@@ -1,0 +1,32 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    
+        <div class="sidebar-collapse">
+            <!-- <div class="dropdown profile-element" dropdown>
+                <a class="dropdown-toggle" dropdown-toggle href>
+                    <span class="clear" style="font-size:40px;text-align:center">
+                        KP+
+                    </span>
+                </a>
+            </div> -->
+            <div class="logo-element">
+                KP+
+            </div>
+            <ul side-navigation class="nav metismenu" id="side-menu">
+                <li ui-sref-active="active" ng-repeat="menu in form.functionList | orderBy:'displayOrder'" on-last-repeat>
+                    <a ng-if="menu.children" ui-sref="layouts"><i class="fa {{menu.icon}}"></i> <span class="nav-label">{{menu.funcName}}</span>  <span class="fa arrow"></span></a>
+                    <a ng-if="!menu.children" ui-sref="layouts" ng-click="gotoUrl(menu.webInfo)"><i class="fa {{menu.icon}}"></i> <span class="nav-label">{{menu.funcName}}</span>  </a>
+                    <ul ng-if="menu.children" class="nav nav-second-level collapse" ng-class="{in: $state.includes('dashboards')}">
+                        <li ui-sref-active="active" ng-repeat="menu2item in menu.children">
+                            <a ng-click="gotoUrl(menu2item.webInfo)" ng-if="!menu2item.children">{{ menu2item.funcName}} <span class="label label-warning pull-right" ng-if="menu2item.funcCode == 'INBOX'">{{form.getNotificationNum}}</span></a>
+                            <a href="" ng-if="menu2item.children">{{ menu2item.funcName}}<span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li ng-repeat="menu3item in menu2item.children">
+                                    <a ng-click="gotoUrl(menu3item.webInfo)">{{menu3item.funcName}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+</nav>

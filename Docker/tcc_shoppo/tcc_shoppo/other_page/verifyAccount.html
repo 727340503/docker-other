@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Verify Account</title>
+    <link rel="stylesheet" href="../share/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../share/css/changle.css" type="text/css" media="screen" />
+    <script src="../share/js/jquery-1.11.3.min.js"></script>
+</head>
+
+<body>
+    <div class="text-center main background" >
+        <div class="subPage-content-style fgs-download">
+            <div class="text-center"><img src="images/app_icon.png"></div>
+            <div class="verifySuccess hide ">
+                <p class="content">You email has been verified. </p>
+                <p class="content">Fill in your profile in Stick 'N Collect to complete the registration.</p>
+            </div>
+            <div class="verifyFailed hide">
+                <p class="content">Link is no longer valid. Try again.</p>
+            </div>
+            <div class="verifySuccess btn-content text-center" style="padding-top: 100px;">
+                <a class="btn btn-primary btn-block openApp" ><p class="btn_text" style="padding: 3px;">Launch app</p> </a>
+            </div>
+        </div>
+        <div class="bgImage">
+            <img class="bg1" src="../share/images/download_page_bg_img_L1.png">
+            <img class="bg2" src="../share/images/download_page_bg_img_L2.png">
+            <img class="bg3" src="../share/images/download_page_bg_img_R1.png">
+            <img class="bg4" src="../share/images/download_page_bg_img_R2.png">
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(function(){ 
+        function GetRequest() { 
+            var url = location.search; 
+            var theRequest = new Object(); 
+            if (url.indexOf("?") != -1) { 
+                var str = url.substr(1); 
+                strs = str.split("&"); 
+                for(var i = 0; i < strs.length; i ++) { 
+                    theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]); 
+                } 
+            } 
+            return theRequest; 
+        } 
+        
+        var Request = new Object(); 
+        Request = GetRequest(); 
+        var verifyEmailUrl='//'+window.location.host+'/tcc_api/verifyEmail.do';
+        postData = {
+            "merchantId":Request.merchantId,
+            "userId":Request.userId,
+            "langCode":Request.langCode,
+            "validationCode":Request.validationCode,
+            "tempEmailUserId":Request.tempEmailUserId
+        }
+        $.ajax({
+            type: 'POST',
+            url: verifyEmailUrl,
+            context: document.body,
+            data: postData,
+            success: function(data) {
+                if(data.errorCode==0)
+                {
+                    if(data.result.status==0){
+                        $('.verifySuccess').removeClass('hide')
+                    }else{
+                        $('.verifyFailed').find('p').text(data.result.message)
+                        $('.verifyFailed').removeClass('hide')
+                    }
+                    
+                }else{
+                    $('.verifyFailed').removeClass('hide')
+                }
+            },
+            error: function(e) {
+                alert(e.statusText + ":" + e.responseText);
+            }
+        })
+        $('.openApp').on('click',function(){
+            window.location.href="rustansshoppo://"
+        })
+        function openApp(){
+            window.location.href="rustansshoppo://"
+        }
+
+    setTimeout(function() {
+        var clientHeight = $('.fgs-download').height();
+        if($(window).height()>clientHeight+150){
+            $('.background').height($(window).height());
+        }else{
+            $('.background').height(clientHeight +150 );
+        }
+    }, 100);
+    window.onresize = function () {
+        var clientHeight = $('.fgs-download').height();
+        if (true) {
+            if($(window).height()>clientHeight +150){
+                $('.background').height($(window).height());
+            }else{
+                $('.background').height(clientHeight + 150 );
+            }
+        }
+
+    }
+    })
+</script>
+
+</html>

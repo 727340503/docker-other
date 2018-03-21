@@ -1,0 +1,108 @@
+<div ng-cloak class="top-menu unSelected text-center" ng-if="form.topBar.showTopBar">
+  <a class="back-btn" ng-if="form.topBar.showBackBtn" ng-click="$root.gotoLastPage()"><span><i class="icon-right-arrow"></i></span></a>
+  <a class="back-btn" ng-if="form.topBar.showCloseBtn" ng-click="$root.closePopup()"><span><i class="icon-close"></i></span></a>
+  <a class="back-btn menuBtn" ng-if="form.topBar.showMenuBtn"><span ng-click="$root.showMenu()"><i class="icon-menu" ></i></span></a>
+  <a class="share-btn" ng-if="form.topBar.showAddFirendBtn" ng-click="$root.gotoAddfriend()"><i class="icon icon-addFirend"></i></a>
+  <a class="share-btn font16" ng-if="form.topBar.showLoginBtn" ng-click="$root.gotoLogin()">{{'LoginLanding' | translate}}</a>
+  <a class="share-btn font16" ng-if="form.topBar.showRegisterBtn" ng-click="$root.gotoRegister()">{{'Register​' | translate}}</a>
+  <a class="share-btn font16" ng-if="form.topBar.showShareBtn" ng-click="$root.gotoShare()" style="top: 6px;">{{'Share' | translate}}</a>
+  <a class="share-btn font16" ng-if="form.topBar.showLogoutBtn" ng-click="$root.logoutEvent()" style="top: 6px;">{{'Logout' | translate}}</a>
+  <span class="topbar-title">
+      <img ng-src="images/logo.png" ng-if="form.topBar.showLogo">
+      {{form.topBar.topBarTitle}}
+    </span>
+</div>
+<div class="searchRecord " ng-if="form.recordArray.length!=0" ng-click="$root.hideRecordList()">
+  <ul class="record-list">
+    <li><span>{{'searchRecord' | translate}}</span><span class="clearBtn" ng-click="$root.clearRecord()">{{'clearRecord' | translate}}</span></li>
+    <li ng-repeat="record in form.recordArray | orderBy:name:true" ng-click="$root.setInput(record.name)">{{record.name}}</li>
+  </ul>
+</div>
+<!-- <div class="menu" ng-click="$root.hideMenu()">
+</div>
+<ul class="menu-list unSelected">
+    <li ng-class="$root.menuHightlight(sideMenu.url)" ng-click="$root.menuBtnEvent(sideMenu.url)" ng-repeat="sideMenu in form.sideMenus"><i class="{{sideMenu.icon}}"></i> {{sideMenu.name}}</li>
+    <li ng-class="$root.menuHightlight('/main/tccLanding')" ng-click="$root.menuBtnEvent('/main/tccLanding')"><i class="icon-home"></i> {{ 'Home' | translate }}</li>
+    <li ng-class="$root.menuHightlight('/main/tccPunchCard')" ng-click="$root.menuBtnEvent('/main/tccPunchCard')"><i class="icon-row-punchcard"></i> {{ 'punchStamp' | translate }}</li>
+    <li ng-class="$root.menuHightlight('/main/tccGivePunch')" ng-click="$root.menuBtnEvent('/main/tccGivePunch')"><i class="icon-change"></i> {{ 'Donation' | translate }}</li>
+    <li ng-class="$root.menuHightlight('/main/tccStampsHistory')" ng-click="$root.menuBtnEvent('/main/tccStampsHistory')"><i class="icon-expired"></i> {{ 'stampHistory' | translate }}</li>
+    <li ng-class="$root.menuHightlight('/main/tccRedemptionHistory')" ng-click="$root.menuBtnEvent('/main/tccRedemptionHistory')"><i class="icon-story"></i> {{ 'TransactionRecord' | translate }}</li>
+    <li ng-class="$root.menuHightlight('/main/tccReservationHistory')" ng-click="$root.menuBtnEvent('/main/tccReservationHistory')"><i class="icon-reservation"></i> Reservation History</li>
+    <li ng-class="$root.menuHightlight('/main/tccCoupon')" ng-click="$root.menuBtnEvent('/main/tccCoupon')"><i class="icon-row-coupon"></i> {{ 'Coupon' | translate }}</li>
+    <li><i class="icon-more"></i> {{ 'More' | translate }}</li>
+</ul> -->
+<!-- <div class="join-bar" ng-if="form.userInfo.subscribe==0">
+    <div class="item-table">
+        <div class="tdcell">
+            <span>{{ 'AttentionContent' | translate }} </span>
+        </div>
+        <div class="tdcell text-right">
+            <a href="{{form.followUrl}}">{{ 'Follow' | translate }}</a>
+        </div>
+    </div>
+</div>
+<div class="totop-btn" ng-if="form.showGotoTop" ng-click="$root.setIscrollTop()"><i class="icon icon-to-top"></i></div> -->
+<div class="reminder-img" ng-click="form.hideReminder()" ng-if="form.showReminder&&form.userInfo.subscribe==0">
+  <a href="{{form.followUrl}}">{{ 'Follow' | translate }}</a>
+</div>
+<div ng-cloak class="main-content {{form.topBar.showTopBar?'have-top-bar':''}}" ui-view>
+</div>
+<div class="bottom-menu" ng-show="form.bottomMenu">
+  <ul>
+    <li>
+      <div class="block" ng-class="$root.menuHightlight('/main/landing')" ng-click="$root.menuBtnEvent('/main/landing')">
+        <div>
+          <i class="icon-home" ng-class="$root.menuHightlight('/main/landing')"></i>
+        </div>
+        <p>{{ 'Home' | translate }}</p>
+      </div>
+    </li>
+    <li>
+      <div class="block" ng-class="$root.menuHightlight('/main/promotion')" ng-click="$root.menuBtnEvent('/main/promotion')">
+        <div>
+          <i class="icon-promotions" ng-class="$root.menuHightlight('/main/promotion')"></i>
+        </div>
+        <p>{{ 'PromotionsLanding' | translate }}</p>
+      </div>
+    </li>
+    <li>
+      <div class="block" ng-class="$root.menuHightlight('/main/stampsCard')" ng-click="$root.menuBtnEvent('/main/stampsCard')">
+        <div>
+          <i class="icon-stamps" ng-class="$root.menuHightlight('/main/stampsCard')"></i>
+        </div>
+        <p>{{ 'Stamps' | translate }}</p>
+      </div>
+    </li>
+    <li>
+      <div class="block" ng-class="$root.menuHightlight('/main/user')" ng-click="$root.menuBtnEvent('/main/user')">
+        <div>
+          <i class="icon-me" ng-class="$root.menuHightlight('/main/user')"></i>
+        </div>
+        <p class="nowrap">{{ 'Me' | translate }}</p>
+      </div>
+    </li>
+    <li>
+      <div class="block" ng-class="$root.menuHightlight('/main/more')" ng-click="$root.menuBtnEvent('/main/more')">
+        <div>
+          <i class="icon-more" ng-class="$root.menuHightlight('/main/more')"></i>
+        </div>
+        <p>{{ 'More' | translate }}</p>
+      </div>
+    </li>
+  </ul>
+</div>
+<input id='warning' ng-click='warningEvent(qrCodeCallback)' type="hidden">
+<input id='warningMsg' ng-model='warningMsg' type="hidden">
+<input id='qrCode' ng-click='qrCodeEvent()' type="hidden">
+<input id='qrCodeCallback' ng-click='qrCodeEvent(qrCodeCallback)' type="hidden">
+<input id='qrCodeVal' ng-model='qrCodeVal' type="hidden">
+<script type="text/ng-template" id="warningDlg.html">
+  <div class="text-center warning-dialog dialog-qrcode">
+    <div class="code-content">
+      <p class="title-color">{{msg}}</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+</script>

@@ -1,0 +1,88 @@
+<div class="stampsDetail">
+    <div class="img-responsive">
+        <img ng-src="{{form.stampsCardCoverImg}}">
+    </div>
+    <div class="item-table border-bottom tab">
+        <div class="tdcell cursor-pointer" ng-click="showStamps()" ng-class="{'active':chooseStamps}">
+            {{ 'Stamps' | translate }}
+        </div>
+        <div class="tdcell cursor-pointer" ng-click="showReward()" ng-class="{'active':chooseReward}">
+            {{ 'infoAndReward' | translate }}
+        </div>
+    </div>
+    <div class="stampsDetail-content">
+        <div id="campaign" class="stamps-content" ng-show="chooseStamps">
+            <div class="stampCardExtra" >
+                    <ul id="stampsList" class="stamps-list clearfix">
+                        <li ng-repeat="stamp in stamps">
+                            <div class="stampsModule" ng-class="{noStamps:stampsCardInfo.collectStampQty<stamp.num}">
+                                <span ng-if="stampsCardInfo.collectStampQty<stamp.num">{{stamp.num}}</span>
+                                <img ng-src="{{stamp.stampImg}}" ng-if="stampsCardInfo.collectStampQty>=stamp.num">
+                            </div>
+                        </li>
+                    </ul>
+            </div>
+            <div class="button-area" ng-if="canCollect">
+                <div class="table-item hasDefaultBg">
+                    <div class="tdcell">
+                        <a class="btn btn-primary btn-block" ng-click="transfer()">{{ 'transferStamps' | translate }}</a>
+                    </div>
+                    <div class="tdcell">
+                        <!-- <a class="btn btn-primary btn-block" ng-click="showJsBarcode128()">{{ 'collect' | translate }}</a> -->
+                        <!-- <a class="btn btn-primary btn-block" ng-click="redeemCoupon()">{{ 'collect' | translate }}</a> -->
+                        <a class="btn btn-primary btn-block" ng-click="collectStamp()">{{ 'collect' | translate }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="button-area" ng-if="!canCollect">
+                <div class="fixArea"></div>
+            </div>
+        </div>
+        <!-- <div class="reward-wrapper" > -->
+            <div class="reward-list" ng-if="chooseReward">
+                <div class="reward-content">
+                    <span class="pull-right cursor-pointer title-color" ng-click="goTNC()"><i class="icon icon-info"></i></span>
+                    <p class="bold font15 title-color">{{ 'promotionDetails' | translate }}</p>
+                    <div class="wrap">{{campaignInfo.descr}}</div>
+                </div>
+                <div class="reward-content">
+                    <div class="item-table">
+                        <div class="tdcell">
+                            <p class="bold font15 title-color">{{ 'collectionPeriod' | translate }}</p>
+                            <div>{{campaignInfo.collStartTime}} -
+                                <br>{{campaignInfo.collEndTime}} </div>
+                        </div>
+                        <div class="tdcell">
+                            <p class="bold font15 title-color">{{ 'redemptionPeriod' | translate }}</p>
+                            <div>{{campaignInfo.redeemStartTime}}  -
+                                <br>{{campaignInfo.redeemEndTime}} </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="bold font15 title-color m-t-sm">{{ 'redemptionGifts' | translate }}</p>
+                <ul class="giftList">
+                    <li ng-repeat="gift in giftList">
+                        <div class="item-table" ng-click="gotoGiftDetail(gift)">
+                            <div class="tdcell">
+                                <img class="img-responsive border" ng-src="{{gift.image}}">
+                            </div>
+                            <div class="tdcell">
+                                <p class="title-color font15 wrap">{{gift.name}}</p>
+                                <p class="wrap" ng-repeat="exchange in gift.exchangeTypeList">{{exchange.stampQty}} {{ 'stamps' | translate }}<span ng-if="exchange.cashQty>0">+{{form.currencyFontCode}} {{exchange.cashQty}}</span></p>
+                                <p class="gift-status font15 bold Expired" ng-if="gift.status==1">{{ 'Coming soon' | translate }}</p>
+                                <p class="gift-status font15 bold lowStock" ng-if="gift.status==3&&gift.isReservation!=1">{{ 'Available in select stores​' | translate }}</p>
+                                <p class="gift-status font15 bold outOfStock" ng-if="gift.status==4&&gift.isReservation!=1">{{ 'Out of stock' | translate }}</p>
+                                <p class="gift-status font15 bold openForReservation" ng-if="gift.isReservation==1&&gift.status!=1&&gift.status!=5&&gift.status!=6">{{gift.giftStatusText}}</p>
+                                <p class="gift-status font15 bold availableNow" ng-if="gift.status==2&&gift.isReservation!=1">{{gift.giftStatusText}}</p>
+                                <p class="gift-status font15 bold Expired" ng-if="gift.status==5">{{ 'Expired' | translate }}</p>
+                            </div>
+                            <div class="tdcell click-area">
+                                <i class="icon-right-arrow"></i>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        <!-- </div> -->
+    </div>
+</div>

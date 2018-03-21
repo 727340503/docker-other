@@ -1,0 +1,31 @@
+<div class="add-friends">
+    <div class="search-list">
+        <div class="search-content text-center border-bottom font15">
+            <i class="icon icon-search"></i> {{ 'searchResultFor' | translate }} “{{form.searchFriendsText}}”
+        </div>
+        <div class="mainPage-content-style" ng-if="haveResult">
+            <ul class="friendsList">
+                <li ng-repeat="friend in searchFriendsList">
+                    <div class="item-table">
+                        <div class="tdcell"><span><img class="img-responsive" ng-src="{{friend.icon}}" ng-if="friend.icon"><img class="img-responsive" src="images/user_default_photo.png" ng-if="!friend.icon"></span></div>
+                        <div class="tdcell">
+                            <p class="title-color font16 bold wrap">{{friend.userName}}</p>
+                            <p class="font14 Expired wrap">{{friend.email}}</p>
+                        </div>
+                        <div class="tdcell text-right" ng-if="friend.status==null&&friend.userId!=form.userInfo.userId">
+                            <a class="btn btn-primary" ng-click="addFriend(friend)"> {{ 'addFriend' | translate }} </a>
+                        </div>
+                        <div class="tdcell text-right" ng-if="friend.status==0&&friend.userId!=form.userInfo.userId">
+                            <a class="btn btn-primary disabled"> {{ 'Invited' | translate }} </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="no-friends text-center" ng-if="!haveResult">
+        <img ng-src="images/addFirends_noresult_icon.png">
+        <p>{{ 'searchFriendNoResult' | translate }}</p>
+        <a class="btn btn-primary btn-block" ng-click="shareEvent()">{{ 'Share' | translate }}</a>
+    </div>
+</div>

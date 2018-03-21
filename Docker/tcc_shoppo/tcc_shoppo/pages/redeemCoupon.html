@@ -1,0 +1,87 @@
+<div class="redeemCoupon hide">
+  <!-- <div ng-show="page1">
+    <div class="campaign">
+      <div class="campaign-content">
+        <p class="font14 bold">{{campaignCouponList[0].stampCardName}}</p>
+      </div>
+      <div class="campaign-img">
+        <img ng-src="{{campaignCouponList[0].stampCardCoverImg}}">
+      </div>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="couponList">
+      <div class="couponList-content">
+        <p class="font14 bold">{{ 'selectCoupon' | translate }}</p>
+        <span ng-if="selectCouponNum>0">{{selectCouponNum}} {{ 'coupon' | translate }}</span>
+      </div>
+      <div class="coupon">
+        <div class="flexslider clear hide">
+          <ul class="slides">
+            <li ng-repeat="campaignCoupon in campaignCouponList" ng-if="campaignCoupon.status==1">
+              <div class="coupon-img">
+                <img ng-src="{{campaignCoupon.img}}" ng-click="select($index)">
+                <div ng-show="isSelect{{$index}}" ng-click="unSelect($index)">
+                  <div class="mask-bg"></div>
+                  <span>{{ 'Added' | translate }}</span>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="controlBarView">
+          <ul class="controlBar clear">
+            <li class="control{{$index}}" ng-repeat="control in controlList">
+              <a href="#"></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="redeem-btn" style="border-top:1px solid #c9cbcb;position:absolute;bottom:0;">
+      <a class="btn btn-primary btn-block" ng-click="next()">{{ 'Next' | translate }}</a>
+    </div>
+  </div> -->
+  <div ng-show="page2">
+    <div class="redeemCode">
+      <div class="title">
+        <!-- <p>{{ 'swipeToScan' | translate }} <span class="bold" style="color:red">{{selectCouponNum+1}}</span> {{ 'codes' | translate }}</p> -->
+        <p>{{ 'swipeToScan' | translate }}</p>
+      </div>
+      <div class="subPage-content-hr"></div>
+      <div class="code">
+        <!-- <div class="code-content">
+          <p class="font16 bold">{{ 'swipeToScan' | translate }} <span style="color:red">{{selectCouponNum+1}}</span> {{ 'codes' | translate }}</p>
+        </div> -->
+        <div class="code-img">
+          <div class="flexsliderCode clear hide">
+            <ul class="slides">
+              <li>
+                <div class="coupon-img">
+                  <div class="codeArea">
+                    <p class="font16 p-f">{{form.myCouponDetail.stampCardName}}</p>
+                    <p class="font14 bold p-s">{{ 'collectCode' | translate }}</p>
+                    <canvas id="barcode" class="barcodeArea"></canvas>
+                    <div class="qrcode qrcodeArea"></div>
+                  </div>
+                </div>
+              </li>
+              <li ng-repeat="coupon in selectCoupon" ng-if="coupon.isSelect&&coupon.status==1">
+                <div class="coupon-img">
+                  <div class="codeArea">
+                    <p class="font16 p-f">{{form.myCouponDetail.name}}</p>
+                    <p class="font14 bold p-s">{{ 'couponCode' | translate }}</p>
+                    <canvas id="barcode{{$index}}" class="barcodeArea"></canvas>
+                    <div class="qrcode{{$index}} qrcodeArea"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="redeem-btn" style="border-top:1px solid #c9cbcb;position:absolute;bottom:0;">
+        <a class="btn btn-primary btn-block" ng-click="done()">{{ 'Done' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</div>

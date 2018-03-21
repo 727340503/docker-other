@@ -1,0 +1,76 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'HomePagePreview' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a ng-click="cancel()">{{ 'HomePage' | translate }}</a>
+            </li>
+            <li>
+                <a  class="active">{{ 'HomePagePreview' | translate }}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom" ng-show="form.systemUserRole.roleType == 1">
+        <div class="row form-horizontal">
+
+            <div class="form-group">
+               <label class="col-sm-2 control-label">{{ 'Language' | translate }}</label>
+               <div class="col-sm-2">
+                   <select class="form-control" ng-model="pageLanguage" ng-change="getMerchantHomePage()">
+                    <option ng-repeat="language in merchantDetail.merchantLangMapList" value="{{language.langCode}}" >{{language.langCode | translate}}</option>
+                   </select>
+                 </div>
+                <!-- <div class="col-sm-2">
+                    <div class="">
+                        <button class="btn btn btn-primary" ng-click="getMerchantHomePage()">
+                            {{ 'Search' | translate }}
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox homePage">
+
+                <div class="ibox-title">
+                    <h5>Banner</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                        </div>
+                        <div class="col-lg-5">
+                            <div  class="landing">
+                            </div>
+                            <div class="promotion">
+                                <img ng-if="data[homepage[3][0].refId+'_'+homepage[3][0].type].img" src="{{data[homepage[3][0].refId+'_'+homepage[3][0].type].img}}">
+                            </div>
+                            <div class="game">
+                                <img  ng-if="data[homepage[1][0].refId+'_'+homepage[1][0].type].img" src="{{data[homepage[1][0].refId+'_'+homepage[1][0].type].img}}">
+                            </div>
+                            <div class="coupon">
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ibox-footer" style="height: 60px;">
+                    <button class="btn btn-primary pull-right" style="margin-left: 10px;" ng-click="cancel()">Back</button>
+                    <button class="btn btn-primary pull-right" ng-show="checkPermission('HOME_PAGE_MANAGEMENT_PUBLISH')" style="margin-left: 10px;" ng-click="publishEvent()">Publish</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,518 @@
+<div class="dialog-qrcode member-punchcard" ng-show="JsBarcode">
+  <div ng-show="showCouponList">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'couponsGetMoreStamps' | translate }}:</p>
+      <div class="scroll showCouponList">
+        <ul>
+          <li ng-repeat="coupon in userCoupon">
+            <div ng-click="show($index)">
+              <span class="pull-right"><i class="icon-left-arrow icon-arrow{{$index}}"></i></span> {{coupon.descr}}
+            </div>
+            <div class="qrcode-content" id="expandcode{{$index}}" style="display:none">
+              <canvas id="barcode{{$index}}"></canvas>
+              <div class="qrcode{{$index}}"></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="toShowCode()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showCode">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'showqrCode' | translate }}</p>
+      <p class="title-color">{{campaignInfo.name}}</p>
+      <div class="scroll text-center qrcode-content">
+        <canvas id="barcode"></canvas>
+        <div class="qrcode"></div>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="toShowSuccess()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showSuccess">
+    <div ng-show="showRefresh">
+      <div class="code-content">
+        <p class="main-color">{{ 'tryToReloadLater' | translate }}.</p>
+      </div>
+      <div class="dialog-btn">
+        <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+      </div>
+    </div>
+    <div ng-show="haveScan">
+      <div class="code-content">
+        <div ng-if="posSuccess">
+          <p class="title-color bold">{{ 'collectionSuccess' | translate }}{{ 'youHaveGot' | translate }}</p>
+          <div class="posSuccess text-center">
+            <span>{{posMessage}}<b class="font16">{{ 'stamps' | translate }}</b></span>
+          </div>
+        </div>
+        <div class="text-center unPosSuccess" ng-if="!posSuccess">
+          <div class="text-center error">
+            <img src="images/error_icon.png">
+          </div>
+          <p class="title-color bold text-center">{{ 'Error' | translate }}!</p>
+          <p class="title-color text-center">{{ errorMsg }}</p>
+        </div>
+      </div>
+      <div class="dialog-btn">
+        <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode member-punchcard" ng-show="redeemtion">
+  <div ng-show="showRedeemCode">
+    <div class="code-content" style="min-height:375px">
+      <p class="text-center main-color">{{ 'scanToRedeem' | translate }}</p>
+      <p class="text-center main-color">{{giftDetail.name}} ({{stampQty}} stickers<span ng-if="cashQty"> + {{form.currencyFontCode}} {{cashQty}}</span>)</p>
+      <canvas id="barcode" ng-if="!expiredCode"></canvas>
+      <div class="qrcode" ng-if="!expiredCode"></div>
+      <img style="width:100%;" ng-src="images/blurCode.jpg" ng-if="expiredCode">
+      <p class="text-center main-color font14" ng-if="expiredCode">{{ 'codeIsExpired' | translate }}
+        <br>{{ 'reopenCode' | translate }}</p>
+    </div>
+    <div class="dialog-btn">
+      <a id="time" class="btn btn-block btn-primary" ng-click="showRedeemption()" ng-if="!expiredCode">{{ 'Done' | translate }} ({{ 'codeRemainTime' | translate }}: 10:00)</a>
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()" ng-if="expiredCode">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="reFresh">
+    <div class="code-content">
+      <p class="text-center main-color">{{ 'tryToReloadLater' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="redeemSuccess">
+    <div class="code-content">
+      <div ng-if="redeemFail" style="min-height:175px">
+        <p class="main-color">{{redeemErrorMsg}}</p>
+      </div>
+      <div ng-if="!redeemFail">
+        <p class="main-color">{{ 'youHaveUsed' | translate }} {{stampQty}} {{ 'of' | translate }} {{ 'stamps' | translate }}<span ng-if="cashQtyText"> + {{form.currencyFontCode}} {{cashQty}}</span> {{ 'to' | translate }} {{ 'Redeem' | translate }} {{giftDetail.name}}.{{ 'nowStillHave' | translate }} </p>
+        <div class="posSuccess text-center">
+          <span>{{stillHaveStamp}}<b class="font16">{{ 'stamps' | translate }}</b></span>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode member-punchcard" ng-show="reservation">
+  <div ng-show="showCode">
+    <div class="code-content">
+      <p class="text-center main-color">{{ 'scanForReservation' | translate }}:</p>
+      <p class="text-center main-color">{{name}} ({{stampQty}} stickers<span ng-if="cashQty"> + {{form.currencyFontCode}} {{cashQty}}</span>)</p>
+      <canvas id="barcode"></canvas>
+      <div class="qrcode"></div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="getUserReservationMsg()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showError">
+    <div class="code-content">
+      <div class="text-center unPosSuccess">
+        <div class="text-center error">
+          <img src="images/error_icon.png">
+        </div>
+        <p class="title-color bold text-center">{{ 'Error' | translate }}!</p>
+        <p class="title-color text-center">{{ errorMsg }}</p>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showSuccess">
+    <div class="code-content">
+      <p class="main-color">{{ 'haveGetReward' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showCompleteReservation">
+    <div class="code-content">
+      <p class="main-color">{{ 'haveCompleteReservation' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showRefresh">
+    <div class="code-content">
+      <p class="text-center main-color">{{ 'tryToReloadLater' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode transferStamps" ng-if="transferStamps">
+  <div ng-show="inputNumber" class="inputNumber">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'stampsYouWantToTransfer' | translate }}</p>
+      <div class="numberContain">
+        <div class="width_3"></div>
+        <div class="width_3">
+          <input class="form-control" type="tel" ng-model="form.transferNum" ng-blur="fixPositionBug()">
+        </div>
+        <div class="width_3"><b>{{ 'stamps' | translate }}</b></div>
+      </div>
+      <div class="enoughStamp">
+        <p class="m-t-xs text-center errorMsg" ng-if="form.transferNum>form.collectStampQty-stampsCardInfo.grantStampQty">{{ 'notEnoughStamps' | translate }}.<span ng-if="form.transferNum<=form.collectStampQty">{{ 'grantStampsCanNotBeTransfered' | translate }}</span></p>
+      </div>
+    </div>
+    <div class="dialog-btn selectFriend">
+      
+      <div class="item-table">
+        <div class="tdcell">
+          <a class="btn btn-block btn-grey" ng-click="closeThisDialog()">{{ 'Cancel' | translate }}</a>
+        </div>
+        <div class="tdcell">
+          <a class="btn btn-block btn-primary" ng-click="showFriendsList()">{{ 'btnOk' | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="selectFriend" class="selectFriend">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'selectOneFriend' | translate }}<span class="add-Btn cursor-pointer" ng-click="gotoAddfriends()">{{ 'addFriends' | translate }}</span></p>
+      <ul class="friendsList">
+        <li ng-click="chooseFriend($index,friend)" ng-repeat="friend in friendsList">
+          <div class="item-table">
+            <div class="tdcell"><span><img class="img-responsive" ng-src="{{friend.icon}}" ng-if="friend.icon"><img class="img-responsive" src="images/user_default_photo.png" ng-if="!friend.icon"></span> </div>
+            <div class="tdcell">
+              <p class="title-color font15">{{friend.userName}}</p>
+            </div>
+            <div class="tdcell text-right">
+              <span class="chooseFriend_{{$index}} circle-check"></span>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="dialog-btn">
+      <div class="item-table">
+        <div class="tdcell">
+          <a class="btn btn-block btn-grey" ng-click="closeThisDialog()">{{ 'Cancel' | translate }}</a>
+        </div>
+        <div class="tdcell">
+          <a class="btn btn-block btn-primary" ng-click="showTransferConfirm()">{{ 'btnOk' | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="transferConfirm" class="transferConfirm">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'youHave' | translate }} {{ 'aTotalOf' | translate }} {{stampsCardInfo.collectStampQty}} {{ 'stamps' | translate }}</p>
+      <p class="m-t-xs">{{ 'confirmToTransfer' | translate }}</p>
+      <div class="numberContain">
+        <span>{{form.transferNum}} <b>{{ 'stamps' | translate }}</b></span>
+      </div>
+      <p class="m-b-xs">{{ 'to' | translate }}</p>
+      <ul class="friendsList">
+        <li>
+          <div class="item-table">
+            <div class="tdcell"><span><img class="img-responsive" ng-src="{{transferFriendImg}}"></span> </div>
+            <div class="tdcell">
+              <p class="title-color font15">{{transferFriendName}}</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="dialog-btn">
+      <div class="item-table">
+        <div class="tdcell">
+          <a class="btn btn-block btn-grey" ng-click="closeThisDialog()">{{ 'Cancel' | translate }}</a>
+        </div>
+        <div class="tdcell">
+          <a class="btn btn-block btn-primary" ng-click="showTransferComplete(form.transferNum)">{{ 'Confirm' | translate }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="transferComplete" class="transferComplete">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'Compeleted' | translate }} {{ 'haveTransfered' | translate }} {{form.transferNum}} {{ 'stamps' | translate }} {{ 'to' | translate }} {{transferFriendName}}. {{ 'stillHave' | translate }}</p>
+      <div class="numberContain">
+        <span>{{form.collectStampQty}} <b>{{ 'stamps' | translate }}</b></span>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-if="sentAddFriendRuquest">
+  <div class="code-content">
+    <p class="title-color" ng-if="!haveBeenInvited">{{ 'requestHaveBeenSent' | translate }}</p>
+    <p class="title-color" ng-if="haveBeenInvited">{{ 'haveBeenInvited' | translate }}</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="resend">
+  <div class="code-content">
+    <p class="title-color">{{ 'emailSentAgain' | translate }} {{form.userInfo.email}}!</p>
+    <p class="title-color">{{ 'checkYourEmail' | translate }}</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="reservationWithCash">
+  <div ng-show="showCode">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'scanForReservation' | translate }}:</p>
+      <div class="m-t-xs Cancelled">{{ 'The' | translate }} <span class="bold">{{ 'inCompleted' | translate }}</span> {{ 'reservationFinishTime' | translate }}.</div>
+      <div class="scroll text-center qrcode-content">
+        <canvas id="barcode"></canvas>
+        <div class="qrcode"></div>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="getUserReservationMsg()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showError">
+    <div class="text-center unPosSuccess">
+      <img src="images/error_icon.png">
+      <p class="title-color bold text-center">{{ 'Error' | translate }}!</p>
+      <p class="title-color text-center">{{ errorMsg }}</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="gotoStampDetail()">{{ 'Done' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showRefresh">
+    <div class="code-content">
+      <p class="text-center main-color">{{ 'reservationIsProcessing' | translate }}.{{ 'checkUpdatedStatusAgain' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="gotoStampDetail()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="notEnoughReserve">
+  <div class="code-content">
+    <p class="text-center main-color">{{ 'notEnoughStampsForReservation' | translate }}.{{ 'getMoreStampsReservation' | translate }}.</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="isGrant">
+  <div ng-show="preGrant">
+    <div class="code-content">
+      <p class="title-color">{{ 'getGrantStamps' | translate }}</p>
+    </div>
+    <div class="dialog-btn">
+      <div class="button-area" style="padding:0">
+        <div class="table-item">
+          <div class="tdcell">
+            <a class="btn btn-block btn-primary" ng-click="grantEvent()">{{ 'Accept' | translate }}</a>
+          </div>
+          <div class="tdcell">
+            <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Later' | translate }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-show="grant">
+    <div class="code-content">
+      <p class="title-color bold">{{ 'grantSuccess' | translate }}</p>
+      <div class="posSuccess text-center">
+        <span>{{grantStampQty}}<b class="font16">{{ 'stamps' | translate }}</b></span>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-if="sendIquirySuccess">
+  <div class="code-content">
+    <p class="title-color">{{ 'requestHaveBeenSent' | translate }}</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+  </div>
+</div>
+<!-- <div class="dialog-qrcode" ng-if="checkoutFailed">
+  <div class="code-content">
+    <p class="title-color">Your password is wrong.</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">Done</a>
+  </div>
+</div> -->
+<div class="dialog-qrcode" ng-if="resetEmailSuccess">
+  <div class="code-content">
+    <p class="title-color">{{ 'resetRegisterEmailSuccess' | translate }}.</p>
+    <p class="title-color">{{ 'loginAgain' | translate }}.</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-if="resetPasswordSuccess">
+  <div class="code-content">
+    <p class="title-color">{{ 'resetPasswordSuccess' | translate }}.</p>
+    <p class="title-color">{{ 'loginAgain' | translate }}.</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-if="showPushMsg">
+  <div class="code-content">
+    <p class="title-color">{{ form.pushMsg}}</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-if="saveCoupon">
+  <div class="code-content">
+    <p class="title-color">{{ 'youGotTheCoupon' | translate }}</p>
+    <p class="title-color">{{ 'couponUsedBefore' | translate }} {{couponDetail.redeemEndTime}}.</p>
+  </div>
+  <div class="dialog-btn">
+    <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="redeemCoupon">
+  <div ng-show="showCouponCode">
+    <div class="code-content">
+      <p class="title-color bold">{{descr}}</p>
+      <p class="title-color text-center m-t-sm">{{ 'scanOrInput' | translate }}</p>
+      <div class="text-center qrcode-content">
+        <canvas id="barcodeCoupon"></canvas>
+        <div class="qrcodeCoupon"></div>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="showCollectCodeEvent()">{{ 'scanStampCardNow' | translate }}</a>
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Finished' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="showCollectCode">
+    <div class="code-content">
+      <p class="title-color bold">campaindescr</p>
+      <p class="title-color text-center m-t-sm">{{ 'scanOrInput' | translate }}</p>
+      <div class="text-center qrcode-content">
+        <canvas id="barcode"></canvas>
+        <div class="qrcode"></div>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Finished' | translate }}</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="showLocationTip">
+  <div>
+    <div class="code-content">
+      <p class="title-color text-center m-t-sm">Current location is not available. Please enable location services and try again.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog(1)">Check your current setting</a>
+      <a class="btn btn-block btn-grey" ng-click="closeThisDialog(0)">No, keep going to use the app</a>
+    </div>
+  </div>
+</div>
+<div class="dialog-qrcode" ng-show="showSuccess">
+  <div ng-show="showRefresh">
+    <div class="code-content">
+      <p class="main-color">{{ 'tryToReloadLater' | translate }}.</p>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    </div>
+  </div>
+  <div ng-show="haveScan">
+    <div class="code-content">
+      <div ng-if="posSuccess">
+        <p class="title-color bold">{{ 'collectionSuccess' | translate }}{{ 'youHaveGot' | translate }}</p>
+        <div class="posSuccess text-center">
+          <span>{{posMessage}}<b class="font16">{{ 'stamps' | translate }}</b></span>
+        </div>
+      </div>
+      <div class="text-center unPosSuccess" ng-if="!posSuccess">
+        <div class="text-center error">
+          <img src="images/error_icon.png">
+        </div>
+        <p class="title-color bold text-center">{{ 'Error' | translate }}!</p>
+        <p class="title-color text-center">{{ errorMsg }}</p>
+      </div>
+    </div>
+    <div class="dialog-btn">
+      <a class="btn btn-block btn-primary" ng-click="closeThisDialog()">{{ 'btnOk' | translate }}</a>
+    </div>
+  </div>
+</div>
+<input id="qrcodeInput{{$index}}" class="couponQrCode" type="hidden" ng-model="$parent.couponQrCode[$index]" ng-repeat="coupon in userCoupon">
+<input id="barcodeInput{{$index}}" class="couponBarCode" type="hidden" ng-model="$parent.couponBarCode[$index]" ng-repeat="coupon in userCoupon">
+<input id="qrcodeInputUser" type="hidden" ng-model="qrCode">
+<input id="barcodeInputUser" type="hidden" ng-model="barCode">
+<input id="qrcodeCouponInput" type="hidden" ng-model="qrCodeCoupon">
+<input id="barcodeCouponInput" type="hidden" ng-model="barCodeCoupon">
+<script type="text/javascript">
+setTimeout(function() {
+  var qrCode = angular.element('#qrcodeInputUser').scope().qrCode;
+  if (qrCode) {
+    generateQrCode(qrCode);
+  }
+  var barCode = angular.element('#barcodeInputUser').scope().barCode;
+  if (barCode) {
+    JsBarcode("#barcode", barCode, {
+      fontSize: 40,
+      textPosition: "top",
+      textMargin: 10,
+      width: 4,
+      height: 80,
+      displayValue: true
+    });
+  }
+  var qrCodeLength = $(".couponQrCode").length;
+  var barCodeLength = $(".couponBarCode").length;
+  if (qrCodeLength > 0) {
+    for (var i = 0; i < qrCodeLength; i++) {
+      eval("var qrCode = angular.element('#qrcodeInput" + i + "').scope().coupon.qrCode");
+      eval("$('.qrcode" + i + "').qrcode({'render': 'div','size': 160,'color': '#000000','text': qrCode,width: 160,height: 160,correctLevel: 3,background: '#fffffff',foreground: '#000000'})")
+    }
+    for (var i = 0; i < barCodeLength; i++) {
+      eval("var barCode = angular.element('#barcodeInput" + i + "').scope().coupon.qrCode");
+      eval("JsBarcode('#barcode" + i + "', barCode, {fontSize: 40,textPosition: 'top',textMargin: 10,width: 4,height: 80,displayValue: true})")
+    }
+  }
+  var qrCodeCoupon = angular.element('#qrcodeCouponInput').scope().qrCodeCoupon;
+  var barCodeCoupon = angular.element('#barcodeCouponInput').scope().barCodeCoupon;
+  if (qrCodeCoupon) {
+    eval("$('.qrcodeCoupon').qrcode({'render': 'div','size': 160,'color': '#000000','text': qrCodeCoupon,width: 160,height: 160,correctLevel: 3,background: '#fffffff',foreground: '#000000'})")
+  }
+  if (barCodeCoupon) {
+    JsBarcode("#barcodeCoupon", barCodeCoupon, {
+      fontSize: 40,
+      textPosition: "top",
+      textMargin: 10,
+      width: 4,
+      height: 80,
+      displayValue: true
+    });
+  }
+}, 60)
+
+</script>

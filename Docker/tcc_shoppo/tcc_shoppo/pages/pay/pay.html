@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8">
+    <title>商品页</title>
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script type="text/javascript" src="http://libs.useso.com/js/angular.js/1.2.9/angular.min.js"></script>
+    <script type="text/javascript" src="http://libs.useso.com/js/angular.js/1.2.9/angular-sanitize.min.js"></script>
+
+    <style type="text/css">
+    .prodlist {
+        text-decoration: none;
+        list-style-type: none;
+        display: block;
+        padding:0;
+
+    }
+    
+    .prodlist>li {
+        padding: 7px;
+        /*float: left;*/
+        white-space: pre-line;
+    }
+    
+    .price {
+        font-weight: bold;
+    }
+    
+    .cat {
+        width: 100%;
+        text-align: center;
+        background-color: #eeeeee;
+    }
+    </style>
+</head>
+
+<body ng-controller="ProdcutListController">
+    <div class="cat">工艺品</div>
+    <ul class="prodlist">
+        <li ng-repeat="product in products">
+            <img ng-src="{{product.img}}" width="240px" height="240px">
+            <div>{{product.title}}</div>
+            详情: <br><div ng-bind-html="product.desc"></div>
+            价格: <div class="price" ng-bind="'¥'+product.price"></div>
+            <button>购买</button>
+            <br/>
+        </li>
+    </ul>
+    <script type="text/javascript">
+    angular.module('app', ['ngSanitize'])
+        .controller('ProdcutListController', ["$scope", function($scope) {
+
+            $scope.products = [{
+                title: "摆设小鹿",
+                desc: "品牌 灵感生活 <br>三只小鹿形态生动，<br>表现出一家三口其乐融融的场景。<br>色釉经过1300摄氏度以上高温烧制，<br>光若流油，<br>色若红霞，<br>展现出独特的艺术魅力 <br><br>材质 陶瓷规格  <br><br> 黑 高 25.6 cm 宽 9.5 cm <br> 白 高 24.8 cm 宽 8.5 cm <br> 红 高 15.5 cm 宽 5.5 cm",
+                price: "54.00/件",
+                img: "cat_400x400.jpg"
+            }, {
+                title: "客厅餐厅摆设",
+                desc: "品牌 造物家 <br>勤劳的小蜜蜂，神情动感，开心每一天 <br>材质 环保树脂和陶瓷混合制品 <br> 高 5.5cm 宽 4cm",
+                price: "9.79/件",
+                img: "ant_430x430q90.jpg"
+            }, {
+                title: "迷你精致陶瓷小花瓶",
+                desc: "品牌 造物家 <br>新古典主义，二款多色可选，<br>冰裂釉和窑变釉，<br>冰裂和窑变工艺在从前的<br>陶瓷烧制中是一种不成功的表现<br>，而现代的大师们恰恰把这种<br>不完美发挥到极致形成了另一种美，<br>精致、可爱 <br> 材质 陶瓷 <br>矮款小花瓶高10CM，底径4.5CM，<br>口径3.5CM，圆肚最宽处直径9CM",
+                price: "12.89/件",
+                img: "bottle_400x400.jpg"
+            }, {
+                title: "新古典迷你精致陶瓷小花瓶",
+                desc: "品牌 造物家 <br>新古典主义，二款多色可选，<br>冰裂釉和窑变釉，<br>冰裂和窑变工艺在从前的<br>陶瓷烧制中是一种不成功的表现<br>，而现代的大师们恰恰把这种<br>不完美发挥到极致形成了另一种美，<br>精致、可爱 <br> 材质 陶瓷 <br>小花瓶高13CM，底径5CM，<br>口径4.5CM，圆肚最宽处直径7.5CM",
+                price: "13.00/件",
+                img: "bottle2_400x400.jpg"
+            }, {
+                title: "马口铁小飞机",
+                desc: "品牌 运动派 <br>风格  美式乡村<br>桌面摆件 <br>材质 马口铁<br>双翼战机<br> 4cm X 3.5cm",
+                price: "28.00/件",
+                img: "plane_430x430q90.jpg"
+            }, {
+                title: "朋克唇膏指环",
+                desc: "品牌 新朋克 <br>指环<br>材质 pp料<br> 2.5cm X 1cm",
+                price: "9.00/件",
+                img: "lipice.jpg"
+            }];
+
+
+
+        }]);
+    </script>
+</body>
+
+</html>

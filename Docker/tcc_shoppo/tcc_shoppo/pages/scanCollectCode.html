@@ -1,0 +1,24 @@
+<div class="collectStamp">
+  <div class="redeemCode">
+    <div class="title">
+      <p>{{ 'scanTheBelowCode' | translate }}</p>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="code">
+      <!-- <div class="code-content">
+        <p class="font16 bold">{{ 'swipeToScan' | translate }} <span style="color:red">{{selectCouponNum+1}}</span> {{ 'codes' | translate }}</p>
+      </div> -->
+      <div class="code-img">
+        <div class="codeArea">
+          <p class="font16 bold">{{ 'collectCode' | translate }}</p>
+          <canvas id="barcode" class="barcodeArea"></canvas>
+          <div class="qrcode qrcodeArea"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="redeem-btn" style="border-top:1px solid #c9cbcb;position:absolute;bottom:0;">
+  <a class="btn btn-primary btn-block" ng-click="done()">{{ 'Done' | translate }}</a>
+  <a class="btn btn-primary btn-block" ng-if="form.isCouponManagement" ng-click="gotoCoupon()" style="margin-top:10px !important">{{ 'scanCoupon' | translate }}</a>
+</div>

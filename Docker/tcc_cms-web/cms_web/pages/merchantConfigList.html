@@ -1,0 +1,76 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'merchant config' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li class="active">
+                <strong>{{ 'merchant config' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row form-horizontal">
+            <div class="">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" >Merchant id</label>
+                    <div class="col-sm-3" >
+                        <div>
+                            <input type="text" class="form-control" placeholder="merchant id" name="search" class="form-control input" ng-model="searchMerchantId">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" >User name</label>
+                    <div class="col-sm-3" >
+                        <div>
+                            <input type="text" class="form-control" name="username" class="form-control input" ng-model="searchUsername">
+                        </div>
+                    </div>
+                    <label class="col-sm-2 control-label" >Password</label>
+                    <div class="col-sm-3" >
+                        <div>
+                            <input type="password" class="form-control"  name="password" class="form-control input" ng-model="searchPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 textRight">
+                        <div class="">
+                            <button class="btn btn btn-primary" ng-click="search()">
+                                {{ 'Search' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div ui-i18n="{{lang}}" id="DataTables_Table_2_wrapper" class="table-responsive dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">{{ 'datagridresult' | translate:gridOptions }}</div>
+                        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns ui-grid-selection ui-grid-auto-resize class="myGrid" ng-style="getTableHeight()"></div>
+                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_2_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous" id="DataTables_Table_2_previous"><a ng-click="gridApi.pagination.previousPage()">{{'Page_Pre' | translate }}</a></li>
+                                <li ng-class="[paginate_button, {active: page == gridApi.pagination.getPage()}]" ng-repeat="page in gridApi.pagination.displayPage()"><a ng-click="gridApi.pagination.seek(page)">{{page}}</a></li>
+                                <li class="paginate_button next" id="DataTables_Table_2_next"><a ng-click="gridApi.pagination.nextPage()">{{'Page_Next'| translate }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-12" style="margin-top:-30px;">
+                        <div class="pull-right">
+                            <button class="btn btn-white"  ng-click="addUser()">{{ 'New' | translate }}</button>
+                            <button class="btn btn-white"  ng-click="deleteEvent()">{{ 'Delete' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

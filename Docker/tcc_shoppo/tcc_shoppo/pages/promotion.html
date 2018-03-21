@@ -1,0 +1,125 @@
+<div class="promotion">
+  <div id="wrapper" ng-if="form.isCouponManagement">
+    <!-- <div class="swiper-container border-bottom" ng-class="swiperEvent()">
+      <div class="tab-bar border-bottom clearfix swiper-wrapper">
+        <div class="swiper-slide" style="width: 90px;" ng-class="{'active':showPromotion}" ng-click="openPromotion()"><span>{{ 'All' | translate }}</span></div>
+        <div class="swiper-slide" style="width: 140px;" ng-class="{'active':showMyCoupon}" ng-click="openMyCoupon()"><span>{{ 'myCoupon' | translate }}</span></div>
+        <div class="swiper-slide" style="width: 137px;" ng-class="{'active':showExpiredCoupon}" ng-click="openExpiredCoupon()"><span>{{ 'usedCoupon' | translate }}</span></div>
+      </div>
+    </div> -->
+    <div class="item-table border-bottom tab" >
+      <div class="tdcell" ng-class="{'active':showPromotion}" ng-click="openPromotion()">
+        {{ 'Promots' | translate }}
+      </div>
+      <div class="tdcell"  ng-class="{'active':showMyCoupon}" ng-click="openMyCoupon()">
+        {{ 'Coupons' | translate }}
+      </div>
+    </div>
+  </div>
+  <div class="containner" style="overflow:scroll;overflow-x:hidden;">
+    <div class="mainPage-content-style  promotion-content" ng-if="showPromotion">
+      <div ng-if="form.userInfo.userType != 0 && haveBanner">
+        <ul class="promotion-list">
+          <li ng-repeat="banner in bannerList" ng-if="banner.status==2" ng-click="openLink(banner.webUrl,banner.inappOpen, 'Promotion-All','Banner')">
+            <img class="img-responsive" ng-src="{{banner.img}}">
+          </li>
+        </ul>
+      </div>
+      <div ng-if="form.userInfo.userType != 0 && !haveBanner">
+        <p class="text-center">{{ 'noPromots' | translate }}</p>
+      </div>
+      <div ng-if="form.userInfo.userType == 0 && haveBanner">
+        <ul class="promotion-list">
+          <li ng-repeat="banner in bannerList" ng-if="banner.status==2" ng-click="openLink(banner.webUrl,banner.inappOpen, 'Promotion-All','Banner')">
+            <img class="img-responsive" ng-src="{{banner.img}}">
+          </li>
+        </ul>
+      </div>
+      <div ng-if="form.userInfo.userType == 0 && !haveBanner">
+        <p class="text-center">{{ 'noPromots' | translate }}</p>
+      </div>
+    </div>
+    <div class="mainPage-content-style" ng-if="showMyCoupon">
+      <div ng-if="form.userInfo.userType != 0 && myCouponList.length > 0">
+        <ul class="promotion-list">
+          <li ng-repeat="myCoupon in myCouponList" ng-if="myCoupon.userCouponStatus==1" ng-click="gotoMyCouponDetail(myCoupon)" style="position:relative">
+            <img class="img-responsive" ng-src="{{myCoupon.img}}">
+            <span class="pending-icon" ng-if="myCoupon.distanceTime[0]<=2">
+              <img src="images/campaign_pending_icon.png">
+              <span ng-if="myCoupon.distanceTime[0]>1">{{myCoupon.distanceTime[0]}} {{ 'days' | translate }}</span>
+              <span ng-if="myCoupon.distanceTime[0]==1">{{myCoupon.distanceTime[0]}} {{ 'day' | translate }}</span>
+              <span ng-if="myCoupon.distanceTime[0]==0">
+                <span ng-if="myCoupon.distanceTime[1]<10">0</span>{{myCoupon.distanceTime[1]}}:<span ng-if="myCoupon.distanceTime[2]<10">0</span>{{myCoupon.distanceTime[2]}}
+              </span>
+              {{ 'left' | translate }}
+            </span>
+          </li>
+          <li ng-repeat="myCoupon in myCouponList" ng-if="myCoupon.userCouponStatus==2" style="position:relative">
+            <img class="img-responsive" ng-src="{{myCoupon.img}}">
+            <div>
+              <div class="mask-bg"></div>
+              <span class="mask-bg-span">
+                <div style="height:3px;width:100%;background-color:#ffffff"></div>
+                {{ 'USED' | translate }}
+                <div style="height:3px;width:100%;background-color:#ffffff;margin-top:-2px"></div>
+              </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div ng-if="form.userInfo.userType != 0 && myCouponList.length == 0">
+        <div class="add-friends ">
+          <div class="no-friends text-center ">
+            <p class="text-center">{{ 'noCoupons' | translate }}</p>
+          </div>
+        </div>
+      </div>
+      <div ng-if="form.userInfo.userType == 0 && myCouponList.length > 0">
+        <ul class="promotion-list">
+          <li ng-repeat="myCoupon in myCouponList" ng-if="myCoupon.status==2" ng-click="gotoRegistration()" style="position:relative">
+            <img class="img-responsive" ng-src="{{myCoupon.img}}">
+            <span class="pending-icon" ng-if="myCoupon.distanceTime[0]<=2">
+              <img src="images/campaign_pending_icon.png">
+              <span ng-if="myCoupon.distanceTime[0]>1">{{myCoupon.distanceTime[0]}} {{ 'days' | translate }}</span>
+            <span ng-if="myCoupon.distanceTime[0]==1">{{myCoupon.distanceTime[0]}} {{ 'day' | translate }}</span>
+            <span ng-if="myCoupon.distanceTime[0]==0">
+              <span ng-if="myCoupon.distanceTime[1]<10">0</span>{{myCoupon.distanceTime[1]}}:<span ng-if="myCoupon.distanceTime[2]<10">0</span>{{myCoupon.distanceTime[2]}}
+            </span>
+            {{ 'left' | translate }}
+            </span>
+          </li>
+        </ul>
+      </div>
+      <div ng-if="form.userInfo.userType == 0 && myCouponList.length == 0">
+        <div class="add-friends ">
+          <div class="no-friends text-center ">
+            <p>{{ 'pleaseRegisterOrLogin' | translate }}</p>
+            <a class="btn btn-primary btn-block " ng-click="gotoRegistration() ">{{ 'registerOrLogin' | translate }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mainPage-content-style" ng-if="showExpiredCoupon">
+      <div ng-if="form.userInfo.userType != 0">
+        <ul class="promotion-list">
+          <li ng-repeat="myCoupon in myCouponList" ng-if="myCoupon.userCouponStatus==2" style="position:relative">
+            <img class="img-responsive" ng-src="{{myCoupon.img}}" ">
+          <div>
+              <div class="mask-bg "></div>
+              <span class="mask-bg-span ">{{ 'USED' | translate }}</span>
+            </div>
+        </li>
+      </ul>
+      </div>
+      <div ng-if="form.userInfo.userType==0 ">
+        <div class="add-friends ">
+            <div class="no-friends text-center ">
+                <p>{{ 'pleaseRegisterOrLogin' | translate }}</p>
+                <a class="btn btn-primary btn-block " ng-click="gotoRegistration() ">{{ 'registerOrLogin' | translate }}</a>
+            </div>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+</div>

@@ -1,0 +1,102 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'RewardInfo' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a  ng-click="cancel()">{{ 'RewardList' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'RewardInfo' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="form-horizontal" style="padding-top: 30px;" ng-show="!newReward">    
+        <label class="col-sm-2 control-label">{{ 'Language' | translate }}</label>
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="pageLanguage" ng-change="selectPageLang()">
+                <option ng-repeat="language in rewardDetail.giftLangMaps" value="{{language.langCode}}" >{{language.langCode | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="tabs-container" style="padding-bottom:50px;margin-top:18px;">
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal" id="baseInfo">
+                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" ng-show="form.systemUserRole.roleType==1">{{ 'merchant' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3" ng-show="form.systemUserRole.roleType==1">
+                                <div>
+                                    <select class="form-control" ng-model="rewardDetail.merchantId" ng-change = "getMerchantDetail(rewardDetail.merchantId)" name="merchantId" required>
+                                        <option  ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'RewardName' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <input type="text" class="form-control" maxlength="50" ng-model="rewardDetail.langData.name" name="name" required>
+                                </div>
+                            </div>
+                        </div>          
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Reward cover image' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div class="input-group img-group">
+                                    <div id="uploadBtn3" class="text-center dropzone logo">
+                                        <input id="logoInput" class="upload-file img-file-m" type="file" accept="image/*" ng-click="$root.prepareUploadImg('logoInput','logoImage',uploadFinish,{$event: $event}, {width:1080, height:1080},rewardDetail.merchantId,3)" ng-model="rewardDetail.langData.image" name="logo">
+                                        <div class="addImage" style="width: 100%" ng-show = "!rewardDetail.langData.image">
+                                            <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                            <p class="text-primary m-t-sm font14 suggestFont">1080x1080 .jpg/jpeg/png</p>
+                                        </div>
+                                        <div class="editImage" ng-show = "rewardDetail.langData.image">
+                                            <div class="mask-bg"></div>
+                                            <img id="logoImage" ng-src="{{rewardDetail.langData.image}}">
+                                            <div class="icon-center">
+                                                <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                                <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Description' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                            <div>
+                                <textarea class="form-control textAreaHeight" maxlength="500" ng-model="rewardDetail.langData.descr" name="desc" required></textarea>
+                                </div>
+                            </div>
+                        </div>     
+                        <div class="form-group" ng-show="!newReward">
+                            <label class="col-sm-2 control-label">{{ 'relatedCampaign' | translate }}</label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <label class="control-label" style="font-weight:normal;">{{rewardDetail.langData.relatedCampaign}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                                    <button class="btn btn-primary" ng-if="form.showSaveBtn" type="submit">{{ 'Save' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

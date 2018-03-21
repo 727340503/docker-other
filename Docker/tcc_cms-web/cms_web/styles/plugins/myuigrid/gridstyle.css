@@ -1,0 +1,105 @@
+.myTableHeader {
+        background-color: white;
+}
+
+.ui-grid-column-menu-button {
+  /*make the column button invisable*/
+  display: none
+}
+
+.ui-grid {
+    border: none;
+}
+.ui-grid-header-cell:last-child {
+  border-right: none;
+}
+.ui-grid-top-panel {
+    background-color: white;
+    background: none;
+}
+.ui-grid-header-cell {
+    border: none !important;
+    border-right: none;
+}
+
+
+
+.ui-grid-no-row-overlay {
+    border: none;
+}
+
+.ui-grid-row .ui-grid-cell.ui-grid-row-header-cell {
+  border-bottom: none;
+}
+
+.ui-grid-header-cell:last-child .ui-grid-column-resizer.right {
+  border-right: none;
+}
+
+.ui-grid-cell {
+
+  border-right: none;
+
+}
+
+.ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-cell:last-child {
+
+  border-right: none;
+
+}
+ 
+ .ui-grid-row div {
+    border:none;
+ }
+
+ .ui-grid-row:nth-child(odd) .ui-grid-cell {
+  background-color: #ffffff;
+}
+
+.ui-grid-row:nth-child(even) .ui-grid-cell {
+  background-color: rgb(249, 249, 249);
+}
+
+
+
+.table-responsive {
+    border:none;
+}
+
+.grid .ui-grid-header-cell {
+  height: 60px;
+}
+
+.ui-grid-cell {
+    border: none;
+
+}
+
+.ui-grid-cell-contents {
+  padding-top: 14px;
+}
+
+
+.ui-grid-draggable-row-target {
+  opacity: 0.5 !important;
+}
+.ui-grid-draggable-row {
+  height: 30px;
+}
+.ui-grid-draggable-row-over {
+  position: relative;
+}
+.ui-grid-draggable-row-over:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  border-bottom: 1px dotted #AAA;
+}
+.ui-grid-draggable-row-over--above:before {
+  top: 0;
+}
+.ui-grid-draggable-row-over--below:before {
+  bottom: 0;
+}

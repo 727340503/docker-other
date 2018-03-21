@@ -1,0 +1,111 @@
+<!--
+* INSPINIA - Responsive Admin Theme
+* Version 2.3
+*
+-->
+<!DOCTYPE html>
+<html ng-app="keeperp">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <!-- Page title set in pageTitle directive -->
+  <title page-title></title>
+  <link rel="stylesheet" href="styles/3dparty.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- Main Inspinia CSS files -->
+  <link href="font-awesome/css/font-awesome.css" rel="stylesheet">  <script>rndver='20180313175211';</script>
+  <script>
+  //dev code
+  
+  var _hmt = _hmt || [];
+  // (function() {
+  //     var hm = document.createElement("script");
+  //     hm.src = "//hm.baidu.com/hm.js?" + bd_code;
+  //     var s = document.getElementsByTagName("script")[0];
+  //     s.parentNode.insertBefore(hm, s);
+  // })();
+
+
+
+
+
+  var _czc = _czc || [];
+
+  // var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  // document.write(unescape("%3Cspan  style='display:none'  id='cnzz_stat_icon_" + cnzz_code + "'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + cnzz_maz + ".cnzz.com/z_stat.php%3Fid%3D" + cnzz_code + "' type='text/javascript'%3E%3C/script%3E"));
+
+  // setTimeout(function() {
+  //     document.getElementById("cnzz_stat_icon_" + cnzz_code).style.display = "none";
+  // }, 500)
+  GLB_TIME = Date.now();
+
+  function guid() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
+  }
+
+  var getUniId = function() {
+    var lblTrackId = "spo_trackUniId";
+    var uid = localStorage.getItem(lblTrackId)
+    if (!localStorage.getItem(lblTrackId)) {
+      uid = guid();
+      localStorage.setItem(lblTrackId, uid);
+    }
+    return uid;
+  }
+
+  // _czc.push(['_trackEvent', "SPEED", JSON.stringify({
+  //   "tid": getUniId(),
+  //   "t": Date.now(),
+  //   "whr": "index.html"
+  // })]);
+
+  // _hmt.push(['_trackEvent', "SPEED", JSON.stringify({
+  //   "tid": getUniId(),
+  //   "t": Date.now(),
+  //   "whr": "index.html"
+  // })]);
+
+
+  // (function() {
+  //     var hm = document.createElement("script");
+  //     hm.src = "https://api.map.baidu.com/api?v=2.0&ak=NzjDQBBG6qK79VuWQoHAn8cR&s=1";
+  //     var s = document.getElementsByTagName("script")[0];
+  //     s.parentNode.insertBefore(hm, s);
+  // })();
+
+  </script>
+</head>
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+
+<body class="{{$state.current.data.specialClass}}  md-skin  fixed-sidebar fixed-nav" landing-scrollspy id="page-top">
+  <!-- Main view  -->
+  <div class="fullview" ui-view></div>
+  <div id='warning' ng-click='$root.warning()'></div>
+  <input id='warningMsg' ng-model='warningMsg' type="hidden">
+  <!--
+ You need to include this script on any page that has a Google Map.
+ When using Google Maps on your own site you MUST signup for your own API key at:
+ https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+ After your sign up replace the key in the URL below..
+-->
+  <!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQTpXj82d8UpCi97wzo_nKXL7nYrd4G70"></script-->
+  <!--script src="//cdn-cn-keeper.shoppoapp.com/keeper/upload/webcontent/vendor/3party.js"></script-->
+  <script src="scripts/vendor/jquery.js"></script>
+  <script src="scripts/vendor/jquery-ui.js"></script>
+  <script src="scripts/vendor/bootstrap.js"></script>
+  <script src="scripts/vendor/angvendor.js"></script>
+  <script src="scripts/vendor/mobi.js"></script>
+  <script src="scripts/vendor/inspinia.js"></script>  <script  src="scripts/app.js?rnd=20180313175211"></script>
+  <!-- Anglar App Script -->
+  <script src="js/plugins/crypto-js/crypto-js.js"></script>
+</body>
+
+</html>

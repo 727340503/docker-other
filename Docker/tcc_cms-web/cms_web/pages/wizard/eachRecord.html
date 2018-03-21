@@ -1,0 +1,58 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <!-- <div class="ibox-content m-b-sm border-bottom">
+        <div class="row form-horizontal">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'RewardName' | translate }}</label>
+                <div class="col-sm-3">
+                    <div>
+                        <input type="text" class="form-control" placeholder="{{ 'RewardName' | translate }}" name="search" class="form-control input" ng-model="searchRewardName">
+                    </div>
+                </div>
+                <label class="col-lg-2 control-label">{{ 'Language' | translate }}</label>
+                <div class="col-lg-2" ng-show = "form.systemUserRole.roleType == 1">
+                    <select class="form-control" ng-model="searchLanguage">
+                        <option ng-repeat="language in form.languageList" value="{{language.langCode}}" >{{language.langCode}}</option>
+                    </select>
+                </div>
+                <div class="col-lg-2" ng-show = "form.systemUserRole.roleType == 2">
+                    <select class="form-control" ng-model="searchLanguage">
+                        <option ng-repeat="language in form.systemUserRole.merchantLangCodes" value="{{language}}" >{{language}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <div class="">
+                        <button class="btn btn btn-primary" ng-click="search()">
+                            {{ 'Search' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div ui-i18n="{{lang}}" id="DataTables_Table_2_wrapper" class="table-responsive dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">{{ 'datagridresult' | translate:gridOptions }}</div>
+                        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns ui-grid-selection ui-grid-auto-resize class="myGrid" ng-style="getTableHeight()"></div>
+                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_2_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous" id="DataTables_Table_2_previous"><a ng-click="gridApi.pagination.previousPage()">{{'Page_Pre' | translate }}</a></li>
+                                <li ng-class="[paginate_button, {active: page == gridApi.pagination.getPage()}]" ng-repeat="page in gridApi.pagination.displayPage()"><a ng-click="gridApi.pagination.seek(page)">{{page}}</a></li>
+                                <li class="paginate_button next" id="DataTables_Table_2_next"><a ng-click="gridApi.pagination.nextPage()">{{'Page_Next'| translate }}</a></li>
+                            </ul>
+                        </div>
+                    </div>                    
+                    <div class="col-sm-12" style="margin-top:-30px;">
+                        <div class="pull-right">
+                            <button class="btn btn-white" ng-if="checkPermission('CAMPAIGN_REWARD_LIST_NEW')" ng-click="addCampaignReward()">{{ 'New' | translate }}</button>
+                            <button class="btn btn-white" ng-if="checkPermission('CAMPAIGN_REWARD_LIST_DELETE')" ng-click="deleteRelated()">{{ 'Delete' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

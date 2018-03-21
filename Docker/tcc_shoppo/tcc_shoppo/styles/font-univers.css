@@ -1,0 +1,29 @@
+/*特殊字体引进*/
+@font-face {
+  font-family: 'Univers';
+  src:  url('../fonts/Univers_LT_55_Roman.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'UniversBold';
+  src:  url('../fonts/Univers_LT_65_Bold.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'UniversCondensed';
+  src:  url('../fonts/Univers_LT_47_Condensed_Light.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+body{
+    font-family: 'Univers' !important;
+}
+.bold{
+    font-family: 'UniversBold' !important;
+}
+.bigNumber{
+	font-family: 'UniversCondensed' !important;
+}
+/*特殊字体引进*/

@@ -1,0 +1,76 @@
+<div class="login set-profile" ng-show="page==1">
+  <form id="login">
+    <div class="subPage-content-style" >
+      <div class="form-group">      
+        <div ng-if="form.fromLanding">
+          <label class="title-color bold" >Log in can be easier now!</label>
+          <p class=" wrap" style="padding-bottom: 15px;">You can log in with your mobile number after a simple step of verification.</p>
+        </div>  
+        <div class="form-group m-b-none phone">
+          <label class="title-color bold">{{ 'NewMobileNumber' | translate }} </label>
+          <div style="overflow:hidden;">
+            <div style="float:left;width:30%;position:relative;">
+              <i class="icon icon-phone" style="top: 3px;"></i>
+              <div data-role="fieldcontain" id="phoneAreaCode_treelist" style="padding-top:5px;">
+                <i class="icon-right-arrow" ng-click="iconClick('phoneAreaCode')" style="top: 3px;right: 0;left: auto;"></i>
+                <ul id="phoneAreaCode" style="display:none">
+                  
+                  <li on-last-repeat ng-repeat="phoneAreaCode in form.phoneDistrictCode">{{phoneAreaCode}}</li>
+                  
+                </ul>
+              </div>
+            </div>
+            <div style="float:right;width:65%;">
+              <input class="form-control phoneInput" type="tel" maxlength="20"  ng-model="phone">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    
+    <div class="subPage-content-style" ng-show="form.fromLanding">
+      <div class="light-color item-table">
+        <span class="check-box tdcell" ng-class="{checked:agreeTC}" ng-model="agreeTC" ng-click="agreeTCFn()"></span>
+        <span class="tdcell">{{ 'readAndAgree' | translate }} <span class="hightLight" ng-click="gotoTAndC()">{{ 'termsAConditions' | translate }}</span> and
+        <span class="hightLight" ng-click="gotoPrivacy()">{{ 'privacyAPolicy' | translate }}</span>.</span>
+      </div>
+      <div class="light-color m-t-sm item-table">
+        <span class="check-box tdcell" ng-class="{checked:isMarketingInfo==1}" ng-click="isMarketingInfoFn()"></span>
+        <span class="tdcell">{{ 'isMarketingInfo' | translate }}</span>
+      </div>
+    </div>
+    <div class="subPage-content-style">
+      <a class="btn btn-primary btn-block disabled" ng-if="!phone||!agreeTC">{{ 'Send' | translate }}</a>
+      <a class="btn btn-primary btn-block" ng-if="phone&&agreeTC" ng-click="submitEvent()" >{{ 'Send' | translate }}</a>
+    </div>
+  </form>
+</div>
+<div class="registraion set-profile" ng-show="page==2">
+
+  <div class="subPage-content-style" ng-show="form.fromLanding">
+    <label class="title-color bold">Verify your mobile number</label>
+    <p class=" wrap">Your SMS verification code has been sent to your mobile:</p>
+    <p class="text-center font22" style="margin:20px 0;">{{phoneAreaCode}} {{phone}}</p>
+    <div class="form-group">
+      <label class="title-color bold">{{ 'verificationCode' | translate }}</label>
+      <i class="icon icon-password"></i>
+      <div>
+        <input class="form-control verifyCode" type="tel" ng-model="verifyCode" style="text-indent:25px;">
+      </div>
+    </div>
+  </div>
+  <div class="subPage-content-style" ng-show="!form.fromLanding">
+    <p class=" wrap">Your passcode has been sent to your mobile by SMS</p>
+    <div class="form-group">
+      <label class="title-color bold">{{ 'Passcode' | translate }}</label>
+      <i class="icon icon-password"></i>
+      <div>
+        <input class="form-control verifyCode" type="tel" ng-model="verifyCode" style="text-indent:25px;">
+      </div>
+    </div>
+  </div>
+  <div class="subPage-content-style">
+    <a class="btn btn-primary btn-block" ng-click="changePhoneEvent()">{{ 'btnOk' | translate }}</a>
+    <a class="btn btn-grey btn-block" ng-class="{'disabled':time!=0}" ng-click="resendSmsEvent()" ng-if="overResendTimes">{{ 'Resend' | translate }} <span ng-if="time!=0">({{time}})</span></a>
+    <a class="btn btn-grey btn-block disabled" ng-if="!overResendTimes">{{ 'Resend' | translate }}</a>
+  </div>
+</div>

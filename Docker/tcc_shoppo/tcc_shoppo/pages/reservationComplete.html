@@ -1,0 +1,8 @@
+<div class="reservation-complete text-center">
+    <img ng-src="images/reservation_complete_icon.png">
+    <p class="font16">{{ 'reservationIsCompleted' | translate }}</p>
+    <p class="font16">{{ 'andThisIsYourReservationNo' | translate }}</p>
+    <p class="font16 bold">{{form.reservationCode}}</p>
+    <p class="font16">{{ 'getNotificationToPickUp' | translate }}</p>
+    <a class="btn btn-primary btn-block" ng-click="gotoStampCard()">{{ 'redeemOtherGifts' | translate }}</a>
+</div>

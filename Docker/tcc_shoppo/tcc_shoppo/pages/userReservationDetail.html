@@ -1,0 +1,81 @@
+<div class="reservation-form overflow-scroll set-profile">
+    <form>
+        <div class="subPage-content-style">
+            <div class="item-table">
+                <div class="tdcell">
+                    <div class="img-preview border"><img ng-src="{{form.reservation.giftImage}}"></div>
+                </div>
+                <div class="tdcell">
+                    <p class="title-color wrap">{{form.reservation.giftName}}</p>
+                    <!-- <p>{{form.reservation.stampQty}} stickers</p> -->
+                    
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'reservationStatus' | translate }}</label>
+                <div class="gift-status font15 bold Expired" ng-if="form.reservation.status==4">{{form.reservation.statusText}}</div>
+                <div class="gift-status font15 bold Cancelled" ng-if="form.reservation.status==3">{{form.reservation.statusText}}</div>
+                <div class="gift-status font15 bold Confirmed" ng-if="form.reservation.status==1">{{form.reservation.statusText}}</div>
+                <div class="gift-status font15 bold Available" ng-if="form.reservation.status==2">{{form.reservation.statusText}}</div>
+                <div class="gift-status font15 bold Incompleted" ng-if="form.reservation.status==5">{{form.reservation.statusText}}</div>
+                <div class="gift-status font15 bold " ng-if="form.reservation.status==6">{{form.reservation.statusText}}</div>
+                <div class="m-t-xs Cancelled" ng-if="form.reservation.status==5">{{ 'The' | translate }} <span class="bold">{{ 'inCompleted' | translate }}</span> {{ 'reservationFinishTime' | translate }}.</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'ReservationNo' | translate }}</label>
+                <div>{{form.reservation.reservationCode}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'requestDate' | translate }}</label>
+                <div>{{form.reservation.createdTime}}</div>
+            </div>
+            <div class="form-group" ng-if="form.reservation.status!=1">
+                <label class="title-color bold">{{ 'pickUpBefore' | translate }}</label>
+                <div>{{form.reservation.reservationExpiredTime}}</div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'numberStampsUsed' | translate }}</label>
+                <div><p>{{form.reservation.stampQty}} {{ 'stamps' | translate }}<span ng-if="form.reservation.cashQty>0">+{{form.currencyFontCode}} {{form.reservation.cashQty}}</span></p></div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'location' | translate }}</label>
+                <div class=" wrap">{{form.reservation.areaInfo}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'BranchStore' | translate }}</label>
+                <div class=" wrap">{{form.reservation.storeAddress}}</div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'Phone' | translate }}</label>
+                <div class=" wrap"><span ng-repeat ="phone in storePhone"><a ng-if="checkPhone(phone,1)" href="tel:{{phone}}">{{phone}}</a><span ng-if="checkPhone(phone,2)">{{phone}}</span> <span ng-if="$index!=storePhone.length-1"> / </span></span></div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'firstName' | translate }}</label>
+                <div class=" wrap">{{form.reservation.firstName}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'lastName' | translate }}</label>
+                <div class=" wrap">{{form.reservation.lastName}}</div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'contactNumber' | translate }}</label>
+                <div class=" wrap">{{form.reservation.contactPhoneAreaCode}}  {{form.reservation.contactPhone}}</div>
+            </div>
+        </div>
+    </form>
+    <div class="redeem-btn" ng-if="form.reservation.status==2">
+        <a class="btn btn-primary btn-block" ng-click="showCodeEvent()">{{ 'Claim​' | translate }}</a>
+    </div>
+    <div class="redeem-btn" ng-if="form.reservation.status==5">
+        <a class="btn btn-primary btn-block" ng-click="showReservationEvent()">{{ 'scanToCompleteReservation' | translate }}</a>
+    </div>
+</div>

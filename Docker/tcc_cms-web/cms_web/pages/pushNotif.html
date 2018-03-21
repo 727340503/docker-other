@@ -1,0 +1,83 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'PushNotifManagement' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'PushNotifManagement' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom">
+        <div class="row form-horizontal">
+            <form method="get" class="form-horizontal" id="baseInfo">
+            <div class="form-group">
+                <label class="col-sm-2 control-label" ng-show="form.systemUserRole.roleType==1">{{ 'merchant' | translate }}</label>
+                <div class="col-sm-3" ng-show="form.systemUserRole.roleType==1">
+                    <div>
+                    <select class="form-control" ng-model="form.merchantId" ng-change="selectMerchant()">
+                            <option  ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-show="form.systemUserRole.roleType==2">
+                <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}</label>
+                <div class="col-sm-7">
+                    <div>
+                        <input type="text" class="form-control" disabled maxlength="50" ng-model="pushNotifDetail.merchantName" name="name" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" ng-repeat="message in pushNotifDetail.pushNotifLangMaps">
+                <label class="col-sm-2 control-label">{{ 'Message' | translate }}-{{message.langCode | translate }}<span style="color:red">*</span><br><span style="font-weight:normal !important">(Max. 200 characters)</span></label>
+                <div class="col-sm-10">
+                <div>
+                    <textarea class="form-control textAreaHeight" maxlength="200" ng-model="message.msg" name="{{message.langCode}}" required></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'Message type' | translate }}<span style="color:red">*</span></label>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-model="pushNotifDetail.pageRedirectType" name="pageRedirectType" required>
+                        <option value="">--- select ---</option>
+                        <option value="1" >{{ 'Campaign' | translate }}</option>
+                        <option value="5" >{{ 'Promotion' | translate }}</option>
+                    </select>
+                </div>
+            </div>
+            </form>
+                <div class="ibox-footer" style="height: 60px;">
+                    <div class="btn btn-white pull-right" style="margin-left: 10px;" ng-click="cancelEvent()">Cancel</div>
+                    <div class="btn btn-primary pull-right" style="margin-left: 10px;" ng-if="pushNotifDetail.status==1&&checkPermission('PUSH_NOTIFICATION_MANAGEMENT_PUBLISH')" ng-click="publishPushNotif()">Publish</div>
+                    <div class="btn btn-primary pull-right" style="margin-left: 10px;" ng-if="pushNotifDetail.status!=2&&form.showSaveBtn" ng-click="saveEvent()">Save as draft</div>
+                </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div ui-i18n="{{lang}}" id="DataTables_Table_2_wrapper" class="table-responsive dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">{{ 'datagridresult' | translate:gridOptions }}</div>
+                        <div ui-grid="gridOptions" ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns ui-grid-selection ui-grid-auto-resize class="myGrid" ng-style="getTableHeight()"></div>
+                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_2_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous" id="DataTables_Table_2_previous"><a ng-click="gridApi.pagination.previousPage()">{{'Page_Pre' | translate }}</a></li>
+                                <li ng-class="[paginate_button, {active: page == gridApi.pagination.getPage()}]" ng-repeat="page in gridApi.pagination.displayPage()"><a ng-click="gridApi.pagination.seek(page)">{{page}}</a></li>
+                                <li class="paginate_button next" id="DataTables_Table_2_next"><a ng-click="gridApi.pagination.nextPage()">{{'Page_Next'| translate }}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

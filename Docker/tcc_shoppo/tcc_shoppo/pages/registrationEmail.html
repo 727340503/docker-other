@@ -1,0 +1,60 @@
+<div class="registraion">
+    <form id="registraion">
+        <div class="subPage-content-style"  ng-show="form.emailMethod">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'loginEmail' | translate }}</label>
+                <i class="icon icon-email"></i>
+                <input class="form-control loginEmail" type="email" ng-model="loginEmail" name="loginEmail" maxlength="50">
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'confirmEmail' | translate }}</label>
+                <i class="icon icon-open-email"></i>
+                <input class="form-control confirmEmail" type="email" ng-model="confirmEmail" name="confirmEmail" maxlength="50">
+            </div>
+        </div>
+        <div class="subPage-content-hr"  ng-show="form.emailMethod"></div>
+        <div class="subPage-content-style"  ng-show="form.emailMethod">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Password' | translate }}</label>
+                <i class="icon icon-password"></i>
+                <div>
+                <input class="form-control password" type="text" ng-class="{'show':!viewPassword}" ng-model="password" name="password">
+                <input class="form-control password" type="password" ng-class="{'show':viewPassword}" ng-model="password" name="password">
+                <div class="light-color m-t-xs">{{ 'passwordFormat' | translate }}.</div>
+                </div>
+                <i class="icon-eye right" ng-class="{'show':viewPassword}" ng-click="changeViewPassword()"></i>
+                <i class="icon-eye-blocked right" ng-class="{'show':!viewPassword}" ng-click="changeViewPassword()"></i>
+                
+            </div>
+            <div class="form-group m-b-none match">
+                <label class="title-color bold">{{ 'confirmPassword' | translate }}</label>
+                <i class="icon icon-check-password"></i>
+                <input class="form-control password " type="text" ng-class="{'show':!viewConfirmPassword}" ng-model="confirmPassword" name="confirmPassword">
+                <input class="form-control password" type="password" ng-class="{'show':viewConfirmPassword}" ng-model="confirmPassword" name="confirmPassword">
+                <i class="icon-eye right" ng-class="{'show':viewConfirmPassword}" ng-click="changeViewConfirmPassword()"></i>
+                <i class="icon-eye-blocked right" ng-class="{'show':!viewConfirmPassword}" ng-click="changeViewConfirmPassword()"></i>
+            </div>
+        </div>
+        <div class="subPage-content-hr"  ng-show="form.emailMethod"></div>
+        <div class="subPage-content-style"  ng-show="form.emailMethod">
+           <div class="light-color item-table">
+               <span class="check-box tdcell" ng-class="{checked:agreeTC}" ng-model="agreeTC" ng-click="agreeTCFn()"></span>
+               <span class="tdcell">{{ 'readAndAgree' | translate }} <span class="hightLight" ng-click="gotoTAndC()">{{ 'termsAConditions' | translate }}</span> and 
+               <span class="hightLight" ng-click="gotoPrivacy()">{{ 'privacyAPolicy' | translate }}</span>.</span>
+            </div>
+           <div class="light-color m-t-sm item-table">
+               <span class="check-box tdcell" ng-class="{checked:form.isMarketingInfo==1}" ng-click="isMarketingInfoFn()"></span>
+               <span class="tdcell">{{ 'isMarketingInfo' | translate }}</span>
+            </div>
+        </div> 
+        <div class="subPage-content-style">
+            <div class="wantEmail" ng-click="gotoRegister()">{{ 'RegisterWithMobile' | translate }}</div>
+            <a class="btn btn-primary btn-block disabled" ng-if="(!loginEmail||!confirmEmail||!password||!confirmPassword||!agreeTC)&&form.emailMethod">{{ 'Register' | translate }}</a>
+           <a class="btn btn-primary btn-block" ng-click="submitEvent()" ng-if="loginEmail&&confirmEmail&&password&&confirmPassword&&agreeTC&&form.emailMethod">{{ 'Register' | translate }}</a>
+           <div class="or-hr" ng-show="form.facebookMethod"><span>{{ 'or' | translate }}</span></div>
+           <a class="btn btn-facebook btn-block" ng-show="form.facebookMethod" ng-click="facebookLogin()">{{ 'facebookViaRegister' | translate }}</a>
+
+           <!-- <a class="btn btn-facebook btn-block" ng-click="facebookLogin2()">Facebook Register(web)</a> -->
+        </div>       
+    </form>
+</div>

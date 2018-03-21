@@ -1,0 +1,90 @@
+<div class="inmodal">
+    <div class="modal-content animated fadeIn">
+    <div class="modal-header" style="padding:none !important;">
+            <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body" ng-class="readyEvent()">
+            <div class="row">
+            <form id="time">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">   
+                        <div class="row">                     
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">{{ 'reservationExpiredTime' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div class='input-group date' datetimepicker endT="true" ng-model="reservationExpiredTime">
+                                        <input type='text' class="form-control" name="reservationExpiredTime" required placeholder="Date" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="table-responsive" style="max-height: 300px;">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Username</th>
+                                            <th>Reserved reward</th>
+                                            <th>Reservation status</th>
+                                            <th>Reservation code</th>
+                                            <th>Reservation date</th>
+                                            <th>Pick up store name</th>
+                                            <th>Campaign</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat = "data in selectedData">
+                                            <td>
+                                                {{data.userName}}
+                                            </td>
+                                            <td>
+                                                {{data.giftName}}
+                                            </td>
+                                            <td>
+                                                {{data.status}}
+                                            </td>
+                                            <td>
+                                                {{data.reservationCode}}
+                                            </td>
+                                            <td>
+                                                {{data.createdTime}}
+                                            </td>
+                                            <td>
+                                                {{data.storeName}}
+                                            </td>
+                                            <td>
+                                                {{data.campaignName}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer ">
+            <div class="col-sm-12" ng-class="{'col-lg-6': showOk}">
+                <button type="button" class="btn btn-block " ng-class="{'btn-primary': !showOk}" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+            </div>
+
+            <div class="col-sm-12 col-lg-6" ng-if="showOk">
+                <button type="button" class="btn btn-block btn-primary" ng-click="ok()">{{ 'Confirm' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

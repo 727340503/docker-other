@@ -1,0 +1,21 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div ui-i18n="{{lang}}" id="DataTables_Table_2_wrapper" class="table-responsive dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="dataTables_info" id="DataTables_Table_2_info" role="status" aria-live="polite">{{ 'datagridresult' | translate:gridOptionsReservation }}</div>
+                        <div ui-grid="gridOptionsReservation" ui-grid-pagination ui-grid-resize-columns ui-grid-move-columns ui-grid-selection ui-grid-auto-resize class="myGrid" ng-style="getTableHeightReservation()"></div>
+                        <div class="dataTables_paginate paging_simple_numbers pull-right" id="DataTables_Table_2_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous" id="DataTables_Table_2_previous"><a ng-click="gridApiReservation.pagination.previousPage()">{{'Page_Pre' | translate }}</a></li>
+                                <li ng-class="[paginate_button, {active: page == gridApiReservation.pagination.getPage()}]" ng-repeat="page in gridApiReservation.pagination.displayPage()"><a ng-click="gridApiReservation.pagination.seek(page)">{{page}}</a></li>
+                                <li class="paginate_button next" id="DataTables_Table_2_next"><a ng-click="gridApiReservation.pagination.nextPage()">{{'Page_Next'| translate }}</a></li>
+                            </ul>
+                        </div>
+                    </div>        
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

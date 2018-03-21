@@ -1,0 +1,159 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'HomePage' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a  class="active">{{ 'HomePage' | translate }}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox-content m-b-sm border-bottom" ng-show="form.systemUserRole.roleType == 1">
+        <div class="row form-horizontal">
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}</label>
+                <div class="col-sm-5">
+                    <div>
+                        <select class="form-control" ng-model="form.merchantId" name="merchantId">
+                            <option  ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="">
+                        <button class="btn btn btn-primary" ng-click="getMerchantHomePage()">
+                            {{ 'Search' | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="homepage">
+        <div class="col-sm-12">
+
+            <div class="ibox homePage">
+
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>1. Top rolling banner</p>
+                            <div class="listTab">
+                                <ul ui-sortable="sortableOptions0"  class="sortable-list connectList0 agile-list" ng-model="homepage[0]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[0]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                        <a class="pull-right btn btn-xs btn-white" ng-click="delete(0,$index)">{{ 'Delete' | translate }}</a>
+                                    </li>
+                                </ul>
+                                <div >
+                                    <button class="btn btn-primary pull-right" ng-class="{'disabled':homepage[0].length==maxData[0]}" style="margin-left: 10px;" ng-click="addLandingCart(2)">Add Banner ad</button>
+                                    <!-- <button class="btn btn-primary pull-right" ng-if="merchantDetail.isCouponManagement" ng-class="{'disabled':homepage[0].length==maxData[0]}" style="margin-left: 10px;" ng-click="addLandingCart(1)">Add Coupon</button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div  class="landing" ng-show="homepage[0].length>0">
+                            </div>
+                            <div  class="landing" ng-show="homepage[0].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>2. Campaign</p>
+                            <div  class="listTab">
+                                <ul ui-sortable="sortableOptions1"  class="sortable-list connectList1 agile-list" ng-model="homepage[3]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[3]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                         <a class="pull-right btn btn-xs btn-white" ng-click="delete(3,$index)">{{ 'Delete' | translate }}</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button class="btn btn-primary pull-right" ng-class="{'disabled':homepage[3].length==maxData[3]}" ng-click="addPromotionCart(4)">Add Campaign</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="promotion" ng-show="homepage[3].length>0">
+                                <img  src="{{data[homepage[3][0].refId+'_'+homepage[3][0].type].img}}">
+                            </div>
+                            <div class="promotion" ng-show="homepage[3].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>3. Gametation</p>
+                            <div  class="listTab">
+                                <ul ui-sortable="sortableOptions2"  class="sortable-list connectList2 agile-list" ng-model="homepage[1]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[1]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                         <a class="pull-right btn btn-xs btn-white" ng-click="delete(1,$index)">{{ 'Delete' | translate }}</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button class="btn btn-primary pull-right" ng-class="{'disabled':homepage[1].length==maxData[1]}" ng-click="addGameCart(3)">Add Game</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="game" ng-show="homepage[1].length>0">
+                                <img   src="{{data[homepage[1][0].refId+'_'+homepage[1][0].type].img}}">
+                            </div>
+                            <div class="game" ng-show="homepage[1].length==0">
+                                <img   src="img/CMS_default_img_gamebanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>4. Bottom rolling banner</p>
+                            <div  class="listTab">
+                                <ul ui-sortable="sortableOptions3"  class="sortable-list connectList3 agile-list" ng-model="homepage[2]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[2]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                         <a class="pull-right btn btn-xs btn-white" ng-click="delete(2,$index)">{{ 'Delete' | translate }}</a>
+                                    </li>
+                                </ul>
+                                <div>
+                                    <button class="btn btn-primary pull-right" ng-class="{'disabled':homepage[2].length==maxData[2]}" style="margin-left: 10px;" ng-click="addCouponCart(2)">Add Banner ad</button>
+                                    <!-- <button class="btn btn-primary pull-right" ng-if="merchantDetail.isCouponManagement" ng-class="{'disabled':homepage[2].length==maxData[2]}" style="margin-left: 10px;" ng-click="addCouponCart(1)">Add Coupon</button> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="coupon" ng-show="homepage[2].length>0">
+                            </div>
+                            <div class="coupon" ng-show="homepage[2].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ibox-footer" style="height: 60px;">
+                    <button class="btn btn-primary pull-right" ng-show="checkPermission('HOME_PAGE_MANAGEMENT_PUBLISH')" ng-class="{'disabled':!isSave}" style="margin-left: 10px;" ng-click="publishEvent()">Publish</button>
+                    <button class="btn btn-primary pull-right" style="margin-left: 10px;" ng-click="goPreview()">Preview</button>
+                    <button class="btn btn-primary pull-right" ng-show="checkPermission('HOME_PAGE_MANAGEMENT_SAVE')" style="margin-left: 10px;" ng-click="saveEvent()">Save as draft</button>
+                    <button class="btn btn-primary pull-right" ng-show="checkPermission('HOME_PAGE_MANAGEMENT_SAVE')" style="margin-left: 10px;" ng-click="currentEvent()">Current view</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

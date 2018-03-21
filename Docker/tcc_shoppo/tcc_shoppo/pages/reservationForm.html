@@ -1,0 +1,76 @@
+<div class="reservation-form set-profile">
+    <form>
+        <div class="subPage-content-style">
+            <div class="item-table">
+                <div class="tdcell">
+                    <div class="img-preview border"><img ng-src="{{form.gift.image}}"></div>
+                </div>
+                <div class="tdcell">
+                    <p class="title-color">{{form.gift.name}}</p>
+                </div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'redemptionRequest' | translate }}</label>
+                <p class="cont font14 wrap">{{form.reservationForm.exchangeType.stampQty}} {{ 'stamps' | translate }}<span ng-if="form.reservationForm.exchangeType.cashQty>0">+{{form.currencyFontCode}} {{form.reservationForm.exchangeType.cashQty}}</span></p>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group district">
+                <label class="title-color bold">{{ 'District' | translate }}<span style="color:red">*</span></label>
+                <div data-role="fieldcontain" class="district" id="district_treelist">
+                    <i class="icon-right-arrow" ng-click="iconClick('district')"></i>
+                    <ul id="district" style="display:none">
+                        <li on-last-repeat ng-repeat="area in merchantAreaList">{{area.areaInfo}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group district">
+                <label class="title-color bold">{{ 'pickUp' | translate }}<span style="color:red">*</span></label>
+                <div data-role="fieldcontain" class="district" id="store_treelist">
+                    <i class="icon-right-arrow" ng-click="iconClick('store')"></i>
+                    <ul id="store" style="display:none">
+                        <li on-last-repeat ng-repeat="store in form.storeList">{{store.name}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group m-b-none" ng-if="storePhone">
+                <label class="title-color bold">{{ 'Phone' | translate }}</label>
+                <div class="phoneNum wrap">{{storePhone}}</div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'firstName' | translate }}<span style="color:red">*</span></label>
+                <input class="form-control" type="text" placeholder="First name" maxlength="50" ng-model="firstName">
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'lastName' | translate }}<span style="color:red">*</span></label>
+                <input class="form-control" type="text" placeholder="Last name" maxlength="50" ng-model="lastName">
+            </div>
+            <div class="form-group m-b-none phone">
+                <label class="title-color bold">{{ 'contactNumber' | translate }}<span style="color:red">*</span></label>
+                <div style="overflow:hidden;">
+                    <div style="float:left;width:30%;position:relative;">
+                        <i class="icon icon-phone" style="top: 3px;"></i>
+                        <div data-role="fieldcontain" id="phoneAreaCode_treelist" style="padding-top:5px;">
+                            <i class="icon-right-arrow" ng-click="iconClick('phoneAreaCode')" style="top: 3px;right: 0;left: auto;"></i>
+                            <ul id="phoneAreaCode" style="display:none">
+                                <li on-last-repeat ng-repeat="phoneAreaCode in form.phoneDistrictCode">{{phoneAreaCode}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div style="float:right;width:65%;">
+                        <input class="form-control" type="tel" maxlength="20" placeholder="Contact no.​" ng-model="userPhone">
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="reservse-btn">
+            <a class="btn btn-primary btn-block" ng-click="gotoConfirm()" ng-if="district&&storeName&&firstName&&lastName&&phoneAreaCode&&userPhone">{{ 'btnOk' | translate }}</a>
+            <a class="btn btn-primary btn-block disabled" ng-if="!district||!storeName||!firstName||!lastName||!phoneAreaCode||!userPhone">{{ 'btnOk' | translate }}</a>
+        </div>
+    </form>
+</div>

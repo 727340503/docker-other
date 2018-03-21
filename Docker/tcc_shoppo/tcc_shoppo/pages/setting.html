@@ -1,0 +1,8 @@
+<div class="setting">
+	<p>{{ 'selectLanguage' | translate }}</p>
+    <ul class="more">
+        <!-- <li class="title-color font15"><span class="pull-right circle-check chooseLang_1" ng-click="chooseLang(1)"></span>English</li>
+        <li class="title-color font15"><span class="pull-right circle-check chooseLang_2" ng-click="chooseLang(2)"></span>Filipino</li> -->
+        <li class="title-color font15" ng-class="setLangCode()" ng-repeat="lang in form.langType"><span class="pull-right circle-check chooseLang_{{$index}}" ng-click="chooseLang($index,lang.langCode)"></span>{{lang.langCodeText}}</li>
+    </ul>
+</div>

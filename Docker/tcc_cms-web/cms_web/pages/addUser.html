@@ -1,0 +1,102 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'addUser' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a ng-click="cancel()">{{ 'AcountList' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'addUser' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-sm-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="panel-body">
+        <div class="ibox-content">
+            <form method="get" class="form-horizontal" id="baseInfo">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'userName' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control" required ng-model="userName" name="adduserName">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'password' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="password" class="form-control" required ng-model="password" name="addpassword">
+                            <div class="light-color m-t-xs">{{ 'passwordFormat' | translate }}.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'Tel' | translate }}</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control" ng-model="mobile" name="mobile">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'email' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="email" class="form-control" required ng-model="email" name="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'Role' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control" name="roleId" required ng-model="roleId" ng-change="setRoleName()">
+                                <option value="">--- Please Select ---</option>
+                                <option ng-repeat="role in roleList" value="{{role.id}}">{{role.roleName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show = "roleType==2">
+                    <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control" name="merchantId" required ng-model="merchantId">
+                                <option value="">--- Please Select ---</option>
+                                <option ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'Status' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control" name="status" required ng-model="status">
+                                <option value="">--- Please Select ---</option>
+                                <option value="1">{{ 'Active' | translate }}</option>
+                                <option value="0">{{ 'Inactive' | translate }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                            <button class="btn btn-primary" >{{ 'Save' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

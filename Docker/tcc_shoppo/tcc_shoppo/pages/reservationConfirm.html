@@ -1,0 +1,65 @@
+<div class="reservation-form overflow-scroll set-profile">
+    <form>
+        <div class="subPage-content-style">
+            <div class="item-table">
+                <div class="tdcell">
+                    <div class="img-preview border"><img ng-src="{{form.gift.image}}"></div>
+                </div>
+                <div class="tdcell">
+                    <p class="title-color">{{form.gift.name}}</p>
+                </div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'redemptionRequest' | translate }}</label>
+                <p class="cont font14 wrap">{{form.reservationForm.exchangeType.stampQty}} {{ 'stamps' | translate }}<span ng-if="form.reservationForm.exchangeType.cashQty>0">+{{form.currencyFontCode}} {{form.reservationForm.exchangeType.cashQty}}</span></p>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'District' | translate }}</label>
+                <div class="wrap">{{form.reservationForm.district}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'pickUpStore' | translate }}</label>
+                <div class="wrap">{{form.reservationForm.storeName}}</div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'Phone' | translate }}</label>
+                <div class="wrap">{{form.reservationForm.storePhone}}</div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'firstName' | translate }}</label>
+                <div class="wrap">{{form.reservationForm.firstName}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'lastName' | translate }}</label>
+                <div class="wrap">{{form.reservationForm.lastName}}</div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'contactNumber' | translate }}</label>
+                <!-- <i class="icon icon-phone"></i>
+                <span class="add-icon">+</span>
+                <div class="item-table">
+                    <div class="tdcell">
+                        <div class="select-ctrl phonenumber border-bottom pull-left">
+                            <div id="phoneArea" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="pull-right"><i class="icon-right-arrow"></i></span><span class="light-color">{{form.reservationForm.phoneAreaCode}}</span></div>
+                        </div>
+                    </div>
+                    <div class="tdcell">
+                        <input class="form-control pull-left" type="text" ng-model="form.reservationForm.userPhone">
+                    </div>
+                </div> -->
+                <div class="">
+                    {{form.reservationForm.phoneAreaCode}} {{form.reservationForm.userPhone}}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="redeem-btn">
+    <a class="btn btn-primary btn-block" ng-click="saveUserReservation()">{{ 'Confirm' | translate }}</a>
+</div>

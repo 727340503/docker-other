@@ -1,0 +1,12 @@
+<div class="changePicture">
+    <div class="picture">
+        <img class="img-responsive" ng-src="{{form.userInfo.icon}}">
+    </div>
+</div>
+<div class="add-friends">
+    <div class="no-friends text-center">
+        <a class="btn btn-primary btn-block" ng-click="takePhoto()">{{ 'takePhoto' | translate }}</a>
+        <a class="btn btn-primary btn-block" ng-click="selectPhoto()">{{ 'selectPhoto' | translate }}</a>
+        <!-- <input class="upload-file img-file-m" type="file" accept="image/*" ng-if="!isIos" ng-click="cropImageFn('merchantM','.img-file-m')"> -->
+    </div>
+</div>

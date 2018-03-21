@@ -1,0 +1,12 @@
+<div class="add-friends">
+    <div class="search-friends">
+        <input ng-blur="searchFriends()" class="search" type="text" placeholder="{{ 'searchfriends' | translate }}" ng-model="form.searchFriendsText" maxlength="50">
+        <span class="delete-searContent" ng-click="clearSearchText()"><i class="icon icon-close"></i></span>
+        <span class="search-icon"><i class="icon icon-search"></i></span>
+    </div>
+    <!-- <div ng-click="searchFriends()">search</div> -->
+    <div class="no-friends text-center">
+        <p>{{ 'searchFriendOrInviteFriend' | translate }}</p>
+        <a class="btn btn-primary btn-block" ng-click="invite()">{{ 'Invite' | translate }}</a>
+    </div>
+</div>

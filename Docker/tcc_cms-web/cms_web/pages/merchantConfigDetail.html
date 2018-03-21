@@ -1,0 +1,312 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>Merchant config Info</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a ng-click="cancel()">Merchant config list</a>
+            </li>
+            <li class="active">
+                <strong>Merchant config Info</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="panel-body">
+        <div class="ibox-content">
+            <form method="get" class="form-horizontal" id="baseInfo">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">User Name</label>
+                    <div class="col-sm-4">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="form.searchUsername">
+                        </div>
+                    </div>
+                    <label class="col-sm-2 control-label">password</label>
+                    <div class="col-sm-4">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="form.searchPassword">
+                        </div>
+                    </div>
+                </div>
+                 <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}<span style="color:red">*</span></label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control" name="merchantId"  ng-model="configDetail.merchantId" >
+                                <option ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Image domain</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.imgDomain">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Push project id</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.pushProjectId">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email host</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailHost">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email port</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailPort">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email user name</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailUserName">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email password</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email smtp auth</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control"  ng-model="configDetail.emailSmtpAuth" >
+                                <option value="">--- Please Select ---</option>
+                                <option  value="true">true</option>
+                                <option  value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email smtp sts enable</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control"  ng-model="configDetail.emailSmtpStsEnable" >
+                                <option value="">--- Please Select ---</option>
+                                <option  value="true">true</option>
+                                <option  value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email smtp sts Required</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <select class="form-control"  ng-model="configDetail.emailSmtpStsRequired" >
+                                <option value="">--- Please Select ---</option>
+                                <option  value="true">true</option>
+                                <option  value="false">false</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email from nick</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailFromNick">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Email from</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.emailFrom">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Support email from</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.supportEmailFrom">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Web domain</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.webDomain">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Api domain</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.apiDomain">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Reservation push template</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.reservationPushTemplate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Register verify email template</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.registerVerifyEmailTemplate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Reset password email template</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.resetPasswordEmailTemplate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Iquiry email template</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.iquiryEmailTemplate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Share template</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.shareTemplate"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Share defalut title</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.shareDefalutTitle">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Share defalut descr</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.shareDefalutDescr"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Share defalut image</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.shareDefalutImage">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">sms base url</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <textarea type="text" class="form-control textAreaHeight"  ng-model="configDetail.smsBaseUrl"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">sms user name</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.smsUserName">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">sms password</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.smsPassword">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">fbAppId</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.fbAppId">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">fbAppToken</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.fbAppToken">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">fbDebugTokenApi</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.fbDebugTokenApi">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">maxSendSmsCount</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.maxSendSmsCount">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">smsFrom</label>
+                    <div class="col-sm-10">
+                        <div>
+                            <input type="text" class="form-control"  ng-model="configDetail.smsFrom">
+                        </div>
+                    </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="pull-right">
+                            <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                            <button class="btn btn-primary" >{{ 'Save' | translate }}</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

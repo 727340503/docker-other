@@ -1,0 +1,32 @@
+<div class="dialog-qrcode member-punchcard unSelected" ng-controller="TccGivePunchCtrl" ng-show="transferStamps">
+    <form id="givePunch" method="get" class="form-horizontal" ng-show="!hasGivePunch" style="border-bottom: 1px solid #eee;padding-bottom: 20px;">
+        <div style="text-align: right;">
+            <span ng-click="closeThisDialog()" style="cursor: pointer">x</span>
+        </div>
+        <div>
+            <p style="font-size:17px;font-weight:bold">{{form.userInfo.userName}},</p>
+            <p style="font-size:17px;font-weight:bold;line-height:25px;">{{ 'youHave' | translate }} <img ng-src="images/tcc-english-demo/7_stamp.png" style="width: 7%;margin-top: -2%;"> <span style="color: #c70a21">{{form.getPoint}}</span> {{ 'punchCardCanGive' | translate }}</p>
+        </div>
+        <p class="text-center main-color" style="color: #c70a21;margin: 20px 0;font-size: 17px;">{{ 'selectFriend' | translate }}</p>
+        <div style="position:relative">
+            <input type="text" ng-model="acceptId" name="acceptId" placeholder="{{ 'select' | translate }}" style="border-radius: 2px;background-color: #f1f1f1;border: 0;width: 100%;height: 44px;text-align:center" ng-blur="blur()" ng-focus="focus()" autocomplete="off" readonly="true">
+            <div class="tcc-pull-down">
+                <!-- <ul>
+                    <li ng-click="setName(1)" ng-if="form.userInfo.userName == 'Sally'">Rocky</li>
+                    <li ng-click="setName(2)" ng-if="form.userInfo.userName == 'Rocky'">Sally</li>
+                </ul> -->
+                <ul>
+                    <li ng-click="setName(friend)" ng-repeat="friend in friends">{{friend}}</li>
+                </ul>
+            </div>
+        </div>
+        <p class="text-center main-color" style="color: #c70a21;margin: 20px 0;font-size: 17px;">{{ 'giveNum' | translate }}</p>
+        <input type="number" ng-model="givePunchQuality" style="border-radius: 2px;background-color: #f1f1f1;border: 0;width: 100%;height: 44px;text-align:center" ng-blur="position()">
+        <p ng-if="givePunchQuality > form.getPoint">{{ 'exceedYourPunchNum' | translate }}</p>
+    </form>
+    <a class="dialog-btn" ng-show="!hasGivePunch" ng-click="form.givePunchEvent()" style="background-color: #fd4337;color: #fff;padding: 10px;margin-bottom: 15px;">{{ 'Done' | translate }}</a>
+    <form ng-show="hasGivePunch" style="margin-top:85px">
+        <p class="text-center main-color" style="color: #c70a21;margin: 20px 0;font-size: 23px;line-height: 25px;">{{ 'youHaveSuccessGive' | translate }} {{a}} {{ 'stampsNum' | translate }} {{acceptId}}</p>
+        <a class="dialog-btn" ng-click="closeThisDialog()" style="background-color: #fd4337;color: #fff;padding: 10px;margin-bottom: 15px;">{{ 'Close' | translate }}</a>
+    </form>
+</div>

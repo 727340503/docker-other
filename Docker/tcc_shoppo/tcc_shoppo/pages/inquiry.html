@@ -1,0 +1,23 @@
+<div class="set-profile inquiryPage">
+    <form id="inquiry">
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Name' | translate }}</label>
+                <i class="icon icon-me"></i>
+                <input class="form-control t-i" type="text" maxlength="30" ng-model="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Email' | translate }}</label>
+                <i class="icon icon-open-email"></i>
+                <input class="form-control t-i email" type="email" ng-model="email" name="email" required maxlength="50">
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Message' | translate }}</label>
+                <textarea class="inquiry-message" style="width:100%;height:200px;resize:none;" required name="textarea" ng-model="textarea"></textarea>
+            </div>
+        </div>
+        <div class="subPage-content-style">
+            <button class="btn btn-primary btn-block">{{ 'Send' | translate }}</button>
+        </div>
+    </form>
+</div>

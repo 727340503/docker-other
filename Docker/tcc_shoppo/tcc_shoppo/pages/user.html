@@ -1,0 +1,140 @@
+<div class="account">
+    <div class="user-account item-table">
+        <div class="tdcell user-image">
+            <span><img class="img-responsive" ng-src="{{form.userInfo.icon}}"></span>
+        </div>
+        <div class="tdcell">
+            <span class="font18 wrap" ng-if="form.userInfo.userType!=0">{{form.userInfo.userName}}</span>
+            <span class="font18 wrap" ng-if="form.userInfo.userType==0">{{ 'registerOrLogin' | translate }}</span>
+        </div>
+    </div>
+    <div id="wrapper">
+        <div class="swiper-container border-bottom" ng-class="swiperEvent()" >
+            <div class="tab-bar border-bottom clearfix swiper-wrapper">
+                <div class="swiper-slide" style="width: 90px;" ng-class="{'active':showReservation}" ng-click="showReservationContent()"><span>{{ 'Reservation' | translate }}<b class="notice" ng-if="(reservationBar&&showReservation)||listStatus.reservation==1"></b></span></div>
+                <div class="swiper-slide" style="width: 140px;" ng-class="{'active':showStampHistory}" ng-click="showStampHistoryContent()"><span>{{ 'TransactionHistory' | translate }}<b class="notice" ng-if="(stampHistoryBar&&showStampHistory)||listStatus.stampHistory==1"></b></span></div>
+                <div class="swiper-slide" style="width: 137px;" ng-class="{'active':showRedeemHistory}" ng-click="showRedeemHistoryContent()"><span>{{ 'redemptionHistory' | translate }}<b class="notice" ng-if="(redeemHistoryBar&&showRedeemHistory)||listStatus.redemptionHistory==1"></b></span></div>
+                <div class="swiper-slide" style="width: 80px;" ng-class="{'active':showFirends}" ng-click="showFriendsContent()"><span>{{ 'Friends' | translate }}<b class="notice" ng-if="(friendStatus&&showFirends)||listStatus.friendsList==1"></b></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="mainPage-content" style="overflow-y: auto;" ng-if="form.userInfo.userType != 0">
+        <div class="mainPage-content-style" ng-if="showReservation">
+            <ul class="giftList" ng-if="reservationList.length>0">
+                <li ng-repeat="gift in reservationList" ng-click="gotoDetail(gift)">
+                    <div class="item-table">
+                        <div class="tdcell">
+                            <img class="img-responsive border" ng-src="{{gift.giftImage}}">
+                        </div>
+                        <div class="tdcell">
+                            <p class="title-color font15 wrap" ng-class="{'position':gift.position}"><span>{{gift.giftName}}<b class="notice" ng-if="gift.readStatus==0"></b></span></p>
+                            <p class="wrap">{{ 'requestDate' | translate }}: {{gift.createdTime}}</p>
+                            <p class="wrap" ng-if="gift.status==2||gift.status==4">Pick up before: {{gift.reservationExpiredTime}}</p>
+                            <p class="gift-status font15 bold Expired" ng-if="gift.status==4">{{gift.statusText}}</p>
+                            <p class="gift-status font15 bold Cancelled" ng-if="gift.status==3">{{gift.statusText}}</p>
+                            <p class="gift-status font15 bold Confirmed" ng-if="gift.status==1">{{gift.statusText}}</p>
+                            <p class="gift-status font15 bold Available" ng-if="gift.status==2">{{gift.statusText}}</p>
+                            <p class="gift-status font15 bold Incompleted" ng-if="gift.status==5">{{gift.statusText}}</p>
+                            <p class="gift-status font15 bold " ng-if="gift.status==6">{{gift.statusText}}</p>
+                        </div>
+                        <img  ng-if="gift.status==2" class="tick" src="images/reservation_avai_bg.png">
+                    </div>
+                </li>
+            </ul>
+            <div class="emptyHistory" ng-if="reservationList.length==0">
+                <p class="title-color font15 text-center">{{ 'emptyHistory' | translate }}.</p>
+                <a class="btn btn-primary btn-block" ng-click="gotoStampsCard()" ng-if="unexpiredCampaignList.length>0">{{ 'redeemReward' | translate }}</a>
+            </div>
+        </div>
+        <div class="mainPage-content-style" ng-if="showStampHistory">
+            <ul class="stampHistoryList" ng-if="stampHistoryList.length>0">
+                <li ng-repeat="stampHistory in stampHistoryList">
+                    <div class="item-table">
+                        <div class="tdcell">
+                            <p class=" wrap">{{stampHistory.typeText}}<b class="notice" ng-if="stampHistory.readStatus==0"></b></p>
+                            <p>{{ 'Date' | translate }}:{{stampHistory.createdTime}}</p>
+                        </div>
+                        <div class="tdcell number" >
+                            <!-- <span style="color:red" ng-if="stampHistory.type==2||stampHistory.type==4||stampHistory.type==5||stampHistory.type==7">{{ 'stampOut' | translate }}</span>
+                            <span style="color:green" ng-if="stampHistory.type==1||stampHistory.type==3||stampHistory.type==6||stampHistory.type==8">{{ 'StampIn' | translate }}</span> -->
+                            <span style="color:red" ng-if="stampHistory.type==2||stampHistory.type==4||stampHistory.type==5||stampHistory.type==7">{{ 'stampOut' | translate }}{{stampHistory.stampQty}}</span>
+                            <span style="color:green" ng-if="stampHistory.type==1||stampHistory.type==3||stampHistory.type==6||stampHistory.type==8">{{ 'StampIn' | translate }}{{stampHistory.stampQty}}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="emptyHistory" ng-if="stampHistoryList.length==0">
+                <p class="title-color font15 text-center">{{ 'emptyHistory' | translate }}.</p>
+                <a class="btn btn-primary btn-block" ng-click="gotoStampsCard()" ng-if="unexpiredCampaignList.length>0">{{ 'collectStamps' | translate }}</a>
+            </div>
+        </div>
+        <div class="mainPage-content-style" ng-if="showRedeemHistory">
+            <ul class="giftList" ng-if="redemptionHistoryList.length>0">
+                <li ng-repeat="redemptionHistory in redemptionHistoryList">
+                    <div class="item-table" ng-click="gotoRedemptionHistory(redemptionHistory)" >
+                        <div class="tdcell">
+                            <img class="img-responsive border" ng-src="{{redemptionHistory.giftImage}}">
+                            
+                        </div>
+                        <div class="tdcell">
+                            <p class="title-color font15 wrap"><span>{{redemptionHistory.giftName}}<b class="notice" ng-if="redemptionHistory.readStatus==0"></b></span></p>
+                            <p class="wrap m-b">{{redemptionHistory.stampQty}} {{ 'stamps' | translate }}<span ng-if="redemptionHistory.cashQty>0">+{{form.currencyFontCode}} {{redemptionHistory.cashQty}}</span></p>
+                            <div class="">
+                                <p class="wrap">{{ 'redemptionDate' | translate }}:</p>
+                                <p class="font15">{{redemptionHistory.redeemTime}}</p>
+                            </div>
+                            <i class="icon-right-arrow" ></i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="emptyHistory" ng-if="redemptionHistoryList.length==0">
+                <p class="title-color font15 text-center">{{ 'emptyHistory' | translate }}.</p>
+                <a class="btn btn-primary btn-block" ng-click="gotoStampsCard()" ng-if="unexpiredCampaignList.length>0">{{ 'redeemReward' | translate }}</a>
+            </div>
+        </div>
+        <div class="mainPage-content-style" ng-if="showFirends">
+            <div class="friendsRequest" ng-if="requestFriendsList.length>0">
+                <p class="light-color">{{ 'friendsrequests' | translate }}</p>
+                <ul class="friendsList">
+                    <li ng-repeat="requestFriend in requestFriendsList">
+                        <div class="item-table">
+                            <div class="tdcell"><span><img class="img-responsive" ng-src="{{requestFriend.icon}}"></span></div>
+                            <div class="tdcell">
+                                <p class="title-color font15 m-b-xs wrap">{{requestFriend.userName}}<b class="notice" ng-if="requestFriend.readStatus==0"></b></p>
+                                <a class="btn btn-primary btn-small" ng-click="acceptFriend(requestFriend)">{{ 'Accept' | translate }}</a><a class="btn btn-grey btn-small" ng-click="deleteFriendRequset(requestFriend)">{{ 'deleteRequest' | translate }}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="friendsRequest" ng-if="friendsList.length>0">
+                <p class="light-color">{{ 'myFriends' | translate }}</p>
+                <ul class="friendsList">
+                    <li ng-repeat="friend in friendsList">
+                        <div class="item-table">
+                            <div class="tdcell"><span><img class="img-responsive" ng-src="{{friend.icon}}"></span></div>
+                            <div class="tdcell">
+                                <p class="title-color font15"><span>{{friend.userName}}<b class="notice" ng-if="friend.readStatus==0"></b></span></p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="add-friends" ng-if="friendsList.length==0&&requestFriendsList.length==0">
+                <div class="no-friends text-center">
+                    <p>{{ 'Add friends to join now' | translate }}</p>
+                     <a class="btn btn-primary btn-block" ng-click="gotoAddFriend()">{{ 'addFriend' | translate }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="form.userInfo.userType == 0">
+        <div class="add-friends">
+            <div class="no-friends text-center">
+                <p>{{ 'pleaseRegisterOrLogin' | translate }}</p>
+                <a class="btn btn-primary btn-block" ng-click="gotoRegistration()">{{ 'registerOrLogin' | translate }}</a>
+            </div>
+        </div>
+    </div>
+</div>

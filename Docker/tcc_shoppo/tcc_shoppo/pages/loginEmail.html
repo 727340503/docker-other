@@ -1,0 +1,18 @@
+<div class="login">
+  <form id="login">
+    <div class="subPage-content-style" >
+      <div class="form-group">
+        <span >Input the password for {{form.email}}</span>
+      </div>
+      <div class="form-group m-b-none">
+        <label class="title-color bold">{{ 'Password' | translate }}</label>
+        <i class="icon icon-password"></i>
+        <input class="form-control password show" type="password"  ng-model="password" name="password">
+      </div>
+      <div class="m-t-xs"><span class="border-b cursor-pointer" ng-click="gotoForgetPassword()">{{ 'forgetPassword' | translate }}</span></div>
+    </div>
+    <div class="subPage-content-style">
+      <a class="btn btn-primary btn-block" ng-click="submitEvent()" >{{ 'Login' | translate }}</a>
+    </div>
+  </form>
+</div>

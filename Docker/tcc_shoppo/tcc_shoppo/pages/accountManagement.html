@@ -1,0 +1,20 @@
+<div class="set-profile shadow">
+    <div class="photo-area">
+        <span class="user-photo" ng-click="gotoChangeProfilePicture()"><img class="img-responsive" ng-src="{{form.userInfo.icon}}"><b class="edit">{{ 'Edit' | translate }}</b></span>
+    </div>
+</div>
+<ul class="more">
+    <li class="title-color font15" ng-click="gotoEditProfile()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'editProfile' | translate }}</li>
+    <li class="title-color font15" ng-click="gotoResetMobile()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'changeMobile' | translate }}</li>
+
+    <li class="title-color font15" ng-if="form.userInfo.isEmailValidation==1&&form.emailMethod" ng-click="gotoResetEmail()"><span class="pull-right"><i class="icon icon-right-arrow" ng-click="gotoResetEmail()"></i></span>{{ 'resetRegitrationEmail' | translate }}</li>
+    <li class="title-color font15" ng-if="form.userInfo.isEmailValidation==1&&form.emailMethod" ng-click="gotoResetPassword()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'changePassword' | translate }}</li>
+
+    <li class="title-color font15" ng-if="form.userInfo.isEmailValidation==0&&form.emailMethod" ng-click="gotoVerifyEmail()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'VerifyEmailForLogin' | translate }}</li>
+</ul>
+<div class="subPage-content-style">
+    <div class="light-color item-table" ng-click="agreeTCFn()">
+        <span class="check-box tdcell" ng-class="{checked:form.userInfo.isMarketingInfo==1}" ng-model="isMarketingInfo" ></span>
+        <span class="tdcell" style="padding-left: 5px;">{{ 'isMarketingInfo' | translate }}</span>
+    </div>
+</div>

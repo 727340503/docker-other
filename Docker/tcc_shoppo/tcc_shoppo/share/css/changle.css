@@ -1,0 +1,312 @@
+/*特殊字体引进*/
+@font-face {
+  font-family: 'Univers';
+  src:  url('../../fonts/Univers_LT_45_Light.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'UniversBold';
+  src:  url('../../fonts/Univers_LT_65_Bold.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+
+body{
+    font-family: 'Univers' !important;
+}
+.bold{
+    font-family: 'UniversBold' !important;
+}
+body {
+    background-size: 100% auto;
+    background-color: #fafaf5 !important;
+    font-size: 14px;
+}
+.background{
+    position: relative;
+}
+.fgs-download {
+    width: 100%;
+    padding-top: 60px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
+    -ms-transform: translate3d(-50%, 0, 0);
+    -moz-transform: translate3d(-50%, 0, 0);
+    -o-transform: translate3d(-50%, 0, 0);
+}
+
+.fgs-download .text-center:first-child {
+    width: 100%;
+}
+
+.fgs-download .text-center:first-child img {
+    width: 33%;
+}
+
+.fgs-download .text-center:nth-child(2) {
+    margin: 0 auto;
+}
+
+.fgs-download .text-center:nth-child(2) img {
+    width: 100%;
+}
+
+.fgs-download p {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.btn-content a img {
+    vertical-align: -4px;
+    width: 25px;
+    height: auto;
+}
+.btn{
+    cursor: pointer;
+}
+.wechat-reminder {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    background-image: url('../images/download_wechat_reminder.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 40% auto
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.title{
+    color: #000 !important;
+    padding-top: 100px
+}
+.content{
+    color: #000 !important;
+    font-weight: normal !important;
+    padding: 0 30px ;
+}
+
+@media(min-width: 601px) {
+    .fgs-download {
+        width: 600px;
+    }
+}
+
+@media(min-width: 481px) and ( max-width: 600px) {
+    .fgs-download {
+        width: 100%;
+        padding-top: 60px;
+    }
+    .fgs-download .text-center:nth-child(2) img {
+        width: 75%;
+        margin-top: -15px;
+    }
+    .btn-content a {
+        width: 100%;
+    }
+    .btn-content a img {
+        width: 20px;
+    }
+    .fgs-download p {
+        font-size: 20px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+    }
+}
+
+@media(max-width: 480px) {
+    .fgs-download {
+        width: 100%;
+        padding-top: 60px;
+    }
+    .fgs-download .text-center:nth-child(2) img {
+        width: 82%;
+        margin-top: -15px;
+    }
+    .btn-content a {
+        width: 100%;
+    }
+    .btn-content a img {
+        width: 20px;
+    }
+    .fgs-download p {
+        font-size: 18px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 35%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 35%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+    }
+    .btn_text{
+        margin:0;
+        padding: 7px;
+        display: inline-block;
+        font-size: 16px !important;
+    }
+}
+
+.btn {
+    padding: 6px 5px !important
+}
+
+.btn-primary {
+    color: #fff;
+    background-image: -webkit-linear-gradient(to bottom, #fc4347, #ea2428);
+    background-image: linear-gradient(to bottom, #fc4347, #ea2428);
+    border-color: transparent;
+    background-color: transparent;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3)
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+    background-image: -webkit-linear-gradient(to bottom, #c4c4c4, #c4c4c4);
+    background-image: linear-gradient(to bottom, #c4c4c4, #c4c4c4);
+    color: #fff;
+    background-color: #c4c4c4;
+    border-color: #c4c4c4
+}
+
+.btn-block {
+    display: block;
+    width: 100%
+}
+.btn_text{
+    margin:0;
+    padding: 7px;
+    display: inline-block;
+    font-size: 18px ;
+}
+.bgImage img{
+    z-index: -1;
+}
+
+@media(min-width: 901px){
+    .background{
+        min-height: 900px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 269px;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 350px;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+    }
+}
+@media(min-width: 601px) and ( max-width: 900px) {
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 30%;
+    }
+}

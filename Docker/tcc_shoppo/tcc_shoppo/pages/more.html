@@ -1,0 +1,21 @@
+<ul class="more-logout" ng-if="form.userInfo.userType == 0">
+  <li class="title-color font16 text-center" ng-click="gotoLogin()">{{ 'Login' | translate }}</li>
+  <li class="title-color font16 text-center" ng-click="gotoRegistration()">{{ 'Register' | translate }}</li>
+  <li class="title-color font16 text-center facebook"  ng-if="form.facebookMethod" ng-click="facebookLogin()">{{ 'facebookRegister' | translate }}</li>
+</ul>
+<div class="more-margin">
+  <ul class="more">
+    <!-- <li class="title-color font16" ng-if="form.userInfo.userType != 0" ng-click="logout()" style="color:red;"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'Logout' | translate }}</li> -->
+    <li class="title-color font16" ng-if="form.userInfo.userType!= 0" ng-click="gotoAccountManagement()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'accountManagement' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoSetting()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'Setting' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoStoreList()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'storeList' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoTutorial()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'Tutorial' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoInquiry()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'Inquiry' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoFAQ()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'FAQ' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoAboutUs()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'aboutUs' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoTAndC()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'termsAndConditions' | translate }}</li>
+    <li class="title-color font16" ng-click="gotoPrivacy()"><span class="pull-right"><i class="icon icon-right-arrow"></i></span>{{ 'PrivacyAndPolicy' | translate }}</li>
+  </ul>
+  <div class="version">App v{{version}}&nbsp;&nbsp;&nbsp;{{webVersion}}</div>
+</div>
+

@@ -1,0 +1,18 @@
+<div class="login ">
+  <form id="login">
+    
+        <div class="subPage-content-style" >
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Enter your registered' | translate }}<p ng-if="form.emailMethod" style="display: inline;"> email or</p> mobile number</label>
+                <i class="icon icon-phone"></i>
+                <input class="form-control " type="text" ng-model="loginContent" name="loginContent" maxlength="50">
+                <div style="color: red;padding-top: 10px;" ng-if="errorMsg">Please enter a valid <span ng-if="form.emailMethod">email/</span>phone number</div>
+            </div>
+        </div>
+    <div class="subPage-content-style">
+      <a class="btn btn-primary btn-block" ng-click="submitEvent()" >{{ 'Login' | translate }}</a>
+      <div class="or-hr"  ng-if="form.facebookMethod" ><span>or</span></div>
+      <a class="btn btn-facebook btn-block"  ng-if="form.facebookMethod" ng-click="facebookLogin()" >{{ 'facebookLogin' | translate }}</a>
+    </div>
+  </form>
+</div>

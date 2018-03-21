@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="form-group">
+        <label class="col-sm-12 control-label">Stamp image</label>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-3" ng-repeat="stamp in stampDetail" style="margin: 15px; width: 150px;height: 150px;padding:0;">
+            <div class="stampDeleteBtn btn btn-primary btn-circle" ng-if="checkPermission('STAMP_DELETE')&&campaignDetail.status==1" ng-click="deleteStamp(stamp.stampId,$index)" ng-show="stamp.stampImg&&$index!=0"><i class="fa fa-times"></i></div>
+            <div class="input-group img-group">
+                <div id="uploadBtn3" class="text-center dropzone stampImg logo" style="padding: 0;width: 150px;height: 150px;">
+                    <input id="stampInput{{$index}}" class="upload-file img-file-m" type="file" accept="image/*" ng-click="$root.prepareUploadImg('stampInput'+$index,'stampImage'+$index,uploadStampFinish,{$event: $event}, {width:130, height:130},campaignDetail.merchantId,2)" ng-model="stamp.stampImg">
+                    <div class="addImage"  style="width: 100%;padding-top:40px;" ng-show="!stamp.stampImg">
+                        <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                        <p class="text-primary m-t-sm font14 suggestFont">130x130.jpg/jpeg/png</p>
+                    </div>
+                    <div class="editImage" ng-show="stamp.stampImg">
+                        <div class="delete"></div>
+                        <img id="stampImage{{$index}}" ng-src="{{stamp.stampImg}}" style="width: 150px;height: auto">
+                        <div class="icon-center">
+                            <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                            <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-3"  ng-if="checkPermission('STAMP_NEW')" style="margin: 15px; width: 150px;height: 150px;padding:0;">
+            <a class="addGallery-outer" ng-click="addNewStamp()">
+                <div class="fa fa-plus addGallery-inner ">
+                </div>
+                <img style="width:150px; height:150px; background-color:#dadada">
+            </a>
+        </div>
+    </div>
+</div>
+<div style="text-align: right;">
+    <a ng-click="stampSubmit()" ng-if="checkPermission('STAMP_UPDATE')" class="btn btn-primary">{{ 'Save' | translate }}</a>
+</div>
+

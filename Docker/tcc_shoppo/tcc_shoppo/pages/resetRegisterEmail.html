@@ -1,0 +1,44 @@
+<div class="login" ng-show="!verifyPassword">
+    <form>
+        <div class="subPage-content-style">
+            {{ 'enterPasswordResetEmail' | translate }}
+        </div>
+        <div class="subPage-content-style">
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'Password' | translate }}</label>
+                <i class="icon icon-password"></i>
+                <!-- <input class="form-control password" type="text" ng-class="{'show':!viewPassword}" ng-model="password" name="password">
+                <input class="form-control password" type="password" ng-class="{'show':viewPassword}" ng-model="password" name="password">
+                <i class="icon-eye right" ng-class="{'show':viewPassword}" ng-click="changeViewPassword()"></i>
+                <i class="icon-eye-blocked right" ng-class="{'show':!viewPassword}" ng-click="changeViewPassword()"></i> -->
+                <input class="form-control" type="password" ng-model="password">
+            </div>
+        </div>
+        <div class="subPage-content-style">
+           <a class="btn btn-primary btn-block" ng-click="checkoutUserPassword()">{{ 'Next' | translate }}</a>
+        </div> 
+    </form>
+</div>
+<div class="login" ng-show="verifyPassword"> 
+    <form id="reset">
+        <div class="subPage-content-style">
+            {{ 'changeExisitingEmail' | translate }}<b>{{form.userInfo.email}}</b>, {{ 'enterNewEmail' | translate }}
+        </div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'loginEmail' | translate }}</label>
+                <i class="icon icon-email"></i>
+                <input class="form-control loginEmail" maxlength="50" type="email" ng-model="email" name="email">
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'confirmEmail' | translate }}</label>
+                <i class="icon icon-open-email"></i>
+                <input class="form-control confirmEmail" maxlength="50" type="email" ng-model="confirmEmail" name="confirmEmail">
+            </div>
+        </div>
+        <div class="subPage-content-style">
+           <a class="btn btn-primary btn-block" ng-if="email&&confirmEmail" ng-click="resetEmailEvent()">{{ 'btnOk' | translate }}</a>
+           <a class="btn btn-primary btn-block disabled" ng-if="!email||!confirmEmail">{{ 'btnOk' | translate }}</a>
+        </div> 
+    </form>
+</div>

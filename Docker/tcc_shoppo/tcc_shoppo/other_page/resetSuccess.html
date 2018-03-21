@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <title>Verify Account</title>
+    <link rel="stylesheet" href="registration.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../share/css/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../share/css/changle.css" type="text/css" media="screen" />
+    <script src="../share/js/jquery-1.11.3.min.js"></script>
+</head>
+
+<style type="text/css">
+    .fgs-download{
+        z-index: 99;
+    }
+    .bgImage img{
+        z-index: 0;
+    }
+</style>
+<body>
+    <div class="text-center  background">
+    <div class="fgs-download">
+    <div class="text-center"><img src="images/app_icon.png"></div>
+    <div class="" style="padding: 20px;">
+        <p class="content">Your password has been successfully updated!</p>
+    </div>
+        <div class="subPage-content-style"><a class="btn btn-primary btn-block openApp" onclick="openApp()"><p class="btn_text" style="padding: 3px;">Launch app</p></a>
+        </div>
+    </div>
+    </div>
+        <div class="bgImage">
+            <img class="bg1" src="../share/images/download_page_bg_img_L1.png">
+            <img class="bg2" src="../share/images/download_page_bg_img_L2.png">
+            <img class="bg3" src="../share/images/download_page_bg_img_R1.png">
+            <img class="bg4" src="../share/images/download_page_bg_img_R2.png">
+        </div>
+</body>
+<script type="text/javascript">
+    $(function(){ 
+        function openApp(){
+            window.location.href="rustansshoppo://"
+        }
+        $('.openApp').on('click',function(){
+            window.location.href="rustansshoppo://"
+        })
+    })
+</script>
+</html>

@@ -1,0 +1,190 @@
+<fieldset>
+    <div class="row form-horizontal">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'CampaignName' | translate }}</label>
+                <div class="col-sm-10">
+                    <div>
+                        <input type="text" class="form-control" name="name" required maxlength="20" ng-model="campaignDetail.langData.name" name="name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'campaignPeriod' | translate }}</label>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.startTime">
+                        <input type='text' class="form-control" name="startTime" required placeholder="From Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.endTime">
+                        <input type='text' class="form-control" name="endTime" required placeholder="To Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'collectStampPeriod' | translate }}</label>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.collStartTime">
+                        <input type='text' class="form-control" name="collStartTime" required placeholder="From Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.collEndTime">
+                        <input type='text' class="form-control" name="collEndTime" required placeholder="To Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'redemptionPeriod' | translate }}</label>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.redeemStartTime">
+                        <input type='text' class="form-control" name="redeemStartTime" required placeholder="From Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class='input-group date' datetimepicker ng-model="campaignDetail.redeemEndTime">
+                        <input type='text' class="form-control" name="redeemEndTime" required placeholder="To Date" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'campaignTC' | translate }}</label>
+                <div class="col-sm-10">
+                    <div>
+                        <textarea class="form-control textAreaHeight" name="terms" required ng-model="campaignDetail.langData.terms"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'Description' | translate }}</label>
+                <div class="col-sm-10">
+                    <div>
+                        <textarea class="form-control textAreaHeight" name="descr" required ng-model="campaignDetail.langData.descr"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'CampaignStatus' | translate }}</label>
+                <div class="col-sm-3">
+                    <select class="form-control" ng-model="campaignDetail.status">
+                        <option value="1">Pending</option>
+                        <option value="2">Active</option>
+                        <option value="2">Expired</option>
+                        <option value="2">Inactive</option>
+                    </select>
+                </div>
+                <label class="col-sm-2 control-label" ng-show="form.systemUserRole.roleType==1">{{ 'merchant' | translate }}</label>
+                <div class="col-sm-3" ng-show="form.systemUserRole.roleType==1">
+                    <select class="form-control" ng-model="campaignDetail.merchantId" ng-change = "getMerchantDetail(campaignDetail.merchantId)">
+                        <option  ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                    </select>
+                </div>
+            </div>            
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'stampRatio' | translate }}</label>
+                <div class="col-sm-10">
+                    <div>
+                        <input type="text" class="form-control" name="stampRatio" required ng-model="campaignDetail.stampRatio">
+                    </div>
+                </div>
+            </div>   
+            <div class="form-group">
+                <label class="col-sm-2 control-label">{{ 'prmBannerUrl' | translate }}</label>
+                <div class="col-sm-10">
+                    <div>
+                        <input type="text" class="form-control" name="prmBannerUrl" required ng-model="campaignDetail.prmBannerUrl">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Cover image</label>
+                <div class="col-sm-10"> 
+                    <div class="input-group img-group">
+                        <div id="uploadBtn3" class="text-center dropzone logo">
+                            <input id="coverInput" class="upload-file img-file-m" type="file" accept="image/*" ng-if="!isIos" ng-click="$root.prepareUploadImg('coverInput','coverImg',uploadFinish,{$event: $event}, {width:58, height:79})" ng-model="campaignDetail.langData.coverImg">
+                            <a class="upload-file img-file-m" ng-if="isIos" ng-click="$root.prepareUploadImg('coverInput','coverImg',uploadFinish,{$event: $event}, {width:200, height:200})"></a>
+                            <div class="addImage" style="width: 100%" ng-show="!campaignDetail.langData.coverImg">
+                                <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                <p class="text-primary m-t-sm font14 suggestFont">{{ 'SuggestedSize' | translate }}200x200.jpg/jpeg/png</p>
+                            </div>
+                            <div class="editImage" ng-show="campaignDetail.langData.coverImg">
+                                <div class="mask-bg"></div>
+                                <img id="coverImg" ng-src="{{campaignDetail.langData.coverImg}}">
+                                <div class="icon-center">
+                                    <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                    <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Background image</label>
+                <div class="col-sm-10">
+                    <div class="input-group img-group">
+                        <div id="uploadBtn3" class="text-center dropzone logo">
+                            <input id="bgInput" class="upload-file img-file-m" type="file" accept="image/*" ng-if="!isIos" ng-click="$root.prepareUploadImg('bgInput','bgImage',uploadFinish,{$event: $event}, {width:200, height:200})" ng-model="campaignDetail.langData.bgImage">
+                            <a class="upload-file img-file-m" ng-if="isIos" ng-click="$root.prepareUploadImg('bgInput','bgImage',uploadFinish,{$event: $event}, {width:200, height:200})"></a>
+                            <div class="addImage" style="width: 100%" ng-show="!campaignDetail.langData.bgImage">
+                                <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                <p class="text-primary m-t-sm font14 suggestFont">{{ 'SuggestedSize' | translate }}200x200.jpg/jpeg/png</p>
+                            </div>
+                            <div class="editImage" ng-show="campaignDetail.langData.bgImage">
+                                <div class="mask-bg"></div>
+                                <img id="bgImage" ng-src="{{campaignDetail.langData.bgImage}}">
+                                <div class="icon-center">
+                                    <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                    <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Promotion banner image</label>
+                <div class="col-sm-10">
+                    <div class="input-group img-group">
+                        <div id="uploadBtn3" class="text-center dropzone logo">
+                            <input id="prmBannerInput" class="upload-file img-file-m" type="file" accept="image/*" ng-if="!isIos" ng-click="$root.prepareUploadImg('prmBannerInput','prmBannerImage',uploadFinish,{$event: $event}, {width:200, height:200})" ng-model="campaignDetail.langData.prmBannerImage">
+                            <a class="upload-file img-file-m" ng-if="isIos" ng-click="$root.prepareUploadImg('prmBannerInput','prmBannerImage',uploadFinish,{$event: $event}, {width:200, height:200})"></a>
+                            <div class="addImage" style="width: 100%" ng-show="!campaignDetail.langData.prmBannerImage">
+                                <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                <p class="text-primary m-t-sm font14 suggestFont">{{ 'SuggestedSize' | translate }}200x200.jpg/jpeg/png</p>
+                            </div>
+                            <div class="editImage" ng-show="campaignDetail.langData.prmBannerImage">
+                                <div class="mask-bg"></div>
+                                <img id="prmBannerImage" ng-src="{{campaignDetail.langData.prmBannerImage}}">
+                                <div class="icon-center">
+                                    <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                    <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a ng-click="changeStep('step_two')" class="btn btn-primary">Next</a>
+</fieldset>

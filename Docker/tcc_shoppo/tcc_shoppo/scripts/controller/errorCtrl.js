@@ -1,0 +1,1 @@
+function errorCtrl(a,b,c,d,e,f){a.form=f,a.form.topBar.topBarTitle="login",a.form.topBar.showTopBar=!1,a.form.topBar.lastPage="",a.form.topBar.showRegisterBtn=!0,a.form.topBar.showBackBtn=!0,a.form.bottomMenu=!1,a.facebookIsReady=!1}var ErrorCtrl=["$scope","$location","$translate","$state","$timeout","form",errorCtrl];angular.module("shoppoweb").controller("ErrorCtrl",ErrorCtrl);

@@ -1,0 +1,58 @@
+<div class="inmodal">
+    <div class="modal-content animated fadeIn">
+    <div class="modal-header" style="padding:none !important;">
+            <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body" ng-class="readyEvent()">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                            <div class="table-responsive" style="max-height: 300px;">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+
+                                            <th></th>
+                                            <th>name</th>
+                                            <th>image</th>
+                                            <th>status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat = "data in dataList | orderBy:'-id'">
+                                            <td>
+                                                <label class="isClaimed">
+                                                    <span class="check-box" ng-class="{checked:refId==data.id}" ng-click="select(data)"></span>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                {{data.name}}
+                                            </td>
+                                            <td>
+                                                <img src="{{data.img}}" style="width: 100px;height: auto"> 
+                                            </td>
+                                            <td>
+                                                {{statusArr[data.status]}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer ">
+            <div class="col-sm-12" ng-class="{'col-lg-6': showOk}">
+                <button type="button" class="btn btn-block " ng-class="{'btn-primary': !showOk}" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+            </div>
+
+            <div class="col-sm-12 col-lg-6" ng-if="showOk">
+                <button type="button" class="btn btn-block btn-primary" ng-click="ok()">{{ 'Confirm' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

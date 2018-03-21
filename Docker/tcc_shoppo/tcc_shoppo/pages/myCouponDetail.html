@@ -1,0 +1,46 @@
+<div class="reservation-form overflow-scroll" style="overflow-x: auto;">
+  <div class="picture">
+    <img ng-src="{{form.myCouponDetail.img}}" style="width: 100%;border-bottom: 1px solid #c9cbcb;">
+  </div>
+  <div class="gift-detail">
+    <div class="subPage-content-style">
+      <p class="cont font20 wrap">{{form.myCouponDetail.name}}</p>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="subPage-content-style">
+      <div class="reward-content">
+        <div class="item-table" style="margin-bottom:0;">
+          <div class="tdcell" style="width:50%;padding-right: 10px;border-right: 1px solid #c9cbcb;">
+            <p class="bold font15 title-color">{{ 'redeemEndDate' | translate }}</p>
+            <div>{{form.myCouponDetail.redeemEndTimeText}}</div>
+          </div>
+          <div class="tdcell">
+            <p class="bold font15 title-color" ng-if="form.myCouponDetail.distanceTime[0]>2">{{ 'remainingDays' | translate }}</p>
+            <p class="bold font15" style="color:#d3242a" ng-if="form.myCouponDetail.distanceTime[0]<=2">{{ 'remainingDays' | translate }}</p>
+            <div>
+              <span ng-if="form.myCouponDetail.distanceTime[0]>1">{{form.myCouponDetail.distanceTime[0]}} days</span>
+              <span ng-if="form.myCouponDetail.distanceTime[0]==1">{{form.myCouponDetail.distanceTime[0]}} day</span>
+              <span ng-if="form.myCouponDetail.distanceTime[0]==0">
+                <span ng-if="form.myCouponDetail.distanceTime[1]<10">0</span>{{form.myCouponDetail.distanceTime[1]}}:<span ng-if="form.myCouponDetail.distanceTime[2]<10">0</span>{{form.myCouponDetail.distanceTime[2]}}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="subPage-content-style">
+      <label class="title-color bold">{{ 'relatedCampaign' | translate }}</label>
+      <div>{{form.myCouponDetail.stampCardName}}</div>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="subPage-content-style">
+      <label class="title-color bold">{{ 'Details' | translate }}</label>
+      <div>{{form.myCouponDetail.descr}}</div>
+    </div>
+  </div>
+</div>
+<div class="redeem-btn" style="border-top:1px solid #c9cbcb;position:absolute;bottom:0;" ng-if="canRedeem">
+  <!-- <a class="btn btn-primary btn-block" ng-click="redeemCouponEvent()">{{ 'redeem' | translate }}</a> -->
+  <a class="btn btn-primary btn-block" ng-click="gotoRedeemCoupon()">{{ 'RedeemCoupon' | translate }}</a>
+</div>

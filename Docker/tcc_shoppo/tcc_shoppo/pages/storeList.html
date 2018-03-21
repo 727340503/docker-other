@@ -1,0 +1,89 @@
+<div class="stamps storeListPage" style="height: 100%;">
+  <div class="item-table border-bottom tab">
+    <div class="tdcell" ng-class="{'active':showMap}" ng-click="chooseMap()">
+      {{ 'Map' | translate }}
+    </div>
+    <div class="tdcell" ng-class="{'active':showList}" ng-click="chooseList()">
+      {{ 'Store list' | translate }}
+    </div>
+  </div>
+  <div class="card-lis tab1" ng-show="showMap" >    
+    <div class="mapTitle ">
+        <div class="item-table"  ng-click="showAreaList()">
+            <div class="tdcell ">{{titleText}}</div>
+            <div class="tdcell category"><span class="icon icon-down"> <i class="icon-right-arrow"></i></span></div>
+        </div>
+        <ul class="areaList" ng-if="showSearch">
+          <li ng-class="{'checkd':checkStore=='All'}" ng-click="checkStoreEvent('All')">{{'All' | translate}}</li>
+          <li ng-class="{'checkd':checkStore=='Nearby'}" ng-click="checkStoreEvent('Nearby')">{{'Nearby' | translate}}</li>
+          <li ng-class="{'checkd':checkStore==area.merchantAreaId}"  ng-click="checkStoreEvent(area.merchantAreaId,area.areaInfo)" ng-repeat="area in merchantArea" >{{area.areaInfo}}</li>          
+        </ul>
+    </div>
+    <div id="l-map" ></div>
+    <img src="./images/locator_pinme.png" class="myLocal" ng-if="haveAccept" ng-click="gotoMyLocal()">
+    <div class="" style="width: 100%;height: 150px;overflow-y: auto;"> 
+        <div class="" style="width: 100%;height: 150px;padding:0 15px;">
+          <div ng-if="showStores.length>0" ng-repeat = "store in showStores | orderBy:'name'" ng-click="selectEvent(store)" style="padding: 15px 0;border-bottom: 1px solid #c9cbcb;">
+             <p class="bold">{{store.name}}</p>
+             <p>{{store.address}}</p>
+             <div class="hr-line-dashed"></div>
+          </div>
+          <div ng-if="showStores.length==0" style="text-align: center;padding: 62px 0;">No results</div>
+        </div>
+    </div>
+  </div>
+  <div class="card-list tab2" ng-show="showList"  style="height: 100%;background-color: #ededed">
+    <div class="tutorial" style="background-color: #fff">
+      <div class="tutorial-items"  ng-repeat = "area in merchantArea">
+        <div class="title item-table" >
+          <div class="tdcell">
+            {{area.areaInfo}}
+          </div>
+          <div class="tdcell tdIcon">
+            <span class="icon"> <i class="icon-right-arrow"></i></span>
+          </div>
+        </div>
+        <div class="content" >
+          <div>
+            <div class="storeList-wrapper">
+              <div class="storeList" style=" margin-bottom: 10px;">
+                <div ng-repeat="store in storeList" ng-if="store.merchantAreaId == area.merchantAreaId">
+                  <div class="subPage-content-style" style="padding: 20px 0;margin-top: 10px;">
+                    <div class="form-group m-b-none" style="padding: 0 15px;">
+                      <label class="title-color wrap">{{store.name}}</label>
+                      <div class="storeList-content">
+                        <div class="f-l">
+                          <i class="icon-icon_store_list"></i>
+                        </div>
+                        <div class="f-r">
+                          <p class="cont font15 wrap">{{store.address}}</p>
+                        </div>
+                      </div>
+                      <div class="storeList-content">
+                        <div class="f-l">
+                          <i class="icon-store_list_phone"></i>
+                        </div>
+                        <div class="f-r">
+                          <p class="cont font15 wrap"><span ng-repeat ="phone in store.phoneArray"><a ng-if="checkPhone(phone,1)" href="tel:{{phone}}">{{phone}}</a><span ng-if="checkPhone(phone,2)">{{phone}}</span> <span ng-if="$index!=store.phoneArray.length-1"> / </span></span></p>
+                        </div>
+                      </div>
+                      <div class="storeList-content" ng-if="store.businessInfo">
+                        <div class="f-l">
+                          <i class="icon-store_list_time"></i>
+                        </div>
+                        <div class="f-r">
+                          <p class="cont font15 wrap">{{store.businessInfo}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

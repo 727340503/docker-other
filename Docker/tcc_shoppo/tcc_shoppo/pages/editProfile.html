@@ -1,0 +1,85 @@
+<div class="set-profile">
+    <form id="setProfile">
+        <div class="subPage-content-style">
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'userName' | translate }}</label>
+                <i class="icon icon-me"></i>
+                <!-- <input class="form-control t-i" type="text" ng-model="form.userInfo.userName" name="userName"> -->
+                <div class="p-l-t-pf wrap">{{form.userInfo.userName}}</div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'firstName' | translate }}</label>
+                <i class="icon icon-me"></i>
+                <input class="form-control t-i" type="text" ng-model="form.userInfo.firstName" maxlength="50">
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'lastName' | translate }}</label>
+                <i class="icon icon-me"></i>
+                <input class="form-control t-i" type="text" ng-model="form.userInfo.lastName" maxlength="50">
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'Contact email' | translate }}</label>
+                <i class="icon icon-email"></i>
+                <input class="form-control t-i contactEmail" ng-if="!form.userInfo.email" type="email" ng-model="form.userInfo.contactEmail" name="email" maxlength="50">
+                <input class="form-control t-i contactEmail" ng-if="form.userInfo.email"  type="email" ng-model="form.userInfo.contactEmail"  disabled style="background-color:#fff;">
+            </div>
+            <div class="form-group m-b-none phone">
+                <label class="title-color bold">{{ 'mobileNumber' | translate }}</label>
+                <div class="item-table">
+                    <div class="tdcell">
+                        <i class="icon icon-phone"></i>
+                        <div data-role="fieldcontain">
+                            
+                             <div class="p-l-t-pf wrap" style="padding-top: 8px;" >{{form.userInfo.phoneAreaCode}} {{form.userInfo.phone}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group district gender">
+                <label class="title-color bold">{{ 'Gender' | translate }}<span>(optional)</span></label>
+                <i class="icon icon-group"></i>
+                <div data-role="fieldcontain" class="district" id="gender_treelist">
+                    <i class="icon-right-arrow" ng-click="iconClick('gender')"></i>
+                    <ul id="gender" style="display:none">
+                        <li on-last-repeat ng-repeat="gender in genderList">{{gender.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group m-b-none district">
+                <label class="title-color bold">{{ 'dateOfBirth' | translate }}<span>(optional)</span></label>
+                <i class="icon icon-date"></i>
+                <i class="icon-right-arrow" ng-click="birthdayClick()"></i>
+                <input id="birthday" class="form-control t-i" type="text" ng-model="form.userInfo.birthday">
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group m-b-none district">
+                <label class="title-color bold">{{ 'Link up social media' | translate }}</label>
+                <div ng-click="facebookLogin()">
+                    <i class="icon icon-facebook"  ng-class="{'fbBlue':form.userInfo.snsId}"></i>
+                    <p style="position: absolute; padding-left: 25px;bottom: 10px;">Facebook</p>
+                    <i class="icon-right-arrow" style="transform:rotate(0deg);-webkit-transform:rotate(0deg)"></i>
+                    <input disabled style="background-color:#fff;text-align: right;padding: 0 25px 0 0;border:none;" class="form-control t-i" type="text" ng-model="form.userInfo.snsId">
+                </div>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <a class="btn btn-primary btn-block disabled" ng-if="phoneAreaCode==''||form.userInfo.phone==''||form.userInfo.firstName==''||form.userInfo.lastName==''||form.userInfo.userName==null||form.userInfo.firstName==null||form.userInfo.lastName==null||form.userInfo.contactEmail==''||form.userInfo.contactEmail==null">{{ 'Confirm' | translate }}</a>
+            <a class="btn btn-primary btn-block" ng-if="phoneAreaCode!=''&&form.userInfo.phone!=''&&form.userInfo.firstName!=''&&form.userInfo.lastName!=''&&form.userInfo.userName!=null&&form.userInfo.firstName!=null&&form.userInfo.lastName!=null&&form.userInfo.contactEmail!=''&&form.userInfo.contactEmail!=null" ng-click="submit()">{{ 'Confirm' | translate }}</a>
+        </div>
+    </form>
+</div>

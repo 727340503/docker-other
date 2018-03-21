@@ -1,0 +1,22 @@
+<div class="inmodal">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">            
+            <!-- <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+            <span class="text-warning"><i class="fa fa-exclamation-triangle modal-icon"></i></span>
+            <h3 class="text-center no-margins">{{ 'Error' | translate }}</h3>
+        </div>
+        <div class="modal-body">
+            <p class="font16 wrap">{{msg}}</p>
+        </div>
+        <div class="modal-footer" ng-if="errorCode == -6">
+            <a ng-click="goLogin()"><button type="button" class="btn btn-block btn-primary">{{ 'OK' | translate }}</button></a>
+        </div>
+        <div class="modal-footer" ng-if="errorCode == -999">
+            <button ng-click="getTokenFn()" type="button" class="btn btn-block btn-primary">{{ 'OK' | translate }}</button>
+        </div>
+
+        <div class="modal-footer" ng-if="errorCode == -16">
+            <button ng-click="goHome()" type="button" class="btn btn-block btn-primary">{{ 'OK' | translate }}</button>
+        </div>
+    </div>
+</div>

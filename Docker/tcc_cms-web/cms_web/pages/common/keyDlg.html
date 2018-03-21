@@ -1,0 +1,25 @@
+<div class="inmodal">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        </div>
+        <div class="modal-body" style="height: 200px">
+            <label class="col-sm-2 control-label" style="padding-top: 7px;">Password</label>
+            <div class="col-sm-10">
+                <div>
+                    <input type="password" class="form-control" placeholder="Password" ng-model="getKeyPassword" required="">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer ">
+            <div class="col-sm-12" ng-class="{'col-sm-6': showOk}">
+                <button type="button" class="btn btn-block " ng-class="{'btn-primary': !showOk}" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+            </div>
+
+            <div class="col-sm-12 col-sm-6" ng-if="showOk">
+                <button type="button" class="btn btn-block btn-primary" ng-click="ok()">{{ 'Confirm' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

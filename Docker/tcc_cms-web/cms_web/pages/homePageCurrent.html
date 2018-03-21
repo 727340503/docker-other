@@ -1,0 +1,120 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-10">
+        <h2>{{ 'HomePageCurrent' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a ng-click="cancel()">{{ 'HomePage' | translate }}</a>
+            </li>
+            <li>
+                <a  class="active">{{ 'HomePageCurrent' | translate }}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+    <div class="row">
+        <div class="col-sm-12">
+
+            <div class="ibox homePage">
+
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>1. Top rolling banner</p>
+                            <div class="listTab">
+                                <ul   class="sortable-list connectList0 agile-list" ng-model="homepage[0]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[0]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div  class="landing" ng-show="homepage[0].length>0">
+                            </div>
+                            <div  class="landing" ng-show="homepage[0].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>2. Campaign</p>
+                            <div  class="listTab">
+                                <ul   class="sortable-list connectList1 agile-list" ng-model="homepage[3]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[3]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="promotion" ng-show="homepage[3].length>0">
+                                <img  src="{{data[homepage[3][0].refId+'_'+homepage[3][0].type].img}}">
+                            </div>
+                            <div class="promotion" ng-show="homepage[3].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>3. Gametation</p>
+                            <div  class="listTab">
+                                <ul   class="sortable-list connectList2 agile-list" ng-model="homepage[1]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[1]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="game" ng-show="homepage[1].length>0">
+                                <img   src="{{data[homepage[1][0].refId+'_'+homepage[1][0].type].img}}">
+                            </div>
+                            <div class="game" ng-show="homepage[1].length==0">
+                                <img   src="img/CMS_default_img_gamebanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <div class="row">
+                        <div class="col-lg-7">
+                            <p>4. Bottom rolling banner</p>
+                            <div  class="listTab">
+                                <ul   class="sortable-list connectList3 agile-list" ng-model="homepage[2]">
+                                    <li class="{{statusClass[task.type]}}-element" ng-repeat="task in homepage[2]">
+                                        <span>{{typeLabel[task.type]}}: {{data[task.refId+"_"+task.type].name}}</span>
+                                        <span>Status: {{homePageStatus[data[task.refId+"_"+task.type].status]}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="coupon" ng-show="homepage[2].length>0">
+                            </div>
+                            <div class="coupon" ng-show="homepage[2].length==0">
+                                <img  src="img/CMS_default_img_promotionbanner.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ibox-footer" style="height: 60px;">
+                    <button class="btn btn-primary pull-right" style="margin-left: 10px;" ng-click="cancel()">Back</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="email-verification">
+    <div class="subPage-content-style" ng-if="!form.verifyPage">
+        <label class="title-color bold">{{ 'activateYourAccount' | translate }}</label>
+        <p class=" wrap">{{ 'haveRegisteredEmail' | translate }} {{form.userInfo.email}}, {{ 'doNotVerified' | translate }}. {{ 'activeAccount' | translate }}</p>
+    </div>
+    <div class="subPage-content-style" ng-if="form.verifyPage">
+        <p class=" wrap">{{ 'verifySameEmail' | translate }} </p>
+    </div>
+    <div class="subPage-content-style">
+        <a class="btn btn-primary btn-block" ng-click="resendActiveEmail()">{{ 'sentVerificationEmail' | translate }}</a>
+    	<a class="btn btn-grey btn-block" ng-click="doneEvent()">{{ 'btnOk' | translate }}</a>
+    </div>
+</div>

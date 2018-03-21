@@ -1,0 +1,42 @@
+<div class="giftDetail-page">
+    <div class="picture">
+        <img ng-src="{{giftDetail.image}}">
+    </div>
+    <div class="gift-detail">
+        <div class="gift-detail-1">
+            <div class="title">
+                <p class="font-bold font15">{{ 'RewardName' | translate }}</p>
+            </div>
+            <p class="cont font14 wrap">{{giftDetail.name}}</p>
+            <div class="title" style="padding-top: 10px">
+                <p class="font-bold font15">{{ 'Description:​' | translate }}</p>
+            </div>
+            <p class="cont font14 wrap">{{giftDetail.descr}}</p>
+        </div>
+        <div class="gift-detail-1">
+            <div class="title">
+                <p class="font-bold font15">{{ 'RedemptionDetails' | translate }}</p>
+            </div>
+            <div class="item-table" ng-repeat="rule in exchangeRule">
+                <div class="tdcell">
+                    <p class="cont font14 wrap">{{rule.stampQty}} {{ 'stamps' | translate }}<span ng-if="rule.cashQty>0">+{{form.currencyFontCode}} {{rule.cashQty}}</span></p>
+                </div>
+                <div class="tdcell redeem-btn">
+                    <a class="btn btn-primary btn-block" ng-if="(collectStampQty>=rule.stampQty)&&form.gift.canReserve&&form.canRedeem" ng-click="gotoReservationForm(rule)">{{ 'Reserve' | translate }}</a>
+                    <a class="btn btn-primary btn-block disabled" ng-if="collectStampQty<rule.stampQty||!form.gift.canReserve||!form.canRedeem">{{ 'Reserve' | translate }}</a>
+                </div>
+            </div>
+        </div>
+        <div class="gift-detail-1">
+            <div class="title">
+                <p class="font-bold font15">{{ 'stockStatus' | translate }}</p>
+            </div>
+            <p class="gift-status font15 bold Expired" ng-if="form.gift.status==1">{{form.gift.giftStatusText}}</p>
+            <p class="gift-status font15 bold lowStock" ng-if="form.gift.status==3&&form.gift.isReservation!=1">{{form.gift.giftStatusText}}</p>
+            <p class="gift-status font15 bold outOfStock" ng-if="form.gift.status==4&&form.gift.isReservation!=1">{{form.gift.giftStatusText}}</p>
+            <p class="gift-status font15 bold openForReservation" ng-if="form.gift.isReservation==1&&form.gift.status!=1&&form.gift.status!=5">{{form.gift.giftStatusText}}</p>
+            <p class="gift-status font15 bold availableNow" ng-if="form.gift.status==2&&form.gift.isReservation!=1">{{form.gift.giftStatusText}}</p>
+            <p class="gift-status font15 bold Expired" ng-if="form.gift.status==5">{{form.gift.giftStatusText}}</p>
+        </div>
+    </div>
+</div>

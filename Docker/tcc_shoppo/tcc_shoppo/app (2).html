@@ -1,0 +1,64 @@
+<!doctype html>
+<html class="no-js" ng-app="shoppoweb">
+
+<head>
+    <meta charset="utf-8">
+    <title ng-bind="$state.current.data.pageTitle | translate"></title>
+    <meta name="description" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="./favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/loading.css">
+    <link rel="stylesheet" href="styles/vendor.css">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/fontall.css">
+    <!-- <link href="styles/mobiscroll/mobiscroll.frame.css" rel="stylesheet" />
+    <link href="styles/mobiscroll/mobiscroll.frame.ios.css" rel="stylesheet" />
+    <link href="styles/mobiscroll/mobiscroll.scroller.css" rel="stylesheet" />
+    <link href="styles/mobiscroll/mobiscroll.scroller.android.css" rel="stylesheet" />
+    <link href="styles/mobiscroll/mobiscroll.scroller.ios.css" rel="stylesheet" /> -->    <link rel="stylesheet" href="styles/main.css?rnd=20180314115913">
+    <script>rndver='20180314115913';</script>
+    <script>merchantCode='M8CRO2GENR';</script>
+    <script>apiDomain='http://138.91.145.5/tcc_api/';</script>
+    <script>gaId='UA-102519743-2';</script>
+    <script>baiduMapKey='NzjDQBBG6qK79VuWQoHAn8cR';</script>
+    <script>googleMapKey='AIzaSyAcTdQWK4OtoUnIkIEKrEK1zgouRo2yY8M';</script>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', gaId, 'auto');
+      ga('send', 'pageview');
+
+</script>
+</head>
+
+<body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="iframed">
+        <!-- <i class="icon-close" onclick="back()"></i>
+        <iframe class="game-iframe" src="{{form.webUrl}}" scrolling="no" frameborder="0"></iframe> -->
+    </div>
+ 
+    <div class="loader" style="display: none;z-index:999999">
+        <div class="sk-spinner sk-spinner-double-bounce">
+            <div class="sk-double-bounce1"></div>
+            <div class="sk-double-bounce2"></div>
+        </div>
+    </div>
+    <div ui-view ng-cloak id="home"></div>
+    <script src="scripts/vendorv3.js"></script>
+
+    <script defer src="scripts/mobiscroll-all.js"></script>
+    <script defer src="scripts/main.js?rnd=20180314115913"></script>
+
+
+</body>
+
+</html>

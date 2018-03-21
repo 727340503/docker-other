@@ -1,0 +1,315 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'merchantInfo' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li ng-if="form.systemUserRole.roleType==1">
+                <a  ng-click="cancel()">{{ 'MerchantList' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'merchantInfo' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="form-horizontal" style="padding-top: 30px;" ng-show="!newMerchant">    
+        <label class="col-sm-2 control-label">{{ 'Language' | translate }}</label>
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="pageLanguage" ng-change="selectPageLang()">
+                <option ng-repeat="language in merchantDetail.merchantLangMapList" value="{{language.langCode}}" >{{language.langCode | translate}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="tabs-container" style="padding-bottom:50px;margin-top:18px;">
+    <div id="wrapperp">
+        <ul class="nav nav-tabs">
+            <li class="active tabLi">
+                <div class="tabDiv" ng-click="changeTab(1)"></div>
+                <a class="tab1" data-toggle="tab" href="#tab-1" aria-expanded="true" ng-click="showTab($event)">{{ 'merchantInfo' | translate }}</a>
+            </li>
+            <li class="tabLi">
+                <div class="tabDiv" ng-click="changeTab(2)"></div>
+                <a class="tab2" data-toggle="tab" href="#tab-2" aria-expanded="false" ng-click="showTab($event,'area')">{{ 'StoreArea' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="row form-horizontal">
+                    <form method="get" class="form-horizontal" id="baseInfo">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-7">
+                                <div>
+                                    <input type="text" class="form-control" maxlength="50" ng-model="merchantDetail.langData.name" name="name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="!newMerchant">
+                            <label class="col-sm-2 control-label">{{ 'MerchantCode' | translate }}</label>
+                            <div class="col-sm-7">
+                                <div>
+                                    <input type="text" disabled class="form-control" ng-model="merchantDetail.merchantCode" name="merchantCode">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'SecurityKey' | translate }}</label>
+                            <div class="col-sm-7">
+                                <div ng-if="!(!newMerchant&&(checkPermission('MERCHANT_LIST_UPDATE_SECURITY_KEY')||checkPermission('MERCHANT_INFO_UPDATE_SECURITY_KEY')))">
+                                    <input type="text" disabled class="form-control" ng-model="merchantDetail.securityKey" name="securityKey">
+                                </div>
+                                <div ng-if="!newMerchant&&(checkPermission('MERCHANT_LIST_UPDATE_SECURITY_KEY')||checkPermission('MERCHANT_INFO_UPDATE_SECURITY_KEY'))">
+                                    <label class="form-control">{{merchantDetail.securityKey}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-3" ng-if="!newMerchant&&(checkPermission('MERCHANT_LIST_UPDATE_SECURITY_KEY')||checkPermission('MERCHANT_INFO_UPDATE_SECURITY_KEY'))">
+                                <div class="pull-left">
+                                    <div class="btn btn-primary" ng-click="viewSecurityKey()" >{{ 'View' | translate }}</div>
+                                </div>
+                                <div class="pull-left" ng-if="canUpdateKey&&(checkPermission('MERCHANT_INFO_UPDATE')||checkPermission('MERCHANT_LIST_UPDATE'))" style="padding-left: 10px;">
+                                    <div class="btn btn-primary" ng-click="changeSecurityKey()" >{{ 'changesecuritykey' | translate }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                       <!--  <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'logoImage' | translate }}</label>
+                            <div class="col-sm-10">
+                                <div class="input-group img-group">
+                                    <div id="uploadBtn3" class="text-center dropzone logo">
+                                        <input id="logoInput" class="upload-file img-file-m" type="file" accept="image/*" ng-show="!isIos" ng-click="$root.prepareUploadImg('logoInput','logoImage',uploadFinish,{$event: $event}, {width:600, height:319})" ng-model="merchantDetail.langData.logo">
+                                        <a class="upload-file img-file-m" ng-show="isIos" ng-click="$root.prepareUploadImg('logoInput','logoImage',uploadFinish,{$event: $event}, {width:600, height:319})"></a>
+                                        <div class="addImage" style="width: 100%" ng-show="!merchantDetail.langData.logo">
+                                            <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                            <p class="text-primary m-t-sm font14 suggestFont">600x319.jpg/jpeg/png</p>
+                                        </div>
+                                        <div class="editImage"  ng-show="merchantDetail.langData.logo">
+                                            <div class="mask-bg"></div>
+                                            <img id="logoImage" ng-src="{{merchantDetail.langData.logo}}">
+                                            <div class="icon-center">
+                                                <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                                <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Image' | translate }}</label>
+                            <div class="col-sm-10">
+                                <div class="input-group img-group">
+                                    <div id="uploadBtn4" class="text-center dropzone">
+                                        <input id="ImageInput" class="upload-file img-file-m" type="file" accept="image/*" ng-show="!isIos" ng-click="$root.prepareUploadImg('ImageInput','ImgImage',uploadFinish,{$event: $event}, {width:200, height:200})" ng-model="merchantDetail.langData.img">
+                                        <a class="upload-file img-file-m" ng-if="isIos" ng-click="$root.prepareUploadImg('ImageInput','ImgImage',uploadFinish,{$event: $event}, {width:58, height:79})"></a>
+                                        <div class="addImage" style="width: 100%" ng-show="!merchantDetail.langData.img">
+                                            <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                            <p class="text-primary m-t-sm font14 suggestFont"> 200x200.jpg/jpeg/png</p>
+                                        </div>
+                                        <div class="editImage"  ng-show="merchantDetail.langData.img">
+                                            <div class="mask-bg"></div>
+                                            <img id="ImgImage" ng-src="{{merchantDetail.langData.img}}">
+                                            <div class="icon-center">
+                                                <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                                <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'LoginMethod' | translate }}<span style="color:red">*</span></label>  
+                            <div class="col-sm-3" ng-show="newMerchant||(loginMethod[0]||newMerchant)">
+                                <label class="isClaimed" ng-if="newMerchant">
+                                    <span class="check-box" ng-class="{checked:loginMethod[0]}" ng-click="checkLoginType(0)"></span>
+                                </label>
+                                <label class="control-label" ng-if="loginMethod[0]||newMerchant">E-Mail</label>
+                            </div>
+                            <div class="col-sm-3" ng-show="newMerchant||(loginMethod[1]||newMerchant)">
+                                <label class="isClaimed" ng-if="newMerchant">
+                                    <span class="check-box" ng-class="{checked:loginMethod[1]}" ng-click="checkLoginType(1)"></span>
+                                </label>
+                                <label class="control-label"  ng-if="loginMethod[1]||newMerchant">Facebook</label>
+                            </div>
+                            <div class="col-sm-3" ng-show="newMerchant||(loginMethod[2]||newMerchant)">
+                                <label class="isClaimed" ng-if="newMerchant">
+                                    <span class="check-box" ng-class="{checked:loginMethod[2]}" ></span>
+                                </label>
+                                <label class="control-label"  ng-if="loginMethod[2]||newMerchant">Mobile</label>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <label class="isClaimed" ng-if="newMerchant">
+                                    <span class="check-box" ng-class="{checked:loginMethod[2]}" ng-click="checkLoginType(2)"></span>
+                                </label>
+                                <label class="control-label"  ng-if="loginMethod[2]||newMerchant">Mobile</label>
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'IssueStampMethod' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="issueStampMethod" required ng-disabled="!newMerchant" ng-model="merchantDetail.issueStampMethod">
+                                        <option value="">--- Please Select ---</option>
+                                        <option value="1">POS integration</option>
+                                        <option value="2">Merchant APP</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'reservationMethod' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="reservationType" required ng-disabled="!newMerchant" ng-model="merchantDetail.reservationType">
+                                        <option value="0">Pay when make reservation</option>
+                                        <option value="1">Pay when pick up at store</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'TimeZone' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="timeZone" ng-disabled="!newMerchant" required  ng-model="merchantDetail.timeZone">
+                                        <option value="">--- Please Select ---</option>
+                                        <option ng-repeat="time in form.timeZone" value="{{time.value}}">{{time.label}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Date format' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="dateFormat" required  ng-model="merchantDetail.dateFormat">
+                                        <option value="">--- Please Select ---</option>
+                                        <option ng-repeat="date in form.dateFormat" value="{{date.value}}">{{date.wenzi}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="hoursFormat" required  ng-model="merchantDetail.hoursFormat">
+                                        <option value="">--- Please Select ---</option>
+                                        <option value="12">12</option>
+                                        <option value="24">24</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Currency' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="currencyUnitId" ng-disabled="!newMerchant"  required  ng-model="merchantDetail.currencyUnitId">
+                                        <option value="">--- Please Select ---</option>
+                                        <option ng-repeat="currency in currencyUnitlist" value="{{currency.id}}">{{currency.currencyCode}}-{{currency.currencyFontCode}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'PhoneDistrictCode' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div class="input-group">
+                                    <select chosen id="states" class="chosen-select" style="width:350px;" tabindex="4" ng-model="merchantDetail.phoneDistrictCode" >
+                                       <option ng-repeat="code in form.phoneDistrictCode" value="{{form.getPhoneCode(code)}}">{{form.phoneCodeFormat(code)}}</option>
+                                   </select>
+                               </div>
+                           </div>
+                       </div>
+                        <div class="form-group" ng-if="form.systemUserRole.roleType==1">
+                            <label class="col-sm-2 control-label">{{ 'Coupon on/off' | translate }}</label>
+                            <div class="col-sm-3">
+                                <label class="isClaimed">
+                                    <span class="check-box"  ng-class="{checked:merchantDetail.isCouponManagement}" ng-click="checkCoupon()"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="newMerchant">
+                            <label class="col-sm-2 control-label">{{ 'Language' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3" ng-repeat = "language in form.languageList">
+                                <label class="isClaimed">
+                                    <span class="check-box" ng-class="{checked:language.select}" ng-click="checkboxLanguage(language.langCode)"></span>
+                                </label>
+                                <label class="control-label">{{language.descr | translate}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="newMerchant">
+                            <label class="col-sm-2 control-label">{{ 'DefaultLanguage' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="defaultLanguage" required ng-model="defaultLanguage">
+                                        <option value="">--- Please Select ---</option>
+                                        <option  ng-repeat = "language in form.languageList" ng-if="language.select" value="{{language.langCode}}">{{language.descr | translate}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="!newMerchant">
+                            <label class="col-sm-2 control-label">{{ 'DefaultLanguage' | translate }}</label>
+                            <div class="col-sm-3" ng-repeat = "language in merchantDetail.merchantLangMapList">
+                                <label class="isClaimed">
+                                    <span class="check-box" ng-class="{checked:merchantDetail.defaultLangCode==language.langCode}" ng-click="checkdefaultLang(language.langCode)"></span>
+                                </label>
+                                <label class="control-label">{{language.langCode | translate}}</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Status' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="status" required ng-model="merchantDetail.status">
+                                        <option value="">--- Please Select ---</option>
+                                        <option value="0">{{ 'Inactive' | translate }}</option>
+                                        <option value="1">{{ 'Active' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'mapType' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" name="mapType" required ng-model="merchantDetail.mapType">
+                                        <option value="">--- Please Select ---</option>
+                                        <option value="0">{{ 'Google map' | translate }}</option>
+                                        <option value="1">{{ 'Baidu map' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Description' | translate }}</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control textAreaHeight" maxlength="200" ng-model="merchantDetail.langData.descr"></textarea>
+                            </div>
+                        </div> -->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                                    <button class="btn btn-primary" ng-if="checkPermission('MERCHANT_INFO_UPDATE')||checkPermission('MERCHANT_LIST_UPDATE')||(!form.merchantId&&checkPermission('MERCHANT_LIST_NEW'))" type="submit">{{ 'Save' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="tab-2" class="tab-pane" ng-show="showArea">
+            <div class="panel-body">
+                <form id="StampForm">
+                    <div ng-include="'pages/merchantStoreArea.html'"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

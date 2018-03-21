@@ -1,0 +1,27 @@
+<div class="inmodal">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <span class="text-warning"><i class="fa fa-exclamation-triangle modal-icon"></i></span>
+            <h4 class="modal-title">{{ 'Warning' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+            <p class="wrap">{{msg}}</p>
+        </div>
+        <div class="modal-footer " ng-if="!timeout">
+            <div class="col-sm-12" ng-class="{'col-lg-6 width50': showOk}">
+                <button type="button" class="btn btn-block " ng-class="{'btn-primary': !showOk}" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+            </div>
+
+            <div class="col-sm-12 col-lg-6" ng-if="showOk" style="width:50%;">
+                <button type="button" class="btn btn-block btn-primary" ng-click="ok()">{{ 'Confirm' | translate }}</button>
+            </div>
+        </div>
+        <div class="modal-footer " ng-if="timeout">
+            <div class="col-sm-12 " >
+                <button type="button" class="btn btn-block btn-primary" ng-click="ok()">{{ 'OK' | translate }}</button>
+            </div>
+        </div>
+
+    </div>
+</div>

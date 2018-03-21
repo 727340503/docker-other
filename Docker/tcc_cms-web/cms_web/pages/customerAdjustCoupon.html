@@ -1,0 +1,131 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'AdjustCoupon' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a  ng-click="cancel()">{{ 'CustomerInfo' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'AdjustCoupon' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="ibox-content m-b-sm border-bottom ng-scope" style="margin-top: 20px;">
+    <div class="row form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label ng-binding">{{ 'MerchantName' | translate }}</label>
+            <div class="col-sm-3">
+                <div>
+                    <input type="text" class="form-control " disabled ng-model="form.merchantName">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label ng-binding">{{ 'Adjustment' | translate }}</label>
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="adjustment" required>
+                    <option value="0">Issue coupon</option>
+                    <option value="1">Inactive coupon</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tabs-container" style="padding-bottom:50px;margin-top:18px;">
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal" id="baseInfo">
+                        <div ng-if="adjustment==0">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Coupon type' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div>
+                                        <select class="form-control" ng-model="couponType" name="type" required>
+                                            <option value="1">Stamp(Add)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Campaign' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div>
+                                        <select class="form-control" ng-model="campaignId" name="campaignId" ng-change="getCouponList()" required>
+                                            <option value="">--- Please Select ---</option>
+                                            <option  ng-repeat="campaign in campaignList" value="{{campaign.id}}" ng-if="campaign.status==1||campaign.status==2">{{campaign.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Coupon title' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div>
+                                        <select class="form-control" ng-model="couponDetail.couponId"  name="couponId" required>
+                                            <option value="">--- Please Select ---</option>
+                                            <option  ng-repeat="coupon in couponList" value="{{coupon.id}}" ng-if="coupon.status==1||coupon.status==2">{{coupon.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'No. of coupon issue' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" required ng-model="couponDetail.qty">
+                                    </div>
+                                </div>
+                            </div>                        
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Remark' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <textarea class="form-control textAreaHeight" required name="terms" ng-model="couponDetail.remark" maxlength="500"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="adjustment==1"> 
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Coupon title' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-5">
+                                    <div>
+                                        <select class="form-control" ng-model="couponDetail.userCouponId"  name="userCouponId" required>
+                                            <option value="">--- Please Select ---</option>
+                                            <option  ng-repeat="coupon in userCouponList" value="{{coupon.id}}" ng-if="coupon.status==1">{{coupon.couponName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Remark' | translate }}<span style="color:red">*</span></label>
+                                <div class="col-sm-10">
+                                    <div>
+                                        <textarea class="form-control textAreaHeight" required name="terms" ng-model="couponDetail.userRemark" maxlength="500"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <div class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</div>
+                                    <button class="btn btn-primary">{{ 'Save' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

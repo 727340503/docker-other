@@ -1,0 +1,20 @@
+<div class="middle-box text-center loginscreen">
+    <div>
+        <h3>Welcome to TCC Stamping platform CMS!!</h3>
+        <form class="m-t" role="form" >
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="User name" ng-model="username" required="">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" ng-model="password" required="">
+            </div>
+            <div class="form-group">
+                <div class="has-error" ng-show="hasErrorMsg ">{{errorMsg}}</div>
+            </div>
+              <button type="submit" class="btn btn-primary block full-width m-b" ng-click="login()" >Login</button>
+            
+            <!-- <a ui-sref="forgot_password"><small>Forgot password?</small></a> -->
+        </form>
+        <p class="m-t"> <small>CP &copy; 2017</small> </p>
+    </div>
+</div>

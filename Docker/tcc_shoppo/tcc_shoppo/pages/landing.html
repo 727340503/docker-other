@@ -1,0 +1,115 @@
+<div class="landing-page" ng-if="!showedTutorial">
+  <div class="rolling-banner">
+    <div class="flexslider hide">
+      <ul class="slides">
+        <li ng-repeat="group in topGroup" ng-click="openLink(group.webUrl,group.inappOpen, 'Home-Top','Banner')">
+          <img ng-src="{{group.img}}">
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="stamp-card" ng-show="newestCampain.refId">
+    <div id="newestCampain" class="stamps-content" ng-if="!pending">
+      <div class="title hasDefaultBg">
+        <span class="main-color font16 bold" ng-if="form.userInfo.userType!= 0">{{ 'totalStampsCollected' | translate }}</span>
+        <span class="main-color font16 bold" ng-if="form.userInfo.userType==0">{{ 'stampsCollection' | translate }}</span>
+        <br>
+        <span class="font-highColor number" ng-if="form.userInfo.userType != 0">{{stampNum}} <b>{{ 'stamps' | translate }}</b></span>
+        <span class="main-color font16" ng-if="form.userInfo.userType == 0">{{ 'startToCollect' | translate }}</span>
+      </div>
+      <ul class="stamps-list clearfix">
+        <li ng-repeat="stamp in stamps">
+          <div class="stampsModule" ng-class="{noStamps:stampsCardInfo.collectStampQty<stamp.num}">
+            <span ng-if="stampsCardInfo.collectStampQty<stamp.num">{{stamp.num}}</span>
+            <img ng-src="{{stamp.stampImg}}" ng-if="stampsCardInfo.collectStampQty>=stamp.num">
+          </div>
+        </li>
+      </ul>
+      <div class="button-area" ng-if="form.userInfo.userType != 0">
+        <div class="table-item hasDefaultBg">
+          <div class="tdcell" ng-if="canCollect">
+            <a class="btn btn-primary btn-block" ng-click="gotoStampsDetail()">{{ 'collectStamps' | translate }}</a>
+          </div>
+          <div class="tdcell" ng-if="canRedeem">
+            <a class="btn btn-primary btn-block" ng-click="gotoStampsDetailRedeem()">{{ 'redeem' | translate }}</a>
+          </div>
+          <div class="tdcell" ng-if="!canRedeem&&!canCollect">
+            <a class="btn btn-primary btn-block" ng-click="gotoStampsDetail()">{{ 'viewCampaign' | translate }}</a>
+          </div>
+        </div>
+      </div>
+      <div class="button-area" ng-if="form.userInfo.userType == 0">
+        <div class="table-item hasDefaultBg">
+          <div class="text-center">
+            <a class="btn btn-primary w-5" ng-click="startNow()">{{ 'startNow' | translate }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stamps-content pending" ng-if="pending">
+      <div ng-if="form.userInfo.userType != 0">
+        <img ng-src="{{newestCampainInfo.coverImg}}" ng-click="openLink(newestCampainInfo.prmBannerUrl,newestCampainInfo.inappOpen, 'Home-Campaign','Banner')">
+      </div>
+      <div ng-if="form.userInfo.userType == 0">
+        <div class="hasDefaultBg">
+          <img ng-src="{{newestCampainInfo.coverImg}}" ng-click="openLink(newestCampainInfo.prmBannerUrl,newestCampainInfo.inappOpen, 'Home-Campaign','Banner')">
+          <!-- <img src="images/circle_bg.png"> -->
+        </div>
+        <div class="bottomCircle"></div>
+        <div class="creatAccount">
+          <p class="text-center main-color font16">{{'RegisterNowAndStartCollectingStickers' | translate }}</p>
+        </div>
+        <div class="button-area">
+          <div class="table-item hasDefaultBg">
+            <div class="text-center">
+              <a class="btn btn-primary w-5" ng-click="startNow()">{{ 'RegisterNow' | translate }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="pending-icon" ng-if="pending"><img src="images/campaign_pending_icon.png">{{ 'Comingsoon' | translate }}</span>
+  </div>
+  <div ng-repeat="group in othergroups">
+    <div class="game-banner" ng-if="group.length==1">
+      <img ng-src="{{group[0].img}}" ng-click="openLink(group[0].webUrl,group[0].inappOpen, 'Home-Game','Banner')">
+    </div>
+    <div class="promotion-banner" ng-if="group.length>1">
+      <div class="flexslider-card">
+        <ul class="slides">
+          <li ng-repeat="object in group" ng-click="openLink(object.webUrl,object.inappOpen, 'Home-Bottom','Banner')">
+            <img ng-src="{{object.img}}">
+          </li>
+        </ul>
+      </div>
+      <div class="icon-left-arrow" ng-click="preClick()"></div>
+      <div class="icon-right-arrow" ng-click="nextClick()"></div>
+    </div>
+  </div>
+</div>
+<div class="tutorialPage landingTutorial" ng-if="showedTutorial">    
+    <div class="flexsliderTutorial">
+      <ul class="slides">
+        <li ng-class="flexsliderEvent()">
+            <img src="./images/tutorial_graphic_1.png">
+            <div class="title bold">About Us</div>
+            <div class="content_t">Rustan Supercenters, Inc. is the operator of Rustan's Supermarkets, the Shopwise chain of hypermarkets and Wellcome. It is a leader and pioneer in the grocery shopping industry, well known for its focus on quality, customer service, and fresh food.</div>
+        </li>
+        <li>
+            <img src="./images/tutorial_graphic_2.png">
+            <div class="title bold">Digital stickers platform</div>
+            <div class="content_t">With the new Rustan's Supermarket App, you can earn and share stickers, as well as redeem and reserve rewards using your mobile device. You will also be updated on the latest news and promos from us.</div>
+        </li>
+        <li>
+            <img src="./images/tutorial_graphic_3.png">
+            <div class="title bold">How to join?</div>
+            <div class="content_t">Just simply register an account via email or Facebook to start earning stickers!</div>
+            <div class="registerBtn">
+              <a class="btn btn-primary btn-block" ng-click="startNow()">{{ 'RegisterNow' | translate }}</a>
+            </div>
+            
+        </li>
+      </ul>
+    </div>
+    <div class="skip" ng-click="skipEvent()">Skip</div>
+</div>

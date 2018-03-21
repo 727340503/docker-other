@@ -1,0 +1,36 @@
+<div class="reservation-form overflow-scroll set-profile">
+    <form>
+        <div class="subPage-content-style">
+            <div class="item-table">
+                <div class="tdcell">
+                    <div class="img-preview border"><img ng-src="{{form.redemptionHistory.giftImage}}"></div>
+                </div>
+                <div class="tdcell">
+                    <p class="title-color">{{form.redemptionHistory.giftName}}</p>
+                </div>
+            </div>
+            <div class="form-group m-b-none">
+                <label class="title-color bold">{{ 'redemptionNumber' | translate }}</label>
+                <p class="cont font14 wrap">{{form.redemptionHistory.redeemCode}}</p>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group">
+                <label class="title-color bold">{{ 'RedemptionDetails' | translate }}</label>
+                <p class="cont font14 wrap">{{form.redemptionHistory.stampQty}} {{ 'stamps' | translate }}<span ng-if="form.redemptionHistory.cashQty>0">+{{form.currencyFontCode}} {{form.redemptionHistory.cashQty}}</span></p>
+            </div>
+        </div>
+        <div class="subPage-content-hr"></div>
+        <div class="subPage-content-style">
+            <div class="form-group" ng-if="form.redemptionHistory.isFromReservation == 1">
+                <label class="title-color bold">{{ 'Request Date' | translate }}</label>
+                <div>{{form.redemptionHistory.reservationDate}}</div>
+            </div>
+            <div class="form-group">
+                <label class="title-color bold">{{ 'redemptionDate' | translate }}</label>
+                <div>{{form.redemptionHistory.redeemTime}}</div>
+            </div>
+        </div>
+    </form>
+</div>

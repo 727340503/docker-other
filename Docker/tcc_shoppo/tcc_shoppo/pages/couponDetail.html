@@ -1,0 +1,39 @@
+<div class="reservation-form overflow-scroll" style="overflow-x: auto;">
+  <div class="picture">
+    <img ng-src="{{couponDetail.img}}" style="width: 100%;border-bottom: 1px solid #c9cbcb;">
+  </div>
+  <div class="gift-detail">
+    <div class="subPage-content-style">
+      <p class="cont font14 wrap">{{couponDetail.name}}</p>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="subPage-content-style">
+      <div class="reward-content">
+        <div class="item-table" style="margin-bottom:0;">
+          <div class="tdcell" style="width:50%;padding-right: 10px;border-right: 1px solid #c9cbcb;">
+            <p class="bold font15 title-color">{{ 'collectionEndDate' | translate }}</p>
+            <div>{{couponDetail.collectEndTime}}</div>
+          </div>
+          <div class="tdcell">
+            <p class="bold font15 title-color">{{ 'remainingDays' | translate }}</p>
+            <div>
+                <span ng-if="couponDetail.distanceTime[0]>1">{{couponDetail.distanceTime[0]}} days</span>
+                <span ng-if="couponDetail.distanceTime[0]==1">{{couponDetail.distanceTime[0]}} day</span>
+                <span ng-if="couponDetail.distanceTime[0]==0">
+                  <span ng-if="couponDetail.distanceTime[1]<10">0</span>{{couponDetail.distanceTime[1]}}:<span ng-if="couponDetail.distanceTime[2]<10">0</span>{{couponDetail.distanceTime[2]}}
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subPage-content-hr"></div>
+    <div class="subPage-content-style">
+      <label class="title-color bold">{{ 'Details' | translate }}</label>
+      <div>{{couponDetail.descr}}</div>
+    </div>
+  </div>
+  <div class="redeem-btn" style="border-top:1px solid #c9cbcb;position:absolute;bottom:0;" ng-if="canCollect">
+    <a class="btn btn-primary btn-block" ng-click="collectCoupon()">{{ 'collect' | translate }}</a>
+  </div>
+</div>

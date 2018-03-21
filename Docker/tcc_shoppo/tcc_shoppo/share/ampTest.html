@@ -1,0 +1,361 @@
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="http://example.ampproject.org/article-metadata.html">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <title>Rustan's</title>
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+    <style amp-custom>
+.hide{
+    display: none;
+}
+/*特殊字体引进*/
+@font-face {
+  font-family: 'Univers';
+  src:  url('../../fonts/Univers_LT_45_Light.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'UniversBold';
+  src:  url('../../fonts/Univers_LT_65_Bold.ttf')  format('truetype');
+  font-weight: normal;
+}
+
+
+body{
+    font-family: 'Univers' ;
+}
+.bold{
+    font-family: 'UniversBold' ;
+}
+body {
+    background-size: 100% auto;
+    background-color: #fafaf5 ;
+    font-size: 14px;
+}
+.background{
+    position: relative;
+}
+.fgs-download {
+    width: 100%;
+    padding-top: 60px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
+    -ms-transform: translate3d(-50%, 0, 0);
+    -moz-transform: translate3d(-50%, 0, 0);
+    -o-transform: translate3d(-50%, 0, 0);
+}
+
+.fgs-download .text-center:first-child {
+    width: 100%;
+}
+
+.fgs-download .text-center:first-child img {
+    width: 33%;
+}
+
+.fgs-download .text-center:nth-child(2) {
+    margin: 0 auto;
+}
+
+.fgs-download .text-center:nth-child(2) img {
+    width: 100%;
+}
+
+.fgs-download p {
+    font-size: 24px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.btn-content {
+    text-align: center;
+    padding: 20px;
+}
+
+.btn-content a img {
+    vertical-align: -4px;
+    width: 25px;
+    height: auto;
+}
+.btn{
+    cursor: pointer;
+}
+.wechat-reminder {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    background-image: url('../images/download_wechat_reminder.png');
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 40% auto
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.title{
+    color: #000 ;
+    padding-top: 100px
+}
+.content{
+    color: #000 ;
+    font-weight: normal ;
+    padding: 0 30px ;
+}
+
+@media(min-width: 601px) {
+    .fgs-download {
+        width: 600px;
+    }
+}
+
+@media(min-width: 481px) and ( max-width: 600px) {
+    .fgs-download {
+        width: 100%;
+        padding-top: 60px;
+    }
+    .fgs-download .text-center:nth-child(2) img {
+        width: 75%;
+        margin-top: -15px;
+    }
+    .btn-content a {
+        width: 100%;
+    }
+    .btn-content a img {
+        width: 20px;
+    }
+    .fgs-download p {
+        font-size: 20px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+    }
+}
+
+@media(max-width: 480px) {
+    .fgs-download {
+        width: 100%;
+        padding-top: 60px;
+    }
+    .fgs-download .text-center:nth-child(2) img {
+        width: 82%;
+        margin-top: -15px;
+    }
+    .btn-content a {
+        width: 100%;
+    }
+    .btn-content a img {
+        width: 20px;
+    }
+    .fgs-download p {
+        font-size: 18px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 35%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 35%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+    }
+    .btn_text{
+        margin:0;
+        padding: 7px;
+        display: inline-block;
+        font-size: 16px ;
+    }
+}
+
+.btn {
+    padding: 6px 5px 
+}
+
+.btn-primary {
+    color: #fff;
+    background-image: -webkit-linear-gradient(to bottom, #fc4347, #ea2428);
+    background-image: linear-gradient(to bottom, #fc4347, #ea2428);
+    border-color: transparent;
+    background-color: transparent;
+    border-radius: 25px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3)
+}
+
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+    background-image: -webkit-linear-gradient(to bottom, #c4c4c4, #c4c4c4);
+    background-image: linear-gradient(to bottom, #c4c4c4, #c4c4c4);
+    color: #fff;
+    background-color: #c4c4c4;
+    border-color: #c4c4c4
+}
+
+.btn-block {
+    display: block;
+    width: 100%
+}
+.btn_text{
+    margin:0;
+    padding: 7px;
+    display: inline-block;
+    font-size: 18px ;
+}
+.bgImage img{
+    z-index: -1;
+}
+
+@media(min-width: 901px){
+    .background{
+        min-height: 900px;
+    }
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 269px;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 350px;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 300px;
+    }
+}
+@media(min-width: 601px) and ( max-width: 900px) {
+    .bg1{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg2{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 30%;
+    }
+    .bg3{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30%;
+    }
+    .bg4{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 30%;
+    }
+}
+
+</style>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+  </head>
+  <body>
+    <div class="background">
+        <div class="fgs-download">
+            <div class="text-center"><amp-img src="./images/app_icon.png"  width="130" height="130"></amp-img></div>
+            <p class="text-center title">Stick 'N Collect</p>
+            <p class="text-center content">Collect stickers now and get that free premium from Marketplace and Rustan's Supermarket. Get the app:</p>
+            <div class="btn-content text-center">
+                <a class="btn btn-primary btn-block ios-url"><amp-img src="./images/ios_icon.png"  width="81" height="97"></amp-img> <p class="btn_text">Download on App Store</p> </a>
+            </div>
+            <div class="btn-content text-center">
+                <a class="btn btn-primary btn-block aos-url"><amp-img src="./images/android_icon.png"  width="81" height="97"></amp-img> <p class="btn_text">Download on Google Play</p> </a>
+            </div>
+        </div>
+        <div class="bgImage">
+            <amp-img class="bg1" src="./images/download_page_bg_img_L1.png" layout="responsive" width="360" height="900"></amp-img>
+            <amp-img class="bg2" src="./images/download_page_bg_img_L2.png" layout="responsive" width="575" height="418"></amp-img>
+            <amp-img class="bg3" src="./images/download_page_bg_img_R1.png" layout="responsive" width="385" height="854"></amp-img>
+            <amp-img class="bg4" src="./images/download_page_bg_img_R2.png" layout="responsive" width="500" height="516"></amp-img>
+        </div>
+    </div>
+  </body>
+</html>

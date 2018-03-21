@@ -1,0 +1,149 @@
+<div class="dialog-qrcode coupon-qrcode" ng-if='couponQrcode'>
+    <h3 class="main-color"><i class="icon-coupon"></i>{{ 'Coupon' | translate }}-{{ 'Redemption' | translate }}</h3>
+    <p class="text-center main-color">{{ 'ShowRedemption' | translate }}</p>
+    <div class="qrcode"></div>
+    <div class="text-center body-color">{{qrCode}}</div>
+    <a class="dialog-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='punchQrcode'>
+    <h3 class="main-color"><i class="icon-punchcard"></i>{{ 'PunchCard' | translate }}-{{ 'Redemption' | translate }}</h3>
+    <p class="text-center main-color" ng-if='isCompleted'>{{ 'ShowRedemption' | translate }}</p>
+    <p class="text-center main-color" ng-if='!isCompleted'>{{ 'ShowStampCollection' | translate }}</p>
+    <div class="qrcode"></div>
+    <div class="text-center body-color">{{qrCode}}</div>
+    <a class="dialog-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<!-- <div class="dialog-qrcode member-punchcard" ng-if="membershipQrcode">
+    <span class="text-center user-photo"><img class="user-photo" src="{{form.userInfo.userIcon}}"></span>
+    <span class="main-color font18">{{form.userInfo.nickname}}</span>
+    <p class="text-center main-color">{{ 'ShowGetScores' | translate }}</p>
+    <div class="qrcode"></div>
+    <div class="text-center body-color">{{qrCode}}</div>
+    <a class="dialog-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div> -->
+<div class="dialog-qrcode member-punchcard" ng-if="membershipQrcode">
+    <!-- <span class="text-center user-photo"><img class="user-photo" src="{{form.userInfo.userIcon}}"></span> -->
+    <!-- <span class="main-color font18">{{form.userInfo.userName}}</span> -->
+    <div ng-show="!qrCodeMessageSuccess">
+        <p class="text-center main-color" style="margin-top: 25px;">{{ 'ShowGetScores' | translate }}</p>
+        <div class="qrcode"></div>
+        <div class="text-center body-color">{{form.userInfo.userName}}</div>
+        <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    </div>
+    <form ng-show="qrCodeMessageSuccess" style="margin-top:85px">
+        <p class="text-center main-color" style="color: #c70a21;margin: 20px 0;font-size: 23px;">{{ 'youHaveSuccessGet' | translate }} {{a}} {{ 'punchCardNum' | translate }}</p>
+        <a class="dialog-btn" ng-click="closeThisDialog()" style="background-color: #fd4337;color: #fff;padding: 10px;margin-bottom: 15px;">{{ 'Close' | translate }}</a>
+    </form>
+</div>
+<div class="dialog-qrcode leavel-dialog" ng-if="form.pointMessage">
+    <p class="text-center main-color font18">{{form.popupMsg.popupMessage}}</p>
+    <a class="dialog-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<div class="text-center dialog-qrcode" ng-if="form.popupMessage">
+    <span class="pull-right top-close-btn" ng-click="closeThisDialog()"><i class="icon icon-close"></i></span>
+    <h2 class="main-color">{{ 'Sucessful' | translate }}</h2>
+    <p class="wrap">{{form.popupMessage}}</p>
+    <a class="dialog-btn" ng-if="couponTemp" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    <a class="dialog-btn" ng-if="punchcardTemp" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<div class="dialog-qrcode text-center referralDialog" ng-if='referral'>
+    <div class="closeDialogBtn"><i class="icon-close" ng-click='form.closeDialog()'></i></div>
+    <h3 class="main-color text-center">{{ 'PleEnterReferralCode' | translate }}</h3>
+    <input class="codeInput" type="text" ng-model='form.referralCode' placeholder="{{ 'EnterReferralCode' | translate }}"></input>
+    <p class="codeErrorMsg" ng-if="form.referralCodeErrorMsg">{{form.referralCodeErrorMsg}}</p>
+    <a class="dialog-btn" ng-click="joinEvent(true,'Done')" ng-if='form.referralCode!=""'>{{ 'Done' | translate }}</a>
+    <a class="dialog-btn disable" ng-if='form.referralCode==""'>{{ 'Done' | translate }}</a>
+    <a class="dialog-btn skip-btn" ng-click="joinEvent(false,'Skip')">{{ 'Skip' | translate }}</a>
+</div>
+<div class="dialog-qrcode text-center referralDone" ng-if='referralDone'>
+    <div class="closeDialogBtn"><i class="icon-close" ng-click='form.closeDialog()'></i></div>
+    <h3 class="main-color text-center">{{ 'Congratulations' | translate }}</h3>
+    <!-- <h3 class="main-color text-center">{{form.userName}}</h3>
+    <h3 class="main-color text-center">的推薦序號</h3> -->
+    <p class="text-center bodyColor">{{ 'GotReferral' | translate }} {{form.userName}}</p>
+    <!-- <p class="text-center bodyColor">{{form.couponName}}</p> -->
+    <a class="dialog-btn" ng-click="gotoCouponDetail()">{{ 'View' | translate }}</a>
+</div>
+<div class="alert-qrcode text-center" ng-if='follow'>
+    <h3 class="text-center">{{ 'Sorry' | translate }}</h3>
+    <p>{{ 'followNow' | translate }}</p>
+    <div class="table-item">
+        <a class="btn" ng-click="closeThisDialog()">{{ 'FollowLater' | translate }}</a>
+        <a class="btn" ng-click="joinEvent(true)">{{ 'Follow' | translate }}</a>
+    </div>
+</div>
+<div class="dialog-qrcode text-center follow" ng-if='deleteProduct'>
+    <div class="closeDialogBtn"><i class="icon-close" ng-click='closeThisDialog()'></i></div>
+    <h3 class="main-color text-center">{{ 'deleteTip' | translate }}</h3>
+    <a class="dialog-btn" ng-click="deleteShoppingCartItem()">{{ 'Done' | translate }}</a>
+    <a class="dialog-btn cancel-btn" ng-click="closeThisDialog()">{{ 'Cancel' | translate }}</a>
+</div>
+<div class="alert-qrcode text-center" ng-if='ownerClaim'>
+    <div class="text-center" style="padding:0 15px 5px 15px">请通过以下联系方式，联系我们以认领您的小店：</div>
+    <div class="text-center item-table" style="padding:0 15px 5px 15px">
+        <div class="tdcell" style="">客服微信：</div>
+        <div class="tdcell">Shoppocn</div>
+    </div>
+    <div class="text-center" style="padding:0 15px 5px 15px">
+        <div class="tdcell" style="">联系电邮：</div>
+        <div class="tdcell"><a href="mailto:china@shoppoapp.com">china@shoppoapp.com</a></div>
+    </div>
+    <div class="table-item">
+        <a class="btn" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+</div>
+<div class="alert-qrcode text-center" ng-if='merchantListLBS'>
+    <div class="text-center item-table" style="padding:0 15px 5px 15px">
+        <div class="tdcell" style="">{{'OpenLBSHints' |translate}}</div>
+        <div class="tdcell"></div>
+    </div>
+    <div class="text-center" style="padding:0 15px 5px 15px">
+        <div class="tdcell" style="">{{'OpenLBSOption' |translate}}</div>
+    </div>
+    <div class="table-item">
+        <a class="btn" ng-click="closeThisDialog()">{{ 'Done' | translate }}</a>
+    </div>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='preRedeem' style="text-align:center">
+    <div ng-show="!qrCodeMessageSuccess">
+        <p class="text-center main-color" style="margin-top: 25px;">{{ 'askForPunch' | translate }}</p>
+        <div class="qrcode"></div>
+        <div class="text-center body-color">{{form.userInfo.userName}}</div>
+        <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+    </div>
+    <form ng-show="qrCodeMessageSuccess" style="margin-top:85px">
+        <div class="text-center main-color" ng-if="stampsOnly" style="color: #c70a21;margin: 20px 0;font-size: 23px;">You have successfully redeemed your reward with {{a}} stamps!</div>
+        <div class="text-center main-color" ng-if="!stampsOnly" style="color: #c70a21;margin: 20px 0;font-size: 23px;">You have successfully redeemed your reward with {{a}} stamps & ${{cost_3}}!</div>
+        <a class="dialog-btn" ng-click="closeThisDialog()" style="background-color: #fd4337;color: #fff;padding: 10px;margin-bottom: 15px;">{{ 'Close' | translate }}</a>
+    </form>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='failRedeempunch' style="text-align:center">
+    <div class="text-center body-color" style="margin-top:115px">{{ 'punchNotEnough' | translate }}</div>
+    <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='reserve' style="text-align:center">
+    <div class="text-center body-color" style="margin-top:70px">{{ 'youHaveSuccess' | translate }} 50 {{ 'punchCardNum' | translate }}</div>
+    <div class="text-center body-color">{{ 'reserveSuccess' | translate }}</div>
+    <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='redeemType' style="text-align:center">
+    <div class="text-center body-color" style="margin-top:70px">
+        You may redeem {{gift}} by spending {{cost_1}} stamps or {{cost_2}} stamps & ${{cost_3}}.
+    </div>
+    <a class="dialog-btn dialog-close-btn" ng-if="form.getPoint >= cost_1" ng-click="closeThisDialog(1)">Redeem by Stamps</a>
+    <a class="dialog-btn dialog-close-btn" ng-if="form.getPoint < cost_1" style="background-color: #d8d8d8;border-color: #d8d8d8;">Redeem by Stamps</a>
+    <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog(2)">Redeem by Stamps + Cash</a>
+</div>
+<div class="dialog-qrcode punchcard-qrcode" ng-if='isReserve' style="text-align:center">
+    <div class="text-center body-color" style="margin-top:40px">To redeem by 25 stamps + $50<br>Please go to your local store to submit payment and reserve your reward.<br><br>To redeem by 50 stamps<br>Stamps will be deducted immediately upon reservation.</div>
+    <a class="dialog-btn dialog-close-btn" ng-click="goToReserve()">{{ 'reserveNow' | translate }}</a>
+    <a class="dialog-btn dialog-close-btn" ng-click="closeThisDialog()">{{ 'Close' | translate }}</a>
+</div>
+
+<input id="qrcodeInput" type="hidden" ng-model="qrCode">
+<script type="text/javascript">
+setTimeout(function() {
+    var qrCode = angular.element('#qrcodeInput').scope().qrCode
+    generateQrCode(qrCode);
+}, 60)
+</script>

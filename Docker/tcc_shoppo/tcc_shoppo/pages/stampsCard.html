@@ -1,0 +1,69 @@
+<div class="stamps">
+  <div class="item-table border-bottom tab">
+    <div class="tdcell" ng-class="{'active':showUnexpiredCampaign}" ng-click="chooseUnexpiredCampaign()">
+      {{ 'stampsCards' | translate }}
+    </div>
+    <div class="tdcell" ng-class="{'active':showExpiredCampaign}" ng-click="chooseExpiredCampaign()">
+      {{ 'expiredStampsCards' | translate }}
+    </div>
+  </div>
+  <div class="card-list" ng-if="showUnexpiredCampaign">
+    <ul>
+      <div ng-if="form.userInfo.userType == 0">
+        <li  class="onecard" ng-repeat="unexpiredCampaign in unexpiredCampaignList" ng-click="gotoRegistration()">
+          <span class="pending-icon" ng-if="unexpiredCampaign.status==1"><img src="images/campaign_pending_icon.png">{{ 'Comingsoon' | translate }}</span>
+          <img ng-src="{{unexpiredCampaign.coverImg}}">
+          <div class="card-desc">
+            <p class="font16 font-highColor wrap">{{unexpiredCampaign.name}}</p>
+            <p class="title-color">{{unexpiredCampaign.startTime}} - {{unexpiredCampaign.endTime}}</p>
+          </div>
+        </li>
+      </div>
+      <div ng-if="form.userInfo.userType != 0">
+        <li  class="onecard" ng-repeat="unexpiredCampaign in unexpiredCampaignList">
+          <span class="pending-icon" ng-if="unexpiredCampaign.status==1"><img src="images/campaign_pending_icon.png">{{ 'Comingsoon' | translate }}</span>
+          <div ng-if="unexpiredCampaign.status==1" ng-click="openLink(unexpiredCampaign.prmBannerUrl,unexpiredCampaign.inappOpen)">
+            <img ng-src="{{unexpiredCampaign.coverImg}}">
+            <div class="card-desc">
+              <p class="font16 font-highColor wrap">{{unexpiredCampaign.name}}</p>
+              <p class="title-color">{{unexpiredCampaign.startTime}} - {{unexpiredCampaign.endTime}}</p>
+            </div>
+          </div>
+          <div ng-if="unexpiredCampaign.status==2" ng-click="gotoStampsDetail(unexpiredCampaign)">
+            <img ng-src="{{unexpiredCampaign.coverImg}}">
+            <div class="card-desc">
+              <p class="font16 font-highColor wrap">{{unexpiredCampaign.name}}</p>
+              <p class="title-color">{{unexpiredCampaign.startTime}} - {{unexpiredCampaign.endTime}}</p>
+            </div>
+          </div>
+        </li>
+      </div>
+    </ul>
+    <div ng-if="unexpiredCampaignList==0" class="noList">
+      {{ 'Comingsoon' | translate }}
+    </div>
+  </div>
+  <div class="card-list" ng-if="showExpiredCampaign">
+    <ul ng-if="form.userInfo.userType != 0">
+      <li ng-repeat="expiredCampaign in expiredCampaignList" ng-click="gotoStampsDetailExpired(expiredCampaign)">
+        <img ng-src="{{expiredCampaign.coverImg}}">
+        <div class="card-desc">
+          <p class="font16 font-highColor wrap">{{expiredCampaign.name}}</p>
+          <p class="title-color">{{expiredCampaign.startTime}} - {{expiredCampaign.endTime}}</p>
+        </div>
+      </li>
+    </ul>
+    <ul ng-if="form.userInfo.userType == 0">
+      <li ng-repeat="expiredCampaign in expiredCampaignList" ng-click="gotoRegistration()">
+        <img ng-src="{{expiredCampaign.coverImg}}">
+        <div class="card-desc">
+          <p class="font16 font-highColor wrap">{{expiredCampaign.name}}</p>
+          <p class="title-color">{{expiredCampaign.startTime}} - {{expiredCampaign.endTime}}</p>
+        </div>
+      </li>
+    </ul>
+    <div ng-if="expiredCampaignList.length==0"  class="noList">
+      {{ 'No expired stickers' | translate }}
+    </div>
+  </div>
+</div>

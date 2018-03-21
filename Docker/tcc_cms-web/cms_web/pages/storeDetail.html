@@ -1,0 +1,186 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'StoreInfo' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a ng-click="cancel()">{{ 'StoreList' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'StoreInfo' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="form-horizontal" style="padding-top: 30px;" ng-show="!newStore">    
+        <label class="col-sm-2 control-label">{{ 'Language' | translate }}</label>
+        <div class="col-sm-2">
+            <select class="form-control" ng-model="pageLanguage" ng-change="selectPageLang()">
+                <option ng-repeat="language in storeDetail.storeLangMaps" value="{{language.langCode}}" >{{language.langCode | translate }}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="tabs-container" style="padding-bottom:50px;margin-top:18px;">
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal" id="baseInfo"> 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" ng-show="form.systemUserRole.roleType==1">{{ 'merchant' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3" ng-show="form.systemUserRole.roleType==1">
+                                <div>
+                                    <select class="form-control" ng-disabled="!newStore" ng-model="storeDetail.merchantId" ng-change = "getMerchantDetail(storeDetail.merchantId)" name="merchantId" required>
+                                        <option  ng-repeat="merchant in merchantList" value="{{merchant.id}}">{{merchant.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'StoreName' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <input type="text" class="form-control" maxlength="50" ng-model="storeDetail.langData.name" name="name" required>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'District' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" ng-model="storeDetail.merchantAreaId" name="merchantId" required>
+                                        <option value="">--- Please Select ---</option>
+                                        <option  ng-repeat="area in areaList" value="{{area.id}}">{{area.areaInfo}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>            
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Address' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <textarea class="form-control textAreaHeight" maxlength="300" ng-model="storeDetail.langData.address" name="address" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+ -->
+                        <div class="form-group" ng-if="mapType==1">
+                            <label class="col-sm-2 control-label">{{ 'Display Address' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div style="padding-bottom: 1px;">
+                                    <textarea class="form-control textAreaHeight" maxlength="300" ng-model="storeDetail.langData.address" name="address" required></textarea>
+                                </div>
+                                <input id="businessAdr" style=" height: 1px; opacity: 0;" class="form-control m-b-xs"  type="text"  ng-model="storeDetail.langData.address" >
+                                <!-- <textarea id="businessAdr" class="form-control textAreaHeight" maxlength="300" ng-model="storeDetail.langData.address" name="address" required></textarea> -->
+                                <div id="l-map" class="google-map" style="overflow: hidden;"></div>
+                                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                            </div>
+                        </div> 
+
+                        <div class="form-group" ng-if="mapType==0">
+                            <label class="col-sm-2 control-label">{{ 'Display Address' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <textarea  class="form-control m-b-xs controls textAreaHeight googleText"  type="text" placeholder="Enter your address" ng-model="storeDetail.langData.address" required></textarea>
+                                </div>
+                                <input id="businessAdr" class="form-control m-b-xs controls" style="margin-top: 9px; width: 50%;"  type="text" placeholder="Search Maps">
+                                <!-- <textarea id="businessAdr" class="form-control textAreaHeight" maxlength="300" ng-model="storeDetail.langData.address" name="address" required></textarea> -->
+                                <div id="l-map" class="google-map google" ></div>
+                                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'BusinessInfo' | translate }}</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control textAreaHeight" maxlength="200" ng-model="storeDetail.langData.businessInfo"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-show="!newStore">
+                            <label class="col-sm-2 control-label">{{ 'Status' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-3">
+                                <div>
+                                    <select class="form-control" ng-model="storeDetail.status" name="Status" required>
+                                        <option value="1">{{ 'Active' | translate }}</option>
+                                        <option value="0">{{ 'Inactive' | translate }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>              
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Contact number' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <input type="tel" class="form-control" maxlength="100" ng-model="storeDetail.phone" name="Phone" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'externalStoreId' | translate }}<span style="color:red">*</span></label>
+                            <div class="col-sm-10">
+                                <div>
+                                    <input type="text" class="form-control" maxlength="20" ng-model="storeDetail.externalStoreId" name="externalStoreId" required>
+                                </div>
+                            </div>
+                        </div>        
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'openingHour' | translate }}</label>
+                            <div class="col-sm-5">
+                                <div class='input-group date' datetimepicker hourOnly=true ng-model="storeDetail.langData.openingHour">
+                                    <input type='text' class="form-control" name="openingHour" required placeholder="Date" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'closingHour' | translate }}</label>
+                            <div class="col-sm-5">
+                                <div class='input-group date' datetimepicker hourOnly=true ng-model="storeDetail.langData.closingHour">
+                                    <input type='text' class="form-control" name="closingHour" required placeholder="Date" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Image' | translate }}</label>
+                            <div class="col-sm-10">
+                                <div class="input-group img-group">
+                                    <div id="uploadBtn3" class="text-center dropzone logo">
+                                        <input id="logoInput" class="upload-file img-file-m" type="file" accept="image/*" ng-if="!isIos" ng-click="$root.prepareUploadImg('logoInput','logoImage',uploadFinish,{$event: $event}, {width:200, height:200})" ng-model="storeDetail.langData.image">
+                                        <a class="upload-file img-file-m" ng-if="isIos" ng-click="$root.prepareUploadImg('logoInput','logoImage',uploadFinish,{$event: $event}, {width:200, height:200})"></a>
+                                        <div class="addImage" style="width: 100%" ng-show = "!storeDetail.langData.image">
+                                            <a class="addImageIcon btn btn-primary btn-circle"><i class="fa fa-plus"></i></a>
+                                            <p class="text-primary m-t-sm font14 suggestFont">200x200.jpg/jpeg/png</p>
+                                        </div>
+                                        <div class="editImage" ng-show = "storeDetail.langData.image">
+                                            <div class="mask-bg"></div>
+                                            <img id="logoImage" ng-src="{{storeDetail.langData.image}}">
+                                            <div class="icon-center">
+                                                <span class="edit-icon"><i class="fa fa-pencil"></i></span>
+                                                <p class="text-primary font14 font-white editFont">{{ 'modify' | translate }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                                    <button class="btn btn-primary" ng-if="form.showSaveBtn" type="submit">{{ 'Save' | translate }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

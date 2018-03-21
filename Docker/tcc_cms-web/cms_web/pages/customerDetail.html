@@ -1,0 +1,166 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'CustomerInfo' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ng-click="goLanding()">{{ 'homePage' | translate }}</a>
+            </li>
+            <li>
+                <a  ng-click="cancel()">{{ 'CustomerList' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'CustomerInfo' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="ibox-content m-b-sm border-bottom" style="margin-top: 20px;">
+    <div class="row form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'userName' | translate }}</label>
+            <div class="col-sm-3">
+                <div>
+                    <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.userName">
+                </div>
+            </div>
+            <label class="col-sm-2 control-label">{{ 'UserFirstName' | translate }}</label>
+            <div class="col-sm-3">
+                <div>
+                    <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.firstName">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{ 'LastName' | translate }}</label>
+            <div class="col-sm-3">
+                <div>
+                    <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.lastName">
+                </div>
+            </div>
+            <label class="col-sm-2 control-label">{{ 'MerchantName' | translate }}</label>
+            <div class="col-sm-3">
+                <div>
+                    <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.merchantName">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="tabs-container" style="padding-bottom:50px;margin-top:18px;">
+    <div id="wrapperp">
+        <ul class="nav nav-tabs">
+            <li class="active tabLi" >
+                <div class="tabDiv" ng-click="changeTab(1)"></div>
+                <a class="tab1" data-toggle="tab" href="#tab-1" aria-expanded="true" ng-click="showTab($event)">{{ 'CustomerInfo' | translate }}</a>
+            </li>
+            <li class="tabLi"  ng-if="checkPermission('STAMP_HISTORY')">
+                <div class="tabDiv" ng-click="changeTab(2)"></div>
+                <a class="tab2" data-toggle="tab" href="#tab-2" aria-expanded="false" ng-click="showTab($event,'StampHistory')">{{ 'StampHistory' | translate }}</a>
+            </li>
+            <li class="tabLi" ng-if="checkPermission('REDEMPTION_HISTORY')">
+                <div class="tabDiv" ng-click="changeTab(4)"></div>
+                <a class="tab4" data-toggle="tab" href="#tab-4" aria-expanded="false" ng-click="showTab($event,'redemptionHistory')">{{ 'redemptionHistory' | translate }}</a>
+            </li>
+            <li class="tabLi" ng-if="checkPermission('RESERVATION_HISTORY')">
+                <div class="tabDiv" ng-click="changeTab(5)"></div>
+                <a class="tab5" data-toggle="tab" href="#tab-5" aria-expanded="false" ng-click="showTab($event,'reservationHistory')">{{ 'reservationHistory' | translate }}</a>
+            </li>
+            <li class="tabLi" ng-if="checkPermission('CUSTOMER_COUPON')">
+                <div class="tabDiv" ng-click="changeTab(6)"></div>
+                <a class="tab6" data-toggle="tab" href="#tab-6" aria-expanded="false" ng-click="showTab($event,'coupon')">{{ 'Coupon' | translate }}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="row form-horizontal">
+                    <form id="campaignInfo">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'ContactEmail' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Phone number area code' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="phoneAreaCode" disabled ng-model="customerDetail.phoneAreaCode">
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label">{{ 'Phone number' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="phone" disabled ng-model="customerDetail.phone">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Gender' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.gender">
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label">{{ 'Birthday' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.birthday">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Email verification status' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.isEmailValidation">
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label">{{ 'Facebook account' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.facebookAccount">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">{{ 'Receive marketing information' | translate }}</label>
+                                <div class="col-sm-4">
+                                    <div>
+                                        <input type="text" class="form-control" name="name" disabled ng-model="customerDetail.isMarketingInfo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>                
+            </div>
+        </div>
+        <div id="tab-2" class="tab-pane" ng-show="showStamp">
+            <div class="panel-body">
+                <form id="StampForm">
+                    <div ng-include="'pages/wizard/stampHistory.html'"></div>
+                </form>
+            </div>
+        </div>
+        <div id="tab-4" class="tab-pane" ng-show="redemption">
+            <div class="panel-body">
+                <div ng-include="'pages/wizard/redemptionHistory.html'"></div>
+            </div>
+        </div>
+        <div id="tab-5" class="tab-pane" ng-show="reservation">
+            <div class="panel-body">
+                <div ng-include="'pages/wizard/reservationHistory.html'"></div>
+            </div>
+        </div>
+        <div id="tab-6" class="tab-pane" ng-show="coupon">
+            <div class="panel-body">
+                <div ng-include="'pages/wizard/coupon.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

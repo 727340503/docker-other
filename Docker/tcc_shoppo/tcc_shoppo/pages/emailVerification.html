@@ -1,0 +1,10 @@
+<div class="email-verification">
+    <div class="subPage-content-style">
+        <p class=" wrap">{{ 'verifyEmailTip1' | translate }} {{form.userInfo.email}}{{ 'verifyEmailTip2' | translate }} </p>
+        <p class=" wrap">{{ 'verifyEmailTip3' | translate }} </p>
+    </div>
+    <div class="subPage-content-style">
+    	<a class="btn btn-primary btn-block" ng-click="doneEvent()">{{ 'Done' | translate }}</a>
+        <a class="btn btn-grey btn-block" ng-click="resendActiveEmail()">{{ 'resentVerificationEmail' | translate }}<span ng-if="form.verifyPage"><br>{{ 'hoursTip' | translate }}</span></a>
+    </div>
+</div>

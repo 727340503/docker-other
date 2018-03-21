@@ -1,0 +1,69 @@
+<div class="registraion set-profile" ng-show="page==1">
+  <form id="registraion">
+    <div class="subPage-content-style">
+      <div class="form-group m-b-none phone">
+        <label class="title-color bold">{{ 'mobileNumber' | translate }} </label>
+        <div style="overflow:hidden;">
+          <div style="float:left;width:30%;">
+            <i class="icon icon-phone"></i>
+            <div data-role="fieldcontain" id="phoneAreaCode_treelist" style="padding-top:5px;">
+              <ul id="phoneAreaCode" style="display:none">
+                <li on-last-repeat ng-repeat="phoneAreaCode in form.phoneDistrictCode">{{phoneAreaCode}}</li>
+              </ul>
+            </div>
+          </div>
+          <div style="float:right;width:65%;">
+            <input class="form-control phoneInput" type="tel" maxlength="20" ng-model="phone">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subPage-content-style">
+      <div class="light-color item-table">
+        <span class="check-box tdcell" ng-class="{checked:agreeTC}" ng-model="agreeTC" ng-click="agreeTCFn()"></span>
+        <span class="tdcell">{{ 'readAndAgree' | translate }} <span class="hightLight" ng-click="gotoTAndC()">{{ 'termsAConditions' | translate }}</span> and
+        <span class="hightLight" ng-click="gotoPrivacy()">{{ 'privacyAPolicy' | translate }}</span>.</span>
+      </div>
+      <div class="light-color m-t-sm item-table">
+        <span class="check-box tdcell" ng-class="{checked:form.isMarketingInfo==1}" ng-click="isMarketingInfoFn()"></span>
+        <span class="tdcell">{{ 'isMarketingInfo' | translate }}</span>
+      </div>
+    </div>
+    <div class="subPage-content-style">
+      <div class="wantEmail" ng-click="gotoEmailRegister()" ng-if="form.emailMethod" >{{ 'Register with email?' | translate }}</div>
+      <a class="btn btn-primary btn-block disabled" ng-if="!phone||!agreeTC">{{ 'Register' | translate }}</a>
+      <a class="btn btn-primary btn-block" ng-if="phone&&agreeTC" ng-click="sendSmsEvent()">{{ 'Register' | translate }}</a>
+      <div class="or-hr" ng-if="form.facebookMethod"><span>{{ 'or' | translate }}</span></div>
+      <a class="btn btn-facebook btn-block"  ng-if="form.facebookMethod" ng-click="facebookLogin()">{{ 'facebookViaRegister' | translate }}</a>
+    </div>
+  </form>
+</div>
+<div class="registraion set-profile" ng-show="page==2">
+  <div class="subPage-content-style">
+    <label class="title-color bold">Verify your mobile number</label>
+    <p class=" wrap">Your SMS verification code has been sent to your mobile number:</p>
+    <p class="text-center font22" style="margin:20px 0;">{{phoneAreaCode}} {{phone}}</p>
+    <div class="form-group">
+      <label class="title-color bold">{{ 'verificationCode' | translate }}</label>
+      <i class="icon icon-password"></i>
+      <div>
+        <input class="form-control verifyCode" type="tel" ng-model="verifyCode" style="text-indent:25px;">
+      </div>
+    </div>
+  </div>
+  <div class="subPage-content-style">
+    <a class="btn btn-primary btn-block" ng-click="verifySmsEvent()">{{ 'btnOk' | translate }}</a>
+    <a class="btn btn-grey btn-block" ng-class="{'disabled':time!=0}" ng-click="resendSmsEvent()" ng-if="overResendTimes">{{ 'Resend' | translate }} <span ng-if="time!=0">({{time}})</span></a>
+    <a class="btn btn-grey btn-block disabled" ng-if="!overResendTimes">{{ 'Resend' | translate }}</a>
+  </div>
+</div>
+<div class="registraion set-profile" ng-show="page==3">
+  <div class="subPage-content-style">
+    <label class="title-color bold">{{ 'Verify your account' | translate }}</label>
+    <p class=" wrap">{{ 'verified1' | translate }}</p>
+    <p class=" wrap">{{ 'verified2' | translate }}</p>
+  </div>
+  <div class="subPage-content-style">
+    <a class="btn btn-primary btn-block" ng-click="gotoSetProFile()">{{ 'Your profile' | translate }}</a>
+  </div>
+</div>

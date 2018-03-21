@@ -1,0 +1,131 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-8">
+        <h2>{{ 'ReservationInfo' | translate }}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a  ng-click="goLanding()">{{ 'Landing' | translate }}</a>
+            </li>
+            <li>
+                <a  ng-click="cancel()">{{ 'CustomerInfo' | translate }}</a>
+            </li>
+            <li class="active">
+                <strong>{{ 'ReservationInfo' | translate }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="tabs-container reservation" style="padding-bottom:50px;margin-top:18px;">
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+            <div class="panel-body">
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal" id="baseInfo">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'userName' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control noBold" >{{reservationDetail.userName}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'Reserved reward' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control noBold"  >{{reservationDetail.giftName}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Reservation status' | translate }}</label>
+                            <div class="col-sm-4">                                
+                                <div>
+                                    <label class="form-control noBold" >{{reservationDetail.status}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'reservationCode' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control noBold">{{reservationDetail.reservationCode}}</label>
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Reservation date' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control noBold"  >{{reservationDetail.createdTime}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'Reservation expiry date' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control noBold" >{{reservationDetail.reservationExpiredTime}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'campaign' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold"  >{{reservationDetail.campaignName}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'Redemption rule' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold" >{{reservationDetail.rule}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">{{ 'Contact person' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold" >{{reservationDetail.contactPerson}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'contactPhone' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold">{{reservationDetail.contactPhone}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label ">{{ 'Pick up store' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold">{{reservationDetail.storeNameLong}}</label>
+                                </div>
+                            </div>
+                            <label class="col-sm-2 control-label">{{ 'Pick up store contact number' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold" >{{reservationDetail.storePhone}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label ">{{ 'Pick up date' | translate }}</label>
+                            <div class="col-sm-4">
+                                <div>
+                                    <label class="form-control wrap noBold">{{reservationDetail.pickupTime}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <!-- <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="pull-right">
+                                    <button class="btn btn-white" type="button" ng-click="cancel()">{{ 'Cancel' | translate }}</button>
+                                    <button class="btn btn-primary" ng-if="checkPermission('ORDER_LIST_UPDATE')" ng-click="AvailableAtStore()">{{ 'AvailableAtStore' | translate }}</button>
+                                </div>
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
